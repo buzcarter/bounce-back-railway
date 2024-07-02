@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 50 50">
+  <g>
+    <path d="M33.312,46.261c-2.57.993-5.363,1.537-8.283,1.537-12.703,0-23-10.298-23-23,0-4.397,1.234-8.507,3.375-12" style="fill: none; stroke: #505056; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;"/>
+    <path d="M8.765,8.534C12.928,4.372,18.678,1.798,25.029,1.798c12.702,0,23,10.298,23,23,0,8.305-4.402,15.582-11,19.625" style="fill: none; stroke: #505056; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;"/>
+  </g>
+  <g>
+    <path d="M31.238,16.798h4.307c.819,0,1.484.664,1.484,1.484v13.032c0,.819-.664,1.484-1.484,1.484h-10.87" style="fill: none; stroke: #505056; stroke-miterlimit: 10; stroke-width: 3px;"/>
+    <polygon points="25.261 37.171 25.261 28.424 20.889 32.798 25.261 37.171" style="fill: #505056; stroke-width: 0px;"/>
+  </g>
+  <g>
+    <path d="M18.952,32.798h-4.439c-.819,0-1.484-.664-1.484-1.484v-13.032c0-.819.664-1.484,1.484-1.484h11.17" style="fill: none; stroke: #505056; stroke-miterlimit: 10; stroke-width: 3px;"/>
+    <polygon points="25.096 12.424 25.096 21.171 29.469 16.798 25.096 12.424" style="fill: #505056; stroke-width: 0px;"/>
+  </g>
+</svg>
