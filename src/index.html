@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Movement</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <main class="container">
+        <section class="layout" id="layout">
+            <div id="path" class="rail">
+                <span id="vehicle" class="icon icon--trolley" alt="Trolley"></span>
+            </div>
+        </section>
+        <section class="section dashboard">
+            <div class="dashboard__guage">
+                <label for="display-position">Position</label>
+                <input type="text" id="display-position" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <label for="display-speed">Max Speed</label>
+                <input type="text" id="display-speed" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <label for="display-power">Power</label>
+                <input type="text" id="display-power" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <label for="display-command">Command</label>
+                <input type="text" id="display-command" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <label for="display-clock">Clock</label>
+                <input type="text" id="display-clock" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <label for="display-direction">Direction</label>
+                <input type="text" id="display-direction" class="dashboard__display" readonly>
+            </div>
+            <div class="dashboard__guage">
+                <span id="display-status" class="status"></span>
+            </div>
+        </section>
+        <section class="section controls">
+            <button id="powerBtn" class="icon-btn icon--btn-power">Power</button>
+            <button id="pauseBtn" class="icon-btn icon--btn-pause">Pause</button>
+            <button id="haltBtn" class="icon-btn icon--btn-halt">Halt</button>
+            <button id="reverseBtn" class="icon-btn icon--btn-reverse">Reverse</button>
+            <input type="range" id="speedControl" class="slider" min="0" max="100" value="50">
+            <label><input type="checkbox" id="enableLoggingCbx">Logging</label>
+        </section>
+        <section class="section stdout" id="std-out"></section>
+    </main>
+    <script src="./scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "name": "bounce-back-railway",
+  "version": "1.0.0",
+  "description": "A JavaScript visual prototype implementation for a mini-train microcontroller that auto-reverses at the ends of a straight track, with any number of intermediate stops. Perfect for model railroaders looking for a simple and fun automation solution.",
+  "keywords": [
+    "mini-train",
+    "microcontroller",
+    "auto-reverse",
+    "model railroad",
+    "automation",
+    "trolley"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buzcarter/bounce-back-railway.git"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "B.Carter",
+    "email": "buzcarter@gmail.com"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint --fix . --ext .js"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.1"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "^18.15",
+    "npm": "^9.5"
+  }
+}
