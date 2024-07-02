@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 (() => {
   /* eslint-disable key-spacing, no-multi-spaces */
   const ids = {
@@ -36,6 +35,8 @@
     STD_OUT_KEY:        'stdout__key',
     STD_OUT_VALUE:      'stdout__value',
 
+    LEFT_ARROW:         'icon--left-arrow',
+    RIGHT_ARROW:        'icon--right-arrow',
   };
 
   const directionUnits = {
@@ -95,7 +96,9 @@
     delay: 750, // ms
     icon: 'crossing-signal',
     style: {
-      top: '63px', right: '165px',
+      top: '73px',
+      right: '165px',
+      height: '22px',
     },
   }];
 
@@ -232,8 +235,12 @@
       // eslint-disable-next-line no-mixed-operators
       maxSpeed: `${(1000 * maxSpeed / CLOCK_SPEED).toFixed(1)} px/s`,
     };
+
+    const directionEle = document.getElementById(ids.DSPLY_DIRECTION);
+    directionEle.classList.toggle(cssClasses.LEFT_ARROW, direction === directionUnits.LEFT);
+    directionEle.classList.toggle(cssClasses.RIGHT_ARROW, direction === directionUnits.RIGHT);
+
     document.getElementById(ids.DSPLY_COMMAND).value = currentState.action;
-    document.getElementById(ids.DSPLY_DIRECTION).value = currentState.direction;
     document.getElementById(ids.DSPLY_POSITION).value = currentState.position;
     document.getElementById(ids.DSPLY_POWER).value = currentState.power;
     document.getElementById(ids.DSPLY_SPEED).value = currentState.maxSpeed;

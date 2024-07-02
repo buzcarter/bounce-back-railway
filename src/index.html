@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Icon Movement</title>
+    <title>Bounce Back Railway - A Little Trolley That Could Experiment</title>
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
@@ -27,18 +27,16 @@
                 <input type="text" id="display-power" class="dashboard__display" readonly>
             </div>
             <div class="dashboard__guage">
-                <label for="display-command">Command</label>
-                <input type="text" id="display-command" class="dashboard__display" readonly>
-            </div>
-            <div class="dashboard__guage">
                 <label for="display-clock">Clock</label>
                 <input type="text" id="display-clock" class="dashboard__display" readonly>
             </div>
             <div class="dashboard__guage">
                 <label for="display-direction">Direction</label>
-                <input type="text" id="display-direction" class="dashboard__display" readonly>
+                <span id="display-direction" class="icon icon--direction"></span>
             </div>
             <div class="dashboard__guage">
+                <label for="display-command">Engaged</label>
+                <input style="display: none;" type="text" id="display-command" class="dashboard__display" readonly>
                 <span id="display-status" class="status"></span>
             </div>
         </section>

@@ -113,6 +113,15 @@ body {
   width: var(--icon-size);
 }
 
+.icon--direction {
+  background-position-x: 23px;
+  background-position-y: 2px;
+  background-size: 60px;
+  height: 33px;
+  margin-top: var(--default-half-spacing);
+  width: 75px;
+}
+
 .icon--barrier,
 .icon--station-1,
 .icon--station-2,
@@ -156,6 +165,14 @@ body {
 
 .icon--signpost-1 {
   background-image: url(../images/icons/signpost-1.svg);
+}
+
+.icon--left-arrow {
+  background-image: url(../images/icons/arrow-left-circle.svg);
+}
+
+.icon--right-arrow {
+  background-image: url(../images/icons/arrow-right-circle.svg);
 }
 
 .icon--btn-power {
