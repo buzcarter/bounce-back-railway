@@ -1,6 +1,6 @@
 (() => {
   /* eslint-disable key-spacing, no-multi-spaces */
-  const ids = {
+  const ids = Object.freeze({
     DSPLY_CLOCK:        'display-clock',
     DSPLY_COMMAND:      'display-command',
     DSPLY_DIRECTION:    'display-direction',
@@ -20,9 +20,9 @@
 
     STATUS:             'display-status',
     STD_OUT:            'std-out',
-  };
+  });
 
-  const cssClasses = {
+  const cssClasses = Object.freeze({
     STATUS_PAUSED:      'status--warning',
     STATUS_MOVING:      'status--success',
     STATUS_STOPPED:     'status--alert',
@@ -37,23 +37,25 @@
 
     LEFT_ARROW:         'icon--left-arrow',
     RIGHT_ARROW:        'icon--right-arrow',
-  };
+  });
 
-  const directionUnits = {
+  const directionUnits = Object.freeze({
     RIGHT: 1,
     LEFT:  -1,
-  };
+  });
 
-  const eventTypes = {
+  const eventTypes = Object.freeze({
     OK:                 'ok',
     STATION_ARRIVAL:    'station:arrival',
     STATION_DEPARTURE:  'station:departure',
-  };
+  });
 
   const CLOCK_SPEED        =    5; // ms === tick duration
   const INSTRUCTION_DELAY  =  100; // ms
 
   const TRAVEL_DISTANCE    =  800; // px (track length in px)
+
+  const HALT_DURATION      = 1750; // ms
   /* eslint-enable key-spacing, no-multi-spaces */
 
   const stations = [{
@@ -109,8 +111,11 @@
   let currentStationId = null;
   let direction = null;
   let position = 0;
-  let powerLevel = 1; // 100%
+  /** Percentage of `maxSpeed`, 1.0 = 100% */
+  let powerLevel = 1;
   let speed = maxSpeed;
+  /** used for Halt/Slow Stop */
+  let originalSpeed = speed;
   let ticks = 0;
   let waitUntil = -1;
 
@@ -191,6 +196,22 @@
   function onHaltBtnClick() {
     isSlowHalt = !isSlowHalt;
     this.classList.toggle(cssClasses.ICON_BTN_ACTIVE, isSlowHalt);
+    if (isSlowHalt) {
+      originalSpeed = speed;
+    }
+
+    let currentStep = 0;
+    const nbrSteps = HALT_DURATION / CLOCK_SPEED;
+    const stepSize = originalSpeed / nbrSteps;
+    const handle = setInterval(() => {
+      if (currentStep++ >= nbrSteps) {
+        clearInterval(handle);
+        speed = isSlowHalt ? 0 : originalSpeed;
+        return;
+      }
+
+      speed += (isSlowHalt ? -1 : 1) * stepSize;
+    }, CLOCK_SPEED);
   }
 
   function onPowerBtnClick() {
@@ -216,7 +237,7 @@
 
   const setStatusLED = () => {
     // eslint-disable-next-line no-nested-ternary
-    const statusClass = !isPowered
+    const statusClass = (!isPowered || isSlowHalt)
       ? cssClasses.STATUS_STOPPED
       : (isLayover || isPaused ? cssClasses.STATUS_PAUSED : cssClasses.STATUS_MOVING);
     const ledEle = document.getElementById(ids.STATUS);
