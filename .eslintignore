@@ -1,7 +1,0 @@
-.lib
-coverage/**/*
-dist
-docs
-lib
-lib-esm
-node_modules
