@@ -3,9 +3,13 @@ import { STATION_SAFETY_LENGTH } from "../constants/Constants";
 import { ids } from "../constants/ElementIds";
 import { CSSClasses } from "../interfaces/CSSClasses";
 import { JsonData, int, pixels } from "../interfaces/CoreTypes";
-import { EventTypes } from "../interfaces/EventTypes";
-import { set as setEvent, get as getEvent } from "./EventManager";
 import { updateStdOut } from "./StdOut";
+
+export enum StationTransistions {
+  ARRIVAL = 1,
+  DEPARTURE = 2,
+  NO_CHANGE = 0,
+}
 
 let currentStationId: int | null = null;
 
@@ -13,10 +17,11 @@ const getStationByPostion = (pos: pixels) => stations.find(station => (pos > (st
 
 export const getCurrentStation = () => stations.find(station => station.id === currentStationId);
 
-export const checkStations = (position: number): int | null => {
+export const checkStations = (position: number): StationTransistions => {
+  let transition = StationTransistions.NO_CHANGE;
   const station = getStationByPostion(position);
   if (station && station.id !== currentStationId) {
-    setEvent(EventTypes.STATION_ARRIVAL);
+    transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
     const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${station.id}"]`);
     sensorEle?.classList.add(CSSClasses.SENSOR_ACTIVE);
@@ -29,7 +34,7 @@ export const checkStations = (position: number): int | null => {
       });
     }
   } else if (!station && currentStationId !== null) {
-    setEvent(EventTypes.STATION_DEPARTURE);
+    transition = StationTransistions.DEPARTURE;
     const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${currentStationId}"]`);
     sensorEle?.classList.remove(CSSClasses.SENSOR_ACTIVE);
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
@@ -39,10 +44,9 @@ export const checkStations = (position: number): int | null => {
       });
     }
     currentStationId = null;
-  } else {
-    setEvent(EventTypes.OK);
   }
-  return currentStationId;
+
+  return transition;
 };
 
 const applyStyles = (ele: HTMLElement, styles: JsonData) => {

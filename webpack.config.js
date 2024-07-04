@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    'trolley-controller': './src/app/index.ts',
+    'trolley-controller': './src/app/main.ts',
   },
   output: {
     filename: '[name].bundle.js',
