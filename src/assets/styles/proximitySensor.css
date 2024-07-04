@@ -1,0 +1,28 @@
+.proximity-sensor {
+  --sensor-halved: calc(var(--sensor-size) / 2);
+}
+
+.proximity-sensor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: calc(var(--rail-height) + var(--sensor-size));
+  margin-left: 0; /* calc(-1 * var(--sensor-halved) + var(--icon-size) / 2); /* to center it */
+}
+
+.proximity-sensor::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-left: calc(-1 * var(--sensor-halved));
+  border-left: var(--sensor-halved) solid transparent;
+  border-right: var(--sensor-halved) solid transparent;
+  border-bottom: var(--sensor-size) solid var(--color-status-disabled);
+  transition: border-bottom-color 0.2s;
+}
+
+.proximity-sensor--active::before {
+  border-bottom-color: var(--color-status-success);
+}

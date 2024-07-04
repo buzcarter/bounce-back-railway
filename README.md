@@ -8,12 +8,23 @@ Since this is meant to somewhat mimic the Arduino's abilities and programming st
 
 ## Installation
 
-```
+```sh
 npm install
 ```
 
-Open index.html in your browser
+## Usage
+
+1. Build
+
+Command + Shift + B or via terminal:
+
+```sh
+npm run build
+```
+
+2. Open "src\views\index.html" in your browser
 
 ## Resources
 
 * [Icons](https://www.iconbolt.com/)
+* [Jittery Trolley, "Getting Jittery On Hover Using Only CSS"](https://www.kirupa.com/snippets/getting_jittery_on_hover_using_only_css.htm)

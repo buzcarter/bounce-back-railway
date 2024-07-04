@@ -1,0 +1,24 @@
+/* .                             */
+/* ------- Std-Out (Console) --- */
+/* .                             */
+.stdout {
+  background-color: black;
+  color: var(--color-neutral-400);
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 18px;
+  overflow-y: scroll;
+  white-space: nowrap;
+  overflow-x: scroll;
+  height: 22rem;
+}
+
+.stdout__line {
+  padding: 0 5px;
+}
+.stdout__key {
+  color: var(--color-blue-300);
+}
+.stdout__value {
+  color: var(--color-orange-300);
+}

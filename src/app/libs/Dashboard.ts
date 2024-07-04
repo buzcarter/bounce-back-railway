@@ -38,7 +38,7 @@ export const updateDashboard = (
   (document.getElementById(ids.DSPLY_SPEED) as HTMLInputElement).value = currentState.speed;
   (document.getElementById(ids.DSPLY_MAX_SPEED) as HTMLInputElement).value = currentState.maxSpeed;
 
-  if ((document.getElementById(ids.ENABLE_LOGGING) as HTMLInputElement).checked) {
+  if ((document.getElementById(ids.ENABLE_DASHBORD_LOG) as HTMLInputElement).checked) {
     updateStdOut(currentState);
   }
 };

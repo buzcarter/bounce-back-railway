@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    'trolley-bundle': './src/app/index.ts',
+    'trolley-controller': './src/app/main.ts',
   },
   output: {
     filename: '[name].bundle.js',
@@ -11,6 +12,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ],
+      },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -36,6 +44,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/views/index.html'
     })

@@ -1,12 +1,13 @@
-import { CLOCK_SPEED, DASHBOARD_REFRESH_RATE, HALT_DURATION, MIN_TIME_TO_COMPLETE, TRAVEL_DISTANCE } from "./constants/Constants";
-import { clockTick, int, pixels, velocity } from "./interfaces/CoreTypes";
+import { CLOCK_SPEED, DASHBOARD_REFRESH_RATE, MIN_TIME_TO_COMPLETE, TRAVEL_DISTANCE } from "./constants/Constants";
+import { clockTick, int, velocity } from "./interfaces/CoreTypes";
 import { DirectionTypes } from "./interfaces/DirectionTypes";
-import { EventTypes } from "./interfaces/EventTypes";
 import { setStatusLED, updateClock, updateDashboard } from "./libs/Dashboard";
-import { get as getEvent, set as setEvent } from "./libs/EventManager";
+import { slowStop, slowStart, continueSpeedChange } from "./libs/EaseSpeed";
+import { EventTypes, get as getEvent, set as setEvent } from "./libs/EventManager";
 import { PinAssignments, setupSlider, readValue, hasInputChanged, setupBtn } from "./libs/PinAssignments";
-import { addStationsToLayout, checkStations, getCurrentStation, getCurrentStationId } from "./libs/StationsHelper";
+import { StationTransistions, addStationsToLayout, checkStations, getCurrentStation, getCurrentStationId } from "./libs/StationsHelper";
 import { getPosition, moveTrolley } from "./libs/Trolley";
+import './styles';
 
 /** (px/tick) */
 const maxSpeed: velocity = TRAVEL_DISTANCE / (MIN_TIME_TO_COMPLETE / CLOCK_SPEED);
@@ -15,9 +16,7 @@ let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** Percentage of `maxSpeed`, 1.0 = 100% */
 let powerLevel = 1;
 /** (px/tick) current speed */
-let speed:velocity = maxSpeed;
-/** (px/tick) used for Halt/Slow Stop */
-let originalSpeed: velocity = speed;
+let speed: velocity = maxSpeed;
 let ticks: clockTick = 0;
 let waitUntil = -1;
 
@@ -26,33 +25,19 @@ let isPaused = false;
 let isPowered = false;
 let isSlowHalt = false;
 
-// hack to silence TS, so it's never null
+export const getSpeed = () => speed;
+export const setSpeed = (newSpeed: velocity) => speed = newSpeed;
 
-function onPauseBtnClick() {
+const onPauseBtnClick = () => {
   isPaused = !isPaused;
 }
 
-function onHaltBtnClick() {
+const onHaltBtnClick = () => {
   isSlowHalt = !isSlowHalt;
-  if (isSlowHalt) {
-    originalSpeed = speed;
-  }
-
-  let currentStep = 0;
-  const nbrSteps = HALT_DURATION / CLOCK_SPEED;
-  const stepSize = originalSpeed / nbrSteps;
-  const handle = setInterval(() => {
-    if (currentStep++ >= nbrSteps) {
-      clearInterval(handle);
-      speed = isSlowHalt ? 0 : originalSpeed;
-      return;
-    }
-
-    speed += (isSlowHalt ? -1 : 1) * stepSize;
-  }, CLOCK_SPEED);
+  setEvent(isSlowHalt ? EventTypes.BEGIN_SLOW_STOP : EventTypes.BEGIN_SLOW_START);
 }
 
-function onPowerBtnClick() {
+const onPowerBtnClick = () => {
   isPowered = !isPowered;
   if (!isPowered) {
     ticks = 0;
@@ -63,11 +48,10 @@ const onReverseBtnClick = () => {
   direction *= -1;
 };
 
-function onSpeedChange() {
+const onSpeedChange = () => {
   powerLevel = readValue(PinAssignments.SPEED_CONTROL);
   speed = maxSpeed * powerLevel;
 }
-
 
 const setLayoverDuration = (length: int) => {
   if (length > 0) {
@@ -146,17 +130,49 @@ const loop = () => {
     return;
   }
 
-  checkStations(position);
+  switch (checkStations(position)) {
+    case StationTransistions.ARRIVAL:
+      setEvent(EventTypes.STATION_ARRIVAL);
+      break;
+    case StationTransistions.DEPARTURE:
+      setEvent(EventTypes.STATION_DEPARTURE);
+      break
+    case StationTransistions.NO_CHANGE:
+      if (![
+        EventTypes.CONTINUE_SPEED_CHANGE,
+        EventTypes.BEGIN_SLOW_START,
+        EventTypes.BEGIN_SLOW_STOP
+      ].includes(getEvent())) {
+        setEvent(EventTypes.OK);
+      }
+      break;
+  }
 
   switch (getEvent()) {
+    case EventTypes.BEGIN_SLOW_STOP:
+      slowStop(speed);
+      setEvent(EventTypes.CONTINUE_SPEED_CHANGE);
+      break;
+    case EventTypes.BEGIN_SLOW_START:
+      slowStart(speed);
+      setEvent(EventTypes.CONTINUE_SPEED_CHANGE);
+      break;
+    case EventTypes.CONTINUE_SPEED_CHANGE:
+      if (continueSpeedChange(speed)) {
+        setEvent(EventTypes.OK);
+      }
+      break;
     case EventTypes.STATION_ARRIVAL:
       handleStationArrival();
+      setEvent(EventTypes.OK);
+      break;
+    case EventTypes.STATION_DEPARTURE:
+      setEvent(EventTypes.OK);
       break;
   }
 
   moveTrolley({ isLayover, isPaused, isPowered, speed, direction });
 
-  setEvent(EventTypes.OK);
   ticks++;
 };
 

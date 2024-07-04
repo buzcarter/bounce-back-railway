@@ -1,0 +1,52 @@
+/* .                             */
+/* --------- Buttons ----------- */
+/* .                             */
+.btn {
+  border-radius: var(--border-radius);
+  border: solid 1px var(--color-neutral-300);
+  cursor: pointer;
+  margin-top: var(--default-spacing);
+  padding: 10px 20px;
+}
+
+.icon-btn {
+  opacity: 0.5;
+  cursor: pointer;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  padding-top: 50px;
+  width: 50px;
+  border: none;
+  position: relative;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  text-align: center;
+  /* overflow: hidden; */
+  margin-right: var(--default-half-spacing);
+}
+
+.icon-btn:hover {
+  opacity: 1;
+}
+
+.icon-btn--active {
+  color: var(--color-status-info);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.icon-btn--active::after {
+  content: "";
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border-width: 4.5px;
+  border-style: solid;
+  border-color: var(--color-status-info);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
