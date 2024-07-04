@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+    contents: read
+    issues: write
+    deployments: write
+    pages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js (18.x)
+      uses: actions/setup-node@v3
+      with:
+          node-version: '18.x'
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Site
+      run: npx webpack --mode production
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        # publish_branch: gh-pages
+        # commit_message: "Deploy Demo Site"
+        # user_name: "GitHub Actions"
