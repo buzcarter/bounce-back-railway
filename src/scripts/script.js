@@ -6,7 +6,8 @@
     DSPLY_DIRECTION:    'display-direction',
     DSPLY_POSITION:     'display-position',
     DSPLY_POWER:        'display-power',
-    DSPLY_SPEED:        'display-speed',
+    DSPLY_MAX_SPEED:    'display-max-speed',
+    DSPLY_SPEED:        'display-current-speed',
 
     HALT_BTN:           'haltBtn',
     PAUSE_BTN:          'pauseBtn',
@@ -50,12 +51,16 @@
     STATION_DEPARTURE:  'station:departure',
   });
 
-  const CLOCK_SPEED        =    5; // ms === tick duration
-  const INSTRUCTION_DELAY  =  100; // ms
-
-  const TRAVEL_DISTANCE    =  800; // px (track length in px)
-
-  const HALT_DURATION      = 1750; // ms
+  /** (ms/tick) i.e. tick duration */
+  const CLOCK_SPEED               =    5;
+  /** (ms) minimum time to completely travers the "Travel Distance" */
+  const MIN_TIME_TO_COMPLETE      = 6000;
+  /** (ms) Time between Dashbord updates */
+  const DASHBOARD_REFRESH_RATE    =  100;
+  /** (px) length of the entire track */
+  const TRAVEL_DISTANCE           =  800;
+  /** Time required for a slow start/stop */
+  const HALT_DURATION             = 1750;
   /* eslint-enable key-spacing, no-multi-spaces */
 
   const stations = [{
@@ -104,17 +109,21 @@
     },
   }];
 
-  const maxSpeed = TRAVEL_DISTANCE / (6000 / CLOCK_SPEED); // px/ms
-  const stationThreshold = 8; // 1.2 * maxSpeed;
+  /** (px/tick) */
+  const maxSpeed = TRAVEL_DISTANCE / (MIN_TIME_TO_COMPLETE / CLOCK_SPEED);
+  /** (ms) */
+  const stationThreshold = 8;
 
   let currentEvent = eventTypes.OK;
   let currentStationId = null;
   let direction = null;
+  /** (px) */
   let position = 0;
   /** Percentage of `maxSpeed`, 1.0 = 100% */
   let powerLevel = 1;
+  /** (px/tick) current speed */
   let speed = maxSpeed;
-  /** used for Halt/Slow Stop */
+  /** (px/tick) used for Halt/Slow Stop */
   let originalSpeed = speed;
   let ticks = 0;
   let waitUntil = -1;
@@ -253,8 +262,9 @@
       direction: direction === directionUnits.RIGHT ? 'Right' : 'Left',
       position: position.toFixed(1),
       power: `${(powerLevel * 100).toFixed(1)}%`,
+      speed: `${(1000 / CLOCK_SPEED * speed).toFixed(1)} px/s`,
       // eslint-disable-next-line no-mixed-operators
-      maxSpeed: `${(1000 * maxSpeed / CLOCK_SPEED).toFixed(1)} px/s`,
+      maxSpeed: `${(1000 / CLOCK_SPEED * maxSpeed).toFixed(1)} px/s`,
     };
 
     const directionEle = document.getElementById(ids.DSPLY_DIRECTION);
@@ -264,7 +274,8 @@
     document.getElementById(ids.DSPLY_COMMAND).value = currentState.action;
     document.getElementById(ids.DSPLY_POSITION).value = currentState.position;
     document.getElementById(ids.DSPLY_POWER).value = currentState.power;
-    document.getElementById(ids.DSPLY_SPEED).value = currentState.maxSpeed;
+    document.getElementById(ids.DSPLY_SPEED).value = currentState.speed;
+    document.getElementById(ids.DSPLY_MAX_SPEED).value = currentState.maxSpeed;
 
     if (document.getElementById(ids.ENABLE_LOGGING).checked) {
       updateStdOut(currentState);
@@ -321,7 +332,7 @@
 
     updateClock();
 
-    if (ticks % INSTRUCTION_DELAY === 0) {
+    if (ticks % DASHBOARD_REFRESH_RATE === 0) {
       updateDashboard();
     }
 
