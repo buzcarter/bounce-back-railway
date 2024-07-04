@@ -20,8 +20,10 @@
     "email": "buzcarter@gmail.com"
   },
   "scripts": {
+    "build": "webpack --mode production",
     "lint": "eslint . --ext .js",
-    "lint:fix": "eslint --fix . --ext .js"
+    "lint:fix": "eslint --fix . --ext .js",
+    "start": "webpack-dev-server --open --mode development"
   },
   "devDependencies": {
     "eslint": "^8.4.1"
