@@ -7,6 +7,7 @@ import { get as getEvent, set as setEvent } from "./libs/EventManager";
 import { PinAssignments, setupSlider, readValue, hasInputChanged, setupBtn } from "./libs/PinAssignments";
 import { addStationsToLayout, checkStations, getCurrentStation, getCurrentStationId } from "./libs/StationsHelper";
 import { getPosition, moveTrolley } from "./libs/Trolley";
+import './styles';
 
 /** (px/tick) */
 const maxSpeed: velocity = TRAVEL_DISTANCE / (MIN_TIME_TO_COMPLETE / CLOCK_SPEED);

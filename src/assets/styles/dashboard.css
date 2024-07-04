@@ -1,0 +1,33 @@
+/* .                             */
+/* ------ Dashboard & Guages --- */
+/* .                             */
+.dashboard {
+  Display: Flex;
+  Justify-Content: Center;
+  Align-Items: Center;
+  /* Padding: Var(--Default-Spacing); */
+  Color: Var(--Color-Neutral-300);
+  Font-Size: 12px;
+  Gap: Var(--Default-Spacing);
+}
+
+.dashboard__guage {
+  width: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: var(--default-spacing); */
+  color: var(--color-neutral-300);
+  font-size: 12px;
+}
+
+.dashboard__display {
+  background-color: var(--color-neutral-100);
+  border-radius: var(--border-radius);
+  border: solid 1px var(--color-neutral-300);
+  color: var(--color-neutral-600);
+  text-align: right;
+  margin-top: var(--default-half-spacing);
+  padding: var(--default-half-spacing) 5px;
+  width: 75%;
+}

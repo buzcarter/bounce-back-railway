@@ -1,0 +1,20 @@
+/* .                             */
+/* ---- Layout Simulation ------ */
+/* .                             */
+.layout {
+  background-color: var(--laybout-background-color);
+  border-radius: var(--border-radius);
+  height: var(--layout-height);
+  position: relative;
+  width: var(--layout-width);
+}
+
+.rail {
+  background-color: var(--rail-color);
+  border-radius: calc(var(--rail-height) / 2);
+  height: var(--rail-height);
+  left: calc((var(--layout-width) - var(--rail-length)) / 2);
+  position: absolute;
+  top: var(--rail-pos-top);
+  width: var(--rail-length);
+}
