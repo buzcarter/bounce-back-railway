@@ -29,9 +29,6 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    # - name: Build Site
-    #   run: npx webpack --mode production
-
     - name: Build Site
       run: npm run build && rsync -av --remove-source-files ./dist/ ./docs/
 
