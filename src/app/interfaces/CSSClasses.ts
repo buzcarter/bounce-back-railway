@@ -13,4 +13,7 @@ export enum CSSClasses {
 
   LEFT_ARROW =         'icon--left-arrow',
   RIGHT_ARROW =        'icon--right-arrow',
+
+  SENSOR =             'proximity-sensor',
+  SENSOR_ACTIVE =      'proximity-sensor--active',
 };

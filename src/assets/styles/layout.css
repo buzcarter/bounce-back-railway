@@ -9,7 +9,7 @@
   width: var(--layout-width);
 }
 
-.rail {
+.layout__rail {
   background-color: var(--rail-color);
   border-radius: calc(var(--rail-height) / 2);
   height: var(--rail-height);
@@ -17,4 +17,14 @@
   position: absolute;
   top: var(--rail-pos-top);
   width: var(--rail-length);
+}
+
+.layout__vehicle::after {
+  background-color: var(--color-neutral-300);
+  content: "";
+  height: calc(2 * var(--sensor-size));
+  left: 0;
+  position: absolute;
+  top: 35px; /* calc(1 + var(--icon-size)); */
+  width: 1px;
 }

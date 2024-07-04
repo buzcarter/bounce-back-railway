@@ -33,7 +33,7 @@ export const stations = [{
     top: '64px', right: '50%',
   },
 }, {
-  id: 3,
+  id: 4,
   name: 'Atwater Crossing',
   position: 700, // px from left
   reverseDirection: false,

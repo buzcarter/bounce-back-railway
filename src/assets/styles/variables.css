@@ -29,10 +29,10 @@
   --color-blue-link:                  #3185e0;
   --color-secondary-link:             var(--color-neutral-200);
   /* Status System */
-  --color-status-info:                #3478c1; /* --color-status-blue... */
-  --color-status-success:             #17bc16; /* --color-status-green... */
-  --color-status-alert:               #ff5853; /* --color-status-red... */
-  --color-status-warning:             #ffb600; /* --color-status-yellow... */
+  --color-status-info:                #3478c1;
+  --color-status-success:             #17bc16;
+  --color-status-alert:               #ff5853;
+  --color-status-warning:             #ffb600;
   --color-status-disabled:            #b3b3b3;
   --color-status-available-seat:      #4aa7f6;
   --color-status-accessibility-seat:  #0059ff;
@@ -55,4 +55,6 @@
   /* . */
   --border-radius:           4px;
   --border-color:          var(--color-neutral-400);
+  /* . */
+  --sensor-size:            10px;
 }

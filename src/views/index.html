@@ -7,9 +7,9 @@
 </head>
 <body>
     <main class="container">
-        <section class="layout" id="layout">
-            <div id="path" class="rail">
-                <span id="vehicle" class="icon icon--trolley" alt="Trolley"></span>
+        <section id="layout" class="layout">
+            <div id="layout-rail" class="layout__rail">
+                <span id="layout-vehicle" class="icon icon--trolley layout__vehicle" alt="Trolley"></span>
             </div>
         </section>
         <section class="section dashboard">
@@ -49,8 +49,11 @@
             <button id="haltBtn" class="icon-btn icon--btn-halt">Halt</button>
             <button id="reverseBtn" class="icon-btn icon--btn-reverse">Reverse</button>
             <input type="range" id="speedControl" class="slider" min="0" max="100" value="50">
-            <label><input type="checkbox" id="enableLoggingCbx">Logging</label>
         </section>
+        <section class="section controls">
+            Logging
+            <label><input type="checkbox" id="enableStationsLogCbx">Stations</label>
+            <label><input type="checkbox" id="enableDashboardLogCbx">Dashboard</label>
         <section class="section stdout" id="std-out"></section>
     </main>
     <script src="../../dist/trolley-controller.bundle.js"></script>
