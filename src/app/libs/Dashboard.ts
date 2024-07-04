@@ -5,19 +5,17 @@ import { DirectionTypes } from "../interfaces/DirectionTypes";
 import { updateStdOut } from "./StdOut";
 import { clockTick, int, pixels, velocity } from "../interfaces/CoreTypes";
 
-interface DashboardUpdateParams {
-  ticks: clockTick;
-  isLayover: boolean;
-  isPaused: boolean;
-  direction: DirectionTypes;
-  position: pixels;
-  powerLevel: number;
-  speed: velocity;
-  maxSpeed: velocity;
-}
-
 export const updateDashboard = (
-  { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: DashboardUpdateParams
+  { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {
+    ticks: clockTick;
+    isLayover: boolean;
+    isPaused: boolean;
+    direction: DirectionTypes;
+    position: pixels;
+    powerLevel: number;
+    speed: velocity;
+    maxSpeed: velocity;
+  }
 ) => {
   const currentState = {
     ticks,
@@ -43,4 +41,23 @@ export const updateDashboard = (
   if ((document.getElementById(ids.ENABLE_LOGGING) as HTMLInputElement).checked) {
     updateStdOut(currentState);
   }
+};
+
+export const updateClock = (ticks: int) => {
+  (document.getElementById(ids.DSPLY_CLOCK) as HTMLInputElement).value = ticks as unknown as string;
+};
+
+export const setStatusLED = ({ isPowered, isSlowHalt, isLayover, isPaused }: {
+  isPowered: boolean;
+  isSlowHalt: boolean;
+  isLayover: boolean;
+  isPaused: boolean;
+}) => {
+  // eslint-disable-next-line no-nested-ternary
+  const statusClass = (!isPowered || isSlowHalt)
+    ? CSSClasses.STATUS_STOPPED
+    : (isLayover || isPaused ? CSSClasses.STATUS_PAUSED : CSSClasses.STATUS_MOVING);
+  const ledEle = document.getElementById(ids.STATUS);
+  ledEle!.classList.remove(CSSClasses.STATUS_PAUSED, CSSClasses.STATUS_MOVING, CSSClasses.STATUS_STOPPED);
+  ledEle!.classList.add(statusClass);
 };
