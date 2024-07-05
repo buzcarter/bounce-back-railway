@@ -1,10 +1,10 @@
-import { TRAVEL_DISTANCE } from "../constants/Constants";
+import { INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from "../constants/Constants";
 import { ids } from "../constants/ElementIds";
 import { pixels } from "../interfaces/CoreTypes";
 import { DirectionTypes } from "../interfaces/DirectionTypes";
 import { updateStdOut } from "./StdOut";
 
-let position: pixels = 0;
+let position: pixels = INITIAL_TROLLEY_POSITION;
 
 const trolleyEle = document.getElementById(ids.VEHICLE) || document.createElement('div');
 
@@ -15,7 +15,7 @@ export const moveTrolley = ({ isLayover, isPaused, isPowered, speed, direction }
     return;
   }
   position += speed * direction;
-  if (position <= 0 || position >= TRAVEL_DISTANCE) {
+  if (position <= MIN_LEFT_EDGE || position >= MAX_RIGHT_EDGE) {
     updateStdOut({
       message: `Trolley has crashed at position ${position}!`,
       type: 'error',
@@ -26,3 +26,8 @@ export const moveTrolley = ({ isLayover, isPaused, isPowered, speed, direction }
 };
 
 export const getPosition = () => position;
+
+export const resetTrolleyPosition = () => {
+  position = INITIAL_TROLLEY_POSITION;
+  trolleyEle.style.left = `${position}px`;
+};
