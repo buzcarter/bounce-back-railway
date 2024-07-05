@@ -1,9 +1,10 @@
+import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from "./constants/Constants";
 import { DirectionTypes } from "./interfaces/DirectionTypes";
 
 export const stations = [{
   id: 1,
   name: 'LA Central Station',
-  position: 0, // px from left
+  position: MIN_LEFT_EDGE, // px from left
   reverseDirection: true,
   delay: 2000, // ms
   icon: 'station-1',
@@ -14,7 +15,7 @@ export const stations = [{
 }, {
   id: 2,
   name: 'Claremont Station',
-  position: 800, // px from left
+  position: MAX_RIGHT_EDGE, // px from left
   reverseDirection: true,
   delay: 3000, // ms
   icon: 'station-2',

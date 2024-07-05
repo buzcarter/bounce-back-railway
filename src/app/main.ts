@@ -6,7 +6,7 @@ import { slowStop, slowStart, continueSpeedChange } from "./libs/EaseSpeed";
 import { EventTypes, get as getEvent, set as setEvent } from "./libs/EventManager";
 import { PinAssignments, setupSlider, readValue, hasInputChanged, setupBtn } from "./libs/PinAssignments";
 import { StationTransistions, addStationsToLayout, checkStations, getCurrentStation, getCurrentStationId } from "./libs/StationsHelper";
-import { getPosition, moveTrolley } from "./libs/Trolley";
+import { getPosition, moveTrolley, resetTrolleyPosition } from "./libs/Trolley";
 import './styles';
 
 /** (px/tick) */
@@ -178,6 +178,7 @@ const loop = () => {
 
 const setup = () => {
   addStationsToLayout();
+  resetTrolleyPosition();
 
   setupBtn(PinAssignments.HALT_BTN);
   setupBtn(PinAssignments.PAUSE_BTN);

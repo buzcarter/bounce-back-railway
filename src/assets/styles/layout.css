@@ -19,12 +19,37 @@
   width: var(--rail-length);
 }
 
+.layout__vehicle {
+  --indicator-size: 6px;
+  --indicator-halved: calc(var(--indicator-size) / 2);
+}
+
+.layout__vehicle {
+  /* left: calc(0.5 * var(--icon-size)); */
+  transform: translateX(calc(-0.5 * var(--icon-size)));
+}
+
+/* triangle indicator (centered 0, 0) */
+.layout__vehicle::before {
+  border-bottom: var(--indicator-size) solid var(--color-neutral-300);
+  border-left: var(--indicator-halved) solid transparent;
+  border-right: var(--indicator-halved) solid transparent;
+  bottom: -12px;
+  content: "";
+  left: 50%;
+  margin-left: calc(-1 * var(--indicator-halved));
+  position: absolute;
+}
+
+/* two lines marking front/rear of vehicle */
 .layout__vehicle::after {
-  background-color: var(--color-neutral-300);
+  border-color: var(--color-neutral-300);
+  border-style: solid;
+  border-width: 0 1px;
   content: "";
   height: calc(2 * var(--sensor-size));
   left: 0;
   position: absolute;
   top: 35px; /* calc(1 + var(--icon-size)); */
-  width: 1px;
+  width: var(--icon-size);
 }
