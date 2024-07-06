@@ -1,7 +1,7 @@
-import { stations } from "../StationsSetup";
-import { ids, STATION_SAFETY_LENGTH } from "../constants";
-import { CSSClasses } from "../enums";
-import { JsonData, int, pixels } from "../interfaces";
+import { stations } from "../../StationsSetup";
+import { ids, STATION_SAFETY_LENGTH } from "../../constants";
+import { CSSClasses } from "../../enums";
+import { JsonData, int, pixels } from "../../interfaces";
 import { updateStdOut } from "./StdOut";
 
 export enum StationTransistions {

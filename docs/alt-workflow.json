@@ -1,0 +1,23 @@
+{
+  "events": [
+    {
+      "on": "sensor:triggered:start",
+      "and": {
+        "sensor": 1,
+        "direction": "left"
+      },
+      "then": {
+        "action": "train:speed:stop:start",
+        "duration": 1500,
+        "then": {
+          "action": "clock:wait:start",
+          "duration": 2000,
+          "then": {
+            "event": "train:speed:go:start",
+            "duration": 1500
+          }
+        }
+      }
+    }
+  ]
+}

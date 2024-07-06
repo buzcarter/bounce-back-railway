@@ -1,15 +1,11 @@
 {
   "name": "bounce-back-railway",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript visual prototype implementation for a mini-train microcontroller that auto-reverses at the ends of a straight track, with any number of intermediate stops. Perfect for model railroaders looking for a simple and fun automation solution.",
-  "keywords": [
-    "mini-train",
-    "microcontroller",
-    "auto-reverse",
-    "model railroad",
-    "automation",
-    "trolley"
-  ],
+  "main": "./dist/trolley-controller.bundle.js",
+  "exports": {
+    ".": "./dist/trolley-controller.bundle.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/buzcarter/bounce-back-railway.git"
@@ -19,12 +15,27 @@
     "name": "B.Carter",
     "email": "buzcarter@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "B.Carter",
+      "email": "buzcarter@gmail.com"
+    }
+  ],
+  "keywords": [
+    "mini-train",
+    "microcontroller",
+    "auto-reverse",
+    "model railroad",
+    "automation",
+    "trolley"
+  ],
   "scripts": {
     "build": "webpack --mode production",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint --fix . --ext .js",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint --fix . --ext .ts,.js",
     "start": "webpack-dev-server --open --mode development"
   },
+  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",

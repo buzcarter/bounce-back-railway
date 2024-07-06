@@ -1,6 +1,6 @@
-import { ids } from "../constants";
-import { CSSClasses, PinAssignments } from "../enums";
-import { JsonData } from "../interfaces";
+import { ids } from "../../constants";
+import { CSSClasses, PinAssignments } from "../../enums";
+import { JsonData } from "../../interfaces";
 
 const pinSelectorHash ={
   [PinAssignments.PAUSE_BTN]: ids.PAUSE_BTN,

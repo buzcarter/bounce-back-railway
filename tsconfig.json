@@ -1,16 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
     "allowJs": true,
-    "moduleResolution": "node",
+    "checkJs": true,
+    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
     "strict": true,
-    "skipLibCheck": true
+    "target": "es6"
   },
-  "include": ["src/app/**/*", "src/microcontroller.ts"]
+  "include": [
+    "src/app/**/*.ts",
+    "src/app/**/*.js",
+    "src/microcontroller.ts"
+  ]
 }

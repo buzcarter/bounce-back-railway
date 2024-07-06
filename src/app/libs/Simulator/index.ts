@@ -1,8 +1,8 @@
-import { PinAssignments } from '../enums';
+import { PinAssignments } from '../../enums';
 import { setupBtn, setupSlider } from './UXControls';
 import { addStationsToLayout } from './StationsHelper';
 import { resetTrolleyPosition } from './Trolley';
-import { onPowerBtnClick } from '../libs/System/Power';
+import { onPowerBtnClick } from '../System/Power';
 import { addPositionSensors } from './PositionSensorsHelper';
 
 export * from './Dashboard';

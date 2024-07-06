@@ -1,8 +1,8 @@
-import positionSensors from '../PositionSensorsSetup';
-import { ids } from '../constants';
-import { CSSClasses } from '../enums';
-import { int, pixels } from '../interfaces';
-import { getTicks } from '../libs/System/Clock';
+import positionSensors from '../../configs/Sensors';
+import { ids } from '../../constants';
+import { CSSClasses } from '../../enums';
+import { int, pixels } from '../../interfaces';
+import { getTicks } from '../System/Clock';
 import { updateStdOut } from './StdOut';
 
 let currentSensorId = -1;

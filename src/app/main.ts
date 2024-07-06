@@ -2,7 +2,7 @@ import {
   StationTransistions, checkStations, getCurrentStation, getCurrentStationId,
   setStatusLED, updateClock, updateDashboard,
   getPosition,
-} from "./simulator";
+} from "./libs/Simulator";
 import {
   int, velocity,
  } from "./interfaces";
@@ -14,7 +14,7 @@ import {
 } from "./constants";
 import { slowStop, slowStart, continueSpeedChange } from "./libs/EaseSpeed";
 import { EventTypes, get as getEvent, set as setEvent } from "./libs/Managers/EventManager";
-import { readValue, hasInputChanged } from "./simulator/UXControls";
+import { readValue, hasInputChanged } from "./libs/Simulator/UXControls";
 import { getTicks } from "./libs/System/Clock";
 import { getIsPowered } from "./libs/System/Power";
 

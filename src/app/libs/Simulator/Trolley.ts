@@ -1,11 +1,11 @@
 import {
   INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE,
   ids,
- } from "../constants";
-import { pixels } from "../interfaces";
+ } from "../../constants";
+import { pixels } from "../../interfaces";
 import { updateStdOut } from "./StdOut";
-import { getState } from "../main";
-import { getIsPowered } from "../libs/System/Power";
+import { getState } from "../../main";
+import { getIsPowered } from "../System/Power";
 import { checkSensors } from "./PositionSensorsHelper";
 
 let position: pixels = INITIAL_TROLLEY_POSITION;

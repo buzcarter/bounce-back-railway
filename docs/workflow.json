@@ -1,0 +1,38 @@
+{
+  "events": [
+    {
+      "on": "sensor:triggered:on",
+      "and": {
+        "sensor": 1,
+        "direction": "left"
+      },
+      "send": {
+        "event": "train:speed:stop:start",
+        "sensor": 1,
+        "duration": 1500
+      }
+    },
+    {
+      "on": "train:speed:stop:done",
+      "and": {
+        "sensor": 1
+      },
+      "send": {
+        "event": "clock:wait:start",
+        "sensor": 1,
+        "duration": 2000
+      }
+    },
+    {
+      "on": "clock:wait:done",
+      "and": {
+        "sensor": 1
+      },
+      "send": {
+        "event": "train:speed:go:start",
+        "sensor": 1,
+        "duration": 1500
+      }
+    }
+  ]
+}
