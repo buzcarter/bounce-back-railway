@@ -1,12 +1,12 @@
 import {
   INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE,
   ids,
- } from "../constants";
-import { pixels } from "../interfaces";
-import { updateStdOut } from "./StdOut";
-import { getState } from "../main";
-import { getIsPowered } from "../libs/System/Power";
-import { checkSensors } from "./PositionSensorsHelper";
+} from '../../constants';
+import { pixels } from '../../interfaces';
+import { updateStdOut } from './StdOut';
+import { getState } from '../../main';
+import { getIsPowered } from '../Systemz/Power';
+import { checkSensors } from './PositionSensorsHelper';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 
@@ -26,7 +26,7 @@ export const moveTrolley = () => {
       throw new Error('CRASH!!!');
     }
 
-    checkSensors(position -16, position + 16);
+    checkSensors(position - 16, position + 16);
     trolleyEle.style.left = `${position}px`;
   }
   requestAnimationFrame(moveTrolley);

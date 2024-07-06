@@ -1,15 +1,14 @@
-import { PinAssignments } from '../enums';
+import { PinAssignments } from '../../enums';
 import { setupBtn, setupSlider } from './UXControls';
 import { addStationsToLayout } from './StationsHelper';
 import { resetTrolleyPosition } from './Trolley';
-import { onPowerBtnClick } from '../libs/System/Power';
+import { onPowerBtnClick } from '../Systemz/Power';
 import { addPositionSensors } from './PositionSensorsHelper';
 
 export * from './Dashboard';
 export * from './StationsHelper';
 export * from './StdOut';
 export * from './Trolley';
-
 
 export const prepareSimulator = () => {
   addStationsToLayout();

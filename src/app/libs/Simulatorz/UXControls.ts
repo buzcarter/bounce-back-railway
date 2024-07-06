@@ -1,8 +1,9 @@
-import { ids } from "../constants";
-import { CSSClasses, PinAssignments } from "../enums";
-import { JsonData } from "../interfaces";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { ids } from '../../constants';
+import { CSSClasses, PinAssignments } from '../../enums';
+import { JsonData } from '../../interfaces';
 
-const pinSelectorHash ={
+const pinSelectorHash = {
   [PinAssignments.PAUSE_BTN]: ids.PAUSE_BTN,
   [PinAssignments.HALT_BTN]: ids.HALT_BTN,
   [PinAssignments.POWER_BTN]: ids.POWER_BTN,
@@ -11,11 +12,11 @@ const pinSelectorHash ={
 };
 
 function onClick() {
-  // @ts-ignore-next-line
+  // @ts-expect-error
   this.isOn = !this.isOn;
-  // @ts-ignore-next-line
+  // @ts-expect-error
   this.hasChanged = true;
-  // @ts-ignore-next-line
+  // @ts-expect-error
   this.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, this.isOn);
 }
 
@@ -26,7 +27,7 @@ const pinToElement = (pinNbr: PinAssignments): HTMLElement | null => {
   }
 
   return document.getElementById(selector);
-}
+};
 
 export const hasInputChanged = (pinNbr: PinAssignments): boolean => {
   const ele = pinToElement(pinNbr);
@@ -34,12 +35,12 @@ export const hasInputChanged = (pinNbr: PinAssignments): boolean => {
     return false;
   }
 
-  // @ts-ignore-next-line
+  // @ts-expect-error
   const hasChanged = ele!.hasChanged ?? false;
-  // @ts-ignore-next-line
+  // @ts-expect-error
   ele!.hasChanged = false;
   return hasChanged;
-}
+};
 
 export const readValue = (pinNbr: PinAssignments): number => {
   const ele = pinToElement(pinNbr);
@@ -48,25 +49,25 @@ export const readValue = (pinNbr: PinAssignments): number => {
   }
 
   return pinNbr === PinAssignments.SPEED_CONTROL
-    // @ts-ignore-next-line
+    // @ts-expect-error
     ? ele.value / 100
     : 0;
-  };
+};
 
 export const setupBtn = (pinNbr: PinAssignments, cb?: unknown) => {
   const ele = pinToElement(pinNbr);
   ele!.addEventListener('click', onClick);
   if (typeof cb === 'function') {
-    // @ts-ignore-next-line
+    // @ts-expect-error
     ele!.addEventListener('click', cb);
   }
   (ele as unknown as JsonData).hasChanged = false;
   (ele as unknown as JsonData).isOn = false;
   return ele;
-}
+};
 
 export const setupSlider = (pinNbr: PinAssignments, initialValue: number) => {
   const powerSlider = setupBtn(pinNbr);
-  // @ts-ignore-next-line
+  // @ts-expect-error
   powerSlider.value = initialValue;
-}
+};

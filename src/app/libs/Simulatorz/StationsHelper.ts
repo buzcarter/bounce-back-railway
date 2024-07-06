@@ -1,8 +1,8 @@
-import { stations } from "../StationsSetup";
-import { ids, STATION_SAFETY_LENGTH } from "../constants";
-import { CSSClasses } from "../enums";
-import { JsonData, int, pixels } from "../interfaces";
-import { updateStdOut } from "./StdOut";
+import { stations } from '../../configs/Stations';
+import { ids, STATION_SAFETY_LENGTH } from '../../constants';
+import { CSSClasses } from '../../enums';
+import { JsonData, int, integer, pixels } from '../../interfaces';
+import { updateStdOut } from './StdOut';
 
 export enum StationTransistions {
   ARRIVAL = 1,
@@ -12,9 +12,9 @@ export enum StationTransistions {
 
 let currentStationId: int | null = null;
 
-const getStationByPostion = (pos: pixels) => stations.find(station => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
+const getStationByPostion = (pos: pixels) => stations.find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
-export const getCurrentStation = () => stations.find(station => station.id === currentStationId);
+export const getCurrentStation = () => stations.find((station: { id: int}) => station.id === currentStationId);
 
 export const checkStations = (position: number): StationTransistions => {
   let transition = StationTransistions.NO_CHANGE;
@@ -49,10 +49,12 @@ export const checkStations = (position: number): StationTransistions => {
 
 const applyStyles = (ele: HTMLElement, styles: JsonData) => {
   Object.entries(styles).forEach(([key, value]) => {
-    // @ts-ignore-next-line
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    // eslint-disable-next-line no-param-reassign
     ele.style[key] = value;
   });
-}
+};
 
 export const addStationsToLayout = () => {
   const layoutEle = document.getElementById(ids.LAYOUT);
@@ -61,7 +63,9 @@ export const addStationsToLayout = () => {
     throw new Error('Layout elements not found');
   }
 
-  stations.forEach(({ icon, name, id, position, style }) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  stations.forEach(({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData}) => {
     const stationEle = document.createElement('span');
     stationEle.classList.add(CSSClasses.ICON, `${CSSClasses.ICON_PREFIX}${icon}`);
     stationEle.title = name;
@@ -81,7 +85,7 @@ export const addStationsToLayout = () => {
     updateStdOut({
       'Add Station': `${id}: "${name}"`,
       at: `${position}px (from left)`,
-    })
+    });
   });
 };
 

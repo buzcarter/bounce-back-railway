@@ -4,4 +4,4 @@ export enum PinAssignments {
   POWER_BTN = 2,
   REVERSE_BTN = 3,
   SPEED_CONTROL = 4,
-};
+}
