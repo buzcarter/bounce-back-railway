@@ -30,3 +30,7 @@ npm run build
 
 * [Icons](https://www.iconbolt.com/)
 * [Jittery Trolley, "Getting Jittery On Hover Using Only CSS"](https://www.kirupa.com/snippets/getting_jittery_on_hover_using_only_css.htm)
+
+## ✔️ TODO List
+
+* Power is a mess, should directly interact with microcontroller.

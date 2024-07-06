@@ -26,3 +26,19 @@
 .proximity-sensor--active::before {
   border-bottom-color: var(--color-status-success);
 }
+
+.proximity-boundary-sensor {
+  background-color: var(--color-status-info);
+  border-radius: 50%;
+  display: block;
+  height: 6px;
+  left: 0;
+  margin-left: 0;
+  position: absolute;
+  top: calc(var(--rail-height) + 6px);
+  width: 6px;
+}
+
+.proximity-boundary-sensor--active {
+  background-color: var(--color-status-success);
+}

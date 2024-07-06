@@ -1,5 +1,5 @@
-import { CLOCK_SPEED, HALT_DURATION } from "../constants/Constants";
-import { int, velocity } from "../interfaces/CoreTypes";
+import { CLOCK_SPEED, HALT_DURATION } from "../constants";
+import { int, velocity } from "../interfaces";
 import { setSpeed } from "../main";
 
 let currentStep: int = 0;

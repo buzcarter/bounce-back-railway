@@ -1,14 +1,6 @@
-import { ids } from "../constants/ElementIds";
-import { CSSClasses } from "../interfaces/CSSClasses";
-import { JsonData } from "../interfaces/CoreTypes";
-
-export enum PinAssignments {
-  PAUSE_BTN = 0,
-  HALT_BTN = 1,
-  POWER_BTN = 2,
-  REVERSE_BTN = 3,
-  SPEED_CONTROL = 4,
-};
+import { ids } from "../constants";
+import { CSSClasses, PinAssignments } from "../enums";
+import { JsonData } from "../interfaces";
 
 const pinSelectorHash ={
   [PinAssignments.PAUSE_BTN]: ids.PAUSE_BTN,
@@ -61,9 +53,13 @@ export const readValue = (pinNbr: PinAssignments): number => {
     : 0;
   };
 
-export const setupBtn = (pinNbr: PinAssignments) => {
+export const setupBtn = (pinNbr: PinAssignments, cb?: unknown) => {
   const ele = pinToElement(pinNbr);
   ele!.addEventListener('click', onClick);
+  if (typeof cb === 'function') {
+    // @ts-ignore-next-line
+    ele!.addEventListener('click', cb);
+  }
   (ele as unknown as JsonData).hasChanged = false;
   (ele as unknown as JsonData).isOn = false;
   return ele;

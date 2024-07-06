@@ -1,12 +1,12 @@
-import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from "./constants/Constants";
-import { DirectionTypes } from "./interfaces/DirectionTypes";
+import { CLOCK_SPEED, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from "./constants";
+import { DirectionTypes } from "./enums";
 
 export const stations = [{
   id: 1,
   name: 'LA Central Station',
   position: MIN_LEFT_EDGE, // px from left
   reverseDirection: true,
-  delay: 2000, // ms
+  delay: 2000 / CLOCK_SPEED, // ms
   icon: 'station-1',
   defaultDirection: DirectionTypes.RIGHT,
   style: {
@@ -17,7 +17,7 @@ export const stations = [{
   name: 'Claremont Station',
   position: MAX_RIGHT_EDGE, // px from left
   reverseDirection: true,
-  delay: 3000, // ms
+  delay: 3000 / CLOCK_SPEED, // ms
   icon: 'station-2',
   defaultDirection: DirectionTypes.LEFT,
   style: {
@@ -28,7 +28,7 @@ export const stations = [{
   name: 'Burbank Platform',
   position: 400, // px from left
   reverseDirection: false,
-  delay: 1500, // ms
+  delay: 1500 / CLOCK_SPEED, // ms
   icon: 'passenger-platform',
   style: {
     top: '64px', right: '50%',
@@ -38,11 +38,11 @@ export const stations = [{
   name: 'Atwater Crossing',
   position: 700, // px from left
   reverseDirection: false,
-  delay: 750, // ms
+  delay: 750 / CLOCK_SPEED, // ms
   icon: 'crossing-signal',
   style: {
     top: '73px',
-    right: '165px',
+    right: '172px',
     height: '22px',
   },
 }];
