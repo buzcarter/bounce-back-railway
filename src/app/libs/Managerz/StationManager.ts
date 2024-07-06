@@ -1,7 +1,7 @@
 import { SENSOR_THRESHOLD } from '../../constants';
 import { uint8_t } from '../../interfaces';
-import { analogRead } from '../Components/IRSensor';
-import { updateStdOut } from '../Simulator';
+import { analogRead } from '../Componentz/IRSensor';
+import { updateStdOut } from '../Simulatorz';
 
 let lastStation: uint8_t = 0;
 

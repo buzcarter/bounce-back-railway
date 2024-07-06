@@ -2,15 +2,15 @@ import {
   StationTransistions, checkStations, getCurrentStation, getCurrentStationId,
   setStatusLED, updateClock, updateDashboard,
   getPosition,
-} from './libs/Simulator';
+} from './libs/Simulatorz';
 import { int, velocity } from './interfaces';
 import { PinAssignments, DirectionTypes } from './enums';
 import { DASHBOARD_REFRESH_RATE, MAX_SPEED } from './constants';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
-import { EventTypes, get as getEvent, set as setEvent } from './libs/Managers/EventManager';
-import { readValue, hasInputChanged } from './libs/Simulator/UXControls';
-import { getTicks } from './libs/System/Clock';
-import { getIsPowered } from './libs/System/Power';
+import { EventTypes, get as getEvent, set as setEvent } from './libs/Managerz/EventManager';
+import { readValue, hasInputChanged } from './libs/Simulatorz/UXControls';
+import { getTicks } from './libs/Systemz/Clock';
+import { getIsPowered } from './libs/Systemz/Power';
 
 import './styles';
 
