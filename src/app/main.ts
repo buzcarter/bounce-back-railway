@@ -2,21 +2,15 @@ import {
   StationTransistions, checkStations, getCurrentStation, getCurrentStationId,
   setStatusLED, updateClock, updateDashboard,
   getPosition,
-} from "./libs/Simulator";
-import {
-  int, velocity,
- } from "./interfaces";
-import {
-  PinAssignments, DirectionTypes
-} from "./enums";
-import {
-  DASHBOARD_REFRESH_RATE, MAX_SPEED,
-} from "./constants";
-import { slowStop, slowStart, continueSpeedChange } from "./libs/EaseSpeed";
-import { EventTypes, get as getEvent, set as setEvent } from "./libs/Managers/EventManager";
-import { readValue, hasInputChanged } from "./libs/Simulator/UXControls";
-import { getTicks } from "./libs/System/Clock";
-import { getIsPowered } from "./libs/System/Power";
+} from './libs/Simulator';
+import { int, velocity } from './interfaces';
+import { PinAssignments, DirectionTypes } from './enums';
+import { DASHBOARD_REFRESH_RATE, MAX_SPEED } from './constants';
+import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
+import { EventTypes, get as getEvent, set as setEvent } from './libs/Managers/EventManager';
+import { readValue, hasInputChanged } from './libs/Simulator/UXControls';
+import { getTicks } from './libs/System/Clock';
+import { getIsPowered } from './libs/System/Power';
 
 import './styles';
 
@@ -32,17 +26,17 @@ let isPaused = false;
 let isSlowHalt = false;
 
 export const getSpeed = () => speed;
-export const setSpeed = (newSpeed: velocity) => speed = newSpeed;
+export const setSpeed = (newSpeed: velocity) => { speed = newSpeed; };
 export const getState = () => ({ isLayover, isPaused, speed, direction });
 
 const onPauseBtnClick = () => {
   isPaused = !isPaused;
-}
+};
 
 const onHaltBtnClick = () => {
   isSlowHalt = !isSlowHalt;
   setEvent(isSlowHalt ? EventTypes.BEGIN_SLOW_STOP : EventTypes.BEGIN_SLOW_START);
-}
+};
 
 const onReverseBtnClick = () => {
   direction *= -1;
@@ -51,7 +45,7 @@ const onReverseBtnClick = () => {
 const onSpeedChange = () => {
   powerLevel = readValue(PinAssignments.SPEED_CONTROL);
   speed = MAX_SPEED * powerLevel;
-}
+};
 
 const setLayoverDuration = (length: int) => {
   if (length > 0) {
@@ -80,7 +74,7 @@ const handleStationArrival = () => {
 
 const readButtons = () => {
   if (hasInputChanged(PinAssignments.PAUSE_BTN)) {
-    onPauseBtnClick()
+    onPauseBtnClick();
   }
 
   if (hasInputChanged(PinAssignments.REVERSE_BTN)) {
@@ -94,7 +88,7 @@ const readButtons = () => {
   if (hasInputChanged(PinAssignments.SPEED_CONTROL)) {
     onSpeedChange();
   }
-}
+};
 
 export const loop = () => {
   readButtons();
@@ -102,7 +96,7 @@ export const loop = () => {
   const ticks = getTicks();
   updateClock(ticks);
 
-  let position = getPosition();
+  const position = getPosition();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
     setStatusLED({ isPowered: getIsPowered(), isSlowHalt, isLayover, isPaused });
     updateDashboard({ ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed: MAX_SPEED });
@@ -127,12 +121,12 @@ export const loop = () => {
       break;
     case StationTransistions.DEPARTURE:
       setEvent(EventTypes.STATION_DEPARTURE);
-      break
+      break;
     case StationTransistions.NO_CHANGE:
       if (![
         EventTypes.CONTINUE_SPEED_CHANGE,
         EventTypes.BEGIN_SLOW_START,
-        EventTypes.BEGIN_SLOW_STOP
+        EventTypes.BEGIN_SLOW_STOP,
       ].includes(getEvent())) {
         setEvent(EventTypes.OK);
       }

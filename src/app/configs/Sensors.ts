@@ -6,4 +6,4 @@ export default [{
   id: 11,
   name: '26 Ave (Higland Park)',
   position: 150,
-}]
+}];

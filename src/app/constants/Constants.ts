@@ -1,5 +1,5 @@
 /* eslint-disable key-spacing, no-multi-spaces */
-import { milliseconds, pixels, velocity } from "../interfaces";
+import { milliseconds, pixels, velocity } from '../interfaces';
 
 // #region Timing/Speed contraints
 /** (ms/tick) i.e. tick duration */

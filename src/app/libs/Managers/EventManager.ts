@@ -10,15 +10,12 @@ export enum EventTypes {
 
   STATION_ARRIVAL =        'station:arrival',
   STATION_DEPARTURE =      'station:departure',
-};
+}
 /* eslint-enable key-spacing, no-multi-spaces */
 
 let currentEvent: EventTypes = EventTypes.OK;
 
-export const set = (eventType: EventTypes): EventTypes => {
-  return currentEvent = eventType;
-}
+// eslint-disable-next-line no-return-assign
+export const set = (eventType: EventTypes): EventTypes => currentEvent = eventType;
 
-export const get = (): EventTypes => {
-  return currentEvent;
-}
+export const get = (): EventTypes => currentEvent;

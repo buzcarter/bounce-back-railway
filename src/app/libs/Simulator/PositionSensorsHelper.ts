@@ -29,20 +29,20 @@ export const addPositionSensors = () => {
       at: position,
     });
   });
-}
+};
 
 const setActive = (id: int, isActive: boolean) => {
   document.getElementById(getSensorId(id))?.classList.toggle(CSSClasses.PROXIMITY_SENSOR_ACTIVE, isActive);
-}
+};
 
 export const checkSensors = (left: pixels, right: pixels) => {
-  const index = positionSensors.findIndex(sensor => sensor.position >= left && sensor.position <= right);
+  const index = positionSensors.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
   const sensor = index > -1 ? positionSensors[index] : null;
   if (!sensor && currentSensorId > -1) {
     setActive(currentSensorId, false);
     updateStdOut({
-      'sensor': currentSensorId,
-      'state': 'off',
+      sensor: currentSensorId,
+      state: 'off',
       ticks: getTicks(),
     });
     currentSensorId = -1;
@@ -50,11 +50,11 @@ export const checkSensors = (left: pixels, right: pixels) => {
     currentSensorId = sensor.id;
     setActive(currentSensorId, true);
     updateStdOut({
-      'sensor': sensor.id,
-      'state': 'on',
-      'name': sensor.name,
+      sensor: sensor.id,
+      state: 'on',
+      name: sensor.name,
       ticks: getTicks(),
     });
   }
   return sensor;
-}
+};

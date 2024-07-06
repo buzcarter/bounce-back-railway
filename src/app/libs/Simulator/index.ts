@@ -10,7 +10,6 @@ export * from './StationsHelper';
 export * from './StdOut';
 export * from './Trolley';
 
-
 export const prepareSimulator = () => {
   addStationsToLayout();
   addPositionSensors();

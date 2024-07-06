@@ -1,19 +1,17 @@
-import { SENSOR_THRESHOLD } from "../../constants";
-import { uint8_t } from "../../interfaces";
-import { analogRead } from "../Components/IRSensor";
-import { updateStdOut } from "../Simulator";
+import { SENSOR_THRESHOLD } from '../../constants';
+import { uint8_t } from '../../interfaces';
+import { analogRead } from '../Components/IRSensor';
+import { updateStdOut } from '../Simulator';
 
 let lastStation: uint8_t = 0;
 
 export const isAtStation = (pin: uint8_t): boolean => {
-  const isAtStation = analogRead(pin) < SENSOR_THRESHOLD;
-  if (isAtStation && lastStation == pin)
-  {
+  const atStation = analogRead(pin) < SENSOR_THRESHOLD;
+  if (atStation && lastStation === pin) {
     return false;
   }
 
-  if (isAtStation)
-  {
+  if (atStation) {
     lastStation = pin;
     updateStdOut({
       message: 'Arrived at station',
@@ -21,5 +19,5 @@ export const isAtStation = (pin: uint8_t): boolean => {
     });
   }
 
-  return isAtStation;
-}
+  return atStation;
+};

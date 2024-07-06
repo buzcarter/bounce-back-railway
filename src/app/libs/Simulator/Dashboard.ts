@@ -1,19 +1,19 @@
-import { CLOCK_SPEED, ids  } from "../../constants";
-import { CSSClasses, DirectionTypes } from "../../enums";
-import { updateStdOut } from "./StdOut";
-import { clockTick, int, pixels, velocity } from "../../interfaces";
+import { CLOCK_SPEED, ids } from '../../constants';
+import { CSSClasses, DirectionTypes } from '../../enums';
+import { updateStdOut } from './StdOut';
+import { clockTick, int, pixels, velocity } from '../../interfaces';
 
 export const updateDashboard = (
   { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {
-    ticks: clockTick;
-    isLayover: boolean;
-    isPaused: boolean;
-    direction: DirectionTypes;
-    position: pixels;
-    powerLevel: number;
-    speed: velocity;
-    maxSpeed: velocity;
-  }
+    ticks: clockTick,
+    isLayover: boolean,
+    isPaused: boolean,
+    direction: DirectionTypes,
+    position: pixels,
+    powerLevel: number,
+    speed: velocity,
+    maxSpeed: velocity,
+  },
 ) => {
   const currentState = {
     ticks,
@@ -21,9 +21,9 @@ export const updateDashboard = (
     direction: direction === DirectionTypes.RIGHT ? 'Right' : 'Left',
     position: position.toFixed(1),
     power: `${(powerLevel * 100).toFixed(1)}%`,
-    speed: `${(1000 / CLOCK_SPEED * speed).toFixed(1)} px/s`,
+    speed: `${((1000 / CLOCK_SPEED) * speed).toFixed(1)} px/s`,
     // eslint-disable-next-line no-mixed-operators
-    maxSpeed: `${(1000 / CLOCK_SPEED * maxSpeed).toFixed(1)} px/s`,
+    maxSpeed: `${((1000 / CLOCK_SPEED) * maxSpeed).toFixed(1)} px/s`,
   };
 
   const directionEle = document.getElementById(ids.DSPLY_DIRECTION);
@@ -46,10 +46,10 @@ export const updateClock = (ticks: int) => {
 };
 
 export const setStatusLED = ({ isPowered, isSlowHalt, isLayover, isPaused }: {
-  isPowered: boolean;
-  isSlowHalt: boolean;
-  isLayover: boolean;
-  isPaused: boolean;
+  isPowered: boolean,
+  isSlowHalt: boolean,
+  isLayover: boolean,
+  isPaused: boolean,
 }) => {
   // eslint-disable-next-line no-nested-ternary
   const statusClass = (!isPowered || isSlowHalt)

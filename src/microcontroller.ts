@@ -4,7 +4,7 @@ import { getIsPowered } from './app/libs/System/Power';
 import { moveTrolley, prepareSimulator } from './app/libs/Simulator';
 import { loop, setup } from './app/main';
 
-const onClickTick = () => {
+const onClockTick = () => {
   if (!getIsPowered()) {
     return;
   }
@@ -18,9 +18,9 @@ const main = () => {
   resetTicks();
 
   setup();
-  setInterval(onClickTick, CLOCK_SPEED);
+  setInterval(onClockTick, CLOCK_SPEED);
 
   moveTrolley();
-}
+};
 
 main();

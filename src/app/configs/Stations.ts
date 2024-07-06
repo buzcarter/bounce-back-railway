@@ -1,5 +1,5 @@
-import { CLOCK_SPEED, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from "../constants";
-import { DirectionTypes } from "../enums";
+import { CLOCK_SPEED, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
+import { DirectionTypes } from '../enums';
 
 export const stations = [{
   id: 1,

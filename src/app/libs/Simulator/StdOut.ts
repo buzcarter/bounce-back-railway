@@ -1,6 +1,6 @@
-import { ids } from "../../constants";
-import { CSSClasses } from "../../enums";
-import { JsonData } from "../../interfaces";
+import { ids } from '../../constants';
+import { CSSClasses } from '../../enums';
+import { JsonData } from '../../interfaces';
 
 export const updateStdOut = (message: JsonData) => {
   const stdOutEle = document.getElementById(ids.STD_OUT);
