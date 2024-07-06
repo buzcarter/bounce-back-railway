@@ -19,7 +19,7 @@ export const STATION_SAFETY_LENGTH: pixels    =    8;
 export const TRAVEL_DISTANCE: pixels          =  800;
 export const MIN_LEFT_EDGE: pixels            = ICON_SIZE / 2;
 export const MAX_RIGHT_EDGE: pixels           = TRAVEL_DISTANCE + (ICON_SIZE / 2);
-export const INITIAL_TROLLEY_POSITION: pixels = ICON_SIZE / 2;
+export const INITIAL_TROLLEY_POSITION: pixels = 1 + ICON_SIZE / 2;
 // #endregion
 
 /** (px/tick) */
