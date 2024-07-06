@@ -3,6 +3,7 @@ import { setupBtn, setupSlider } from './UXControls';
 import { addStationsToLayout } from './StationsHelper';
 import { resetTrolleyPosition } from './Trolley';
 import { onPowerBtnClick } from '../libs/System/Power';
+import { addPositionSensors } from './PositionSensorsHelper';
 
 export * from './Dashboard';
 export * from './StationsHelper';
@@ -12,6 +13,8 @@ export * from './Trolley';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
+  addPositionSensors();
+
   resetTrolleyPosition();
 
   setupBtn(PinAssignments.POWER_BTN, onPowerBtnClick);

@@ -16,4 +16,6 @@ export enum CSSClasses {
 
   SENSOR =             'proximity-sensor',
   SENSOR_ACTIVE =      'proximity-sensor--active',
+
+  BOUNDARY_SENSOR =    'proximity-boundary-sensor',
 };
