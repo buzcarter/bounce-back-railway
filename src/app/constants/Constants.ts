@@ -1,5 +1,5 @@
 /* eslint-disable key-spacing, no-multi-spaces */
-import { milliseconds, pixels } from "../interfaces/CoreTypes";
+import { milliseconds, pixels, velocity } from "../interfaces";
 
 // #region Timing/Speed contraints
 /** (ms/tick) i.e. tick duration */
@@ -21,3 +21,6 @@ export const MIN_LEFT_EDGE: pixels            = ICON_SIZE / 2;
 export const MAX_RIGHT_EDGE: pixels           = TRAVEL_DISTANCE + (ICON_SIZE / 2);
 export const INITIAL_TROLLEY_POSITION: pixels = ICON_SIZE / 2;
 // #endregion
+
+/** (px/tick) */
+export const MAX_SPEED: velocity = TRAVEL_DISTANCE / 400;

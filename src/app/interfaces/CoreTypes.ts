@@ -2,6 +2,9 @@ export type integer = number;
 
 export type int = number;
 
+/** unsigned 10-bit integer, 0 - 1024 */
+export type unsignedTiny = number;
+
 export type pixels = number;
 
 export type milliseconds = number;

@@ -20,7 +20,7 @@
 }
 
 .layout__vehicle {
-  --indicator-size: 6px;
+  --indicator-size: var(--rail-height);
   --indicator-halved: calc(var(--indicator-size) / 2);
 }
 
@@ -31,10 +31,10 @@
 
 /* triangle indicator (centered 0, 0) */
 .layout__vehicle::before {
-  border-bottom: var(--indicator-size) solid var(--color-neutral-300);
+  border-top: var(--indicator-size) solid var(--color-orange-300);
   border-left: var(--indicator-halved) solid transparent;
   border-right: var(--indicator-halved) solid transparent;
-  bottom: -12px;
+  bottom: calc(-1 * var(--indicator-halved));
   content: "";
   left: 50%;
   margin-left: calc(-1 * var(--indicator-halved));

@@ -1,8 +1,7 @@
 import { stations } from "../StationsSetup";
-import { STATION_SAFETY_LENGTH } from "../constants/Constants";
-import { ids } from "../constants/ElementIds";
-import { CSSClasses } from "../interfaces/CSSClasses";
-import { JsonData, int, pixels } from "../interfaces/CoreTypes";
+import { ids, STATION_SAFETY_LENGTH } from "../constants";
+import { CSSClasses } from "../enums";
+import { JsonData, int, pixels } from "../interfaces";
 import { updateStdOut } from "./StdOut";
 
 export enum StationTransistions {
@@ -28,8 +27,7 @@ export const checkStations = (position: number): StationTransistions => {
 
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
       updateStdOut({
-        // ticks,
-        Arrived: station.name,
+        Arrived: `${station.name} (${station.id})`,
         layover: station.delay || 'none',
       });
     }
@@ -80,6 +78,10 @@ export const addStationsToLayout = () => {
     sensorEle.title = name;
 
     railEle.appendChild(sensorEle);
+    updateStdOut({
+      'Add Station': `${id}: "${name}"`,
+      at: `${position}px (from left)`,
+    })
   });
 };
 

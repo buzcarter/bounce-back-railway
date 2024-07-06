@@ -1,9 +1,7 @@
-import { CLOCK_SPEED } from "../constants/Constants";
-import { ids } from "../constants/ElementIds";
-import { CSSClasses } from "../interfaces/CSSClasses";
-import { DirectionTypes } from "../interfaces/DirectionTypes";
+import { CLOCK_SPEED, ids  } from "../constants";
+import { CSSClasses, DirectionTypes } from "../enums";
 import { updateStdOut } from "./StdOut";
-import { clockTick, int, pixels, velocity } from "../interfaces/CoreTypes";
+import { clockTick, int, pixels, velocity } from "../interfaces";
 
 export const updateDashboard = (
   { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {

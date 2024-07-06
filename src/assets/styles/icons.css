@@ -92,3 +92,11 @@
 .icon--btn-reverse {
   background-image: url(../images/icons/btn-reverse.svg);
 }
+
+.icon--rotatable {
+  transition: transform 0.3s ease;
+}
+
+.icon--rotatable.rotate {
+  transform: rotate(180deg);
+}
