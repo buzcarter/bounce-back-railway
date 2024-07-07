@@ -1,6 +1,6 @@
-import { DirectionTypes, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
-import { SensorTypes } from '../constants/SensorTypes';
+import { DirectionTypes, SensorTypes } from '../constants';
 import { CLOCK_SPEED } from '../microcontroller';
+import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../simulator/constants';
 
 export const stations = [{
   id: 1,

@@ -1,23 +1,24 @@
 // externals
 import { stations } from '../../configs/Stations';
-import { STATION_SAFETY_LENGTH } from '../../constants';
 import { StationTransistions } from '../../libs/mgrs/StationManager';
-import { JsonData, int, integer, pixels } from '../../interfaces';
+// integer,
+import { JsonData, int, pixels } from '../../interfaces';
 // locals
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './Trolley';
-import { SensorTypes } from '../../constants/SensorTypes';
+import { SensorTypes } from '../../constants';
 
 let currentStationId: int | null = null;
 
-export const getSignals = () => stations.filter(({ type }: { type: SensorTypes}) => type === SensorTypes.SIGNAL);
-export const getStations = () => stations.filter(({ type }: { type: SensorTypes}) => type === SensorTypes.STATION);
+const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);
+export const getSignals = getByType.bind(null, SensorTypes.SIGNAL);
+export const getStations = getByType.bind(null, SensorTypes.STATION);
 export const getCurrentStation = () => getStations().find((station: { id: int}) => station.id === currentStationId);
 
 const getStationByPostion = (pos: pixels) => getStations().find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
-const setActiveIndicator = (stationId: int, isActive: boolean) => {
+const setActive = (stationId: int, isActive: boolean) => {
   document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
 };
 
@@ -28,7 +29,7 @@ export const checkStations = (): StationTransistions => {
   if (station && station.id !== currentStationId) {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
-    setActiveIndicator(station.id, true);
+    setActive(station.id, true);
 
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
       updateStdOut({
@@ -38,10 +39,9 @@ export const checkStations = (): StationTransistions => {
     }
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
-    setActiveIndicator(currentStationId, false);
+    setActive(currentStationId, false);
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
       updateStdOut({
-        // ticks,
         Departed: currentStationId,
       });
     }
@@ -68,9 +68,11 @@ export const addStationsToLayout = () => {
   }
 
   getStations()
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    .forEach(({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData}) => {
+    .forEach((station) => {
+      // ({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData})
+      const {
+        id, name, position, icon, style,
+      } = station;
       const stationEle = document.createElement('span');
       stationEle.classList.add(CSSClasses.ICON, `${CSSClasses.ICON_PREFIX}${icon}`);
       stationEle.title = name;

@@ -1,12 +1,11 @@
 // externals
-import { INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../../constants';
 import { pixels } from '../../interfaces';
 import { getState } from '../../main';
 import { getIsPowered } from '../../microcontroller';
 // locals
 import { updateStdOut } from './StdOut';
 import { checkSensors } from './PositionSensorsHelper';
-import { ids } from '../constants';
+import { ids, INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 

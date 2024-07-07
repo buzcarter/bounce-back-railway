@@ -1,7 +1,6 @@
 // externals
 import {
-  DirectionTypes,
-  HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from '../constants';
 import { getIsPowered, getTicks, onPowerBtnClick } from '../microcontroller';
 // locals
@@ -14,6 +13,7 @@ import { setupBtn, setupSlider } from './components/UXControls';
 export { hasInputChanged, setupBtn, setupSlider, readValue as analogRead } from './components/UXControls';
 export { updateClock } from './components/Dashboard';
 export { checkStations, getCurrentStation, getCurrentStationId } from './components/StationsHelper';
+// export { TRAVEL_DISTANCE, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from './constants';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
