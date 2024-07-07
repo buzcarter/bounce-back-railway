@@ -1,14 +1,12 @@
+// externals
 import { stations } from '../../configs/Stations';
 import { STATION_SAFETY_LENGTH } from '../../constants';
+import { StationTransistions } from '../../libs/mgrs/StationManager';
 import { JsonData, int, integer, pixels } from '../../interfaces';
+// locals
 import { CSSClasses, ids } from '../constants';
 import { updateStdOut } from './StdOut';
-
-export enum StationTransistions {
-  ARRIVAL = 1,
-  DEPARTURE = 2,
-  NO_CHANGE = 0,
-}
+import { getPosition } from './Trolley';
 
 let currentStationId: int | null = null;
 
@@ -16,7 +14,8 @@ const getStationByPostion = (pos: pixels) => stations.find((station: { position:
 
 export const getCurrentStation = () => stations.find((station: { id: int}) => station.id === currentStationId);
 
-export const checkStations = (position: number): StationTransistions => {
+export const checkStations = (): StationTransistions => {
+  const position = getPosition();
   let transition = StationTransistions.NO_CHANGE;
   const station = getStationByPostion(position);
   if (station && station.id !== currentStationId) {

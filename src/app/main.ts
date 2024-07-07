@@ -1,14 +1,14 @@
 import { int, velocity } from './interfaces';
-import { DASHBOARD_REFRESH_RATE, DirectionTypes, MAX_SPEED, PinAssignments } from './constants';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
-import { readValue, hasInputChanged } from './simulator/components/UXControls';
-import { getTicks } from './microcontroller/components/Clock';
-import { getIsPowered } from './microcontroller/components/Power';
-import { getPosition } from './simulator/components/Trolley';
-import { checkStations, getCurrentStation, getCurrentStationId, StationTransistions } from './simulator/components/StationsHelper';
-import { setStatusLED, updateClock, updateDashboard } from './simulator/components/Dashboard';
-
+import { refreshDashboard } from './libs/mgrs/LCDManager';
+import {
+  DASHBOARD_REFRESH_RATE, DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, REVERSE_BTN, SPEED_CONTROL,
+} from './constants';
+import { Serial, getTicks } from './microcontroller';
+import { hasInputChanged, readValue } from './simulator/components/UXControls';
+import { checkStations, getCurrentStation, getCurrentStationId } from './simulator/components/StationsHelper';
+import { StationTransistions } from './libs/mgrs/StationManager';
 import './styles';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
@@ -24,7 +24,7 @@ let isSlowHalt = false;
 
 export const getSpeed = () => speed;
 export const setSpeed = (newSpeed: velocity) => { speed = newSpeed; };
-export const getState = () => ({ isLayover, isPaused, speed, direction });
+export const getState = () => ({ isLayover, isPaused, speed, direction, powerLevel, isSlowHalt });
 
 const onPauseBtnClick = () => {
   isPaused = !isPaused;
@@ -40,7 +40,7 @@ const onReverseBtnClick = () => {
 };
 
 const onSpeedChange = () => {
-  powerLevel = readValue(PinAssignments.SPEED_CONTROL);
+  powerLevel = readValue(SPEED_CONTROL);
   speed = MAX_SPEED * powerLevel;
 };
 
@@ -70,19 +70,19 @@ const handleStationArrival = () => {
 };
 
 const readButtons = () => {
-  if (hasInputChanged(PinAssignments.PAUSE_BTN)) {
+  if (hasInputChanged(PAUSE_BTN)) {
     onPauseBtnClick();
   }
 
-  if (hasInputChanged(PinAssignments.REVERSE_BTN)) {
+  if (hasInputChanged(REVERSE_BTN)) {
     onReverseBtnClick();
   }
 
-  if (hasInputChanged(PinAssignments.HALT_BTN)) {
+  if (hasInputChanged(HALT_BTN)) {
     onHaltBtnClick();
   }
 
-  if (hasInputChanged(PinAssignments.SPEED_CONTROL)) {
+  if (hasInputChanged(SPEED_CONTROL)) {
     onSpeedChange();
   }
 };
@@ -91,18 +91,8 @@ export const loop = () => {
   readButtons();
 
   const ticks = getTicks();
-  updateClock(ticks);
-
-  const position = getPosition();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
-    setStatusLED({ isPowered: getIsPowered(), isSlowHalt, isLayover, isPaused });
-    updateDashboard({
-      direction,
-      isLayover,
-      isPaused,
-      powerLevel,
-      speed,
-    });
+    refreshDashboard();
   }
 
   if (isPaused) {
@@ -118,7 +108,7 @@ export const loop = () => {
     return;
   }
 
-  switch (checkStations(position)) {
+  switch (checkStations()) {
     case StationTransistions.ARRIVAL:
       setEvent(EventTypes.STATION_ARRIVAL);
       break;
@@ -161,5 +151,7 @@ export const loop = () => {
 };
 
 export const setup = () => {
+  Serial.begin(9600);
+
   onSpeedChange();
 };

@@ -23,7 +23,7 @@ export const addPositionSensors = () => {
 
     railEle.appendChild(sensorEle);
     updateStdOut({
-      'Add Sensor': `${id}: {$name}`,
+      'Add Sensor': `${id}: ${name}`,
       at: position,
     });
   });

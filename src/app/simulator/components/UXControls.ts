@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { PinAssignments } from '../../constants';
-import { JsonData } from '../../interfaces';
+import {
+  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+} from '../../constants';
+import { JsonData, uint8_t } from '../../interfaces';
 import { CSSClasses, ids } from '../constants';
 
 const pinSelectorHash = {
-  [PinAssignments.PAUSE_BTN]: ids.PAUSE_BTN,
-  [PinAssignments.HALT_BTN]: ids.HALT_BTN,
-  [PinAssignments.POWER_BTN]: ids.POWER_BTN,
-  [PinAssignments.REVERSE_BTN]: ids.REVERSE_BTN,
-  [PinAssignments.SPEED_CONTROL]: ids.SPEED_CONTROL,
+  [PAUSE_BTN]: ids.PAUSE_BTN,
+  [HALT_BTN]: ids.HALT_BTN,
+  [POWER_BTN]: ids.POWER_BTN,
+  [REVERSE_BTN]: ids.REVERSE_BTN,
+  [SPEED_CONTROL]: ids.SPEED_CONTROL,
 };
 
 function onClick() {
@@ -20,7 +22,7 @@ function onClick() {
   this.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, this.isOn);
 }
 
-const pinToElement = (pinNbr: PinAssignments): HTMLElement | null => {
+const pinToElement = (pinNbr: uint8_t): HTMLElement | null => {
   const selector = pinSelectorHash[pinNbr];
   if (!selector) {
     return null;
@@ -29,7 +31,7 @@ const pinToElement = (pinNbr: PinAssignments): HTMLElement | null => {
   return document.getElementById(selector);
 };
 
-export const hasInputChanged = (pinNbr: PinAssignments): boolean => {
+export const hasInputChanged = (pinNbr: uint8_t): boolean => {
   const ele = pinToElement(pinNbr);
   if (!ele) {
     return false;
@@ -42,19 +44,19 @@ export const hasInputChanged = (pinNbr: PinAssignments): boolean => {
   return hasChanged;
 };
 
-export const readValue = (pinNbr: PinAssignments): number => {
+export const readValue = (pinNbr: uint8_t): number => {
   const ele = pinToElement(pinNbr);
   if (!ele) {
     return 0;
   }
 
-  return pinNbr === PinAssignments.SPEED_CONTROL
+  return pinNbr === SPEED_CONTROL
     // @ts-expect-error
     ? ele.value / 100
     : 0;
 };
 
-export const setupBtn = (pinNbr: PinAssignments, cb?: unknown) => {
+export const setupBtn = (pinNbr: uint8_t, cb?: unknown) => {
   const ele = pinToElement(pinNbr);
   ele!.addEventListener('click', onClick);
   if (typeof cb === 'function') {
@@ -66,7 +68,7 @@ export const setupBtn = (pinNbr: PinAssignments, cb?: unknown) => {
   return ele;
 };
 
-export const setupSlider = (pinNbr: PinAssignments, initialValue: number) => {
+export const setupSlider = (pinNbr: uint8_t, initialValue: number) => {
   const powerSlider = setupBtn(pinNbr);
   // @ts-expect-error
   powerSlider.value = initialValue;
