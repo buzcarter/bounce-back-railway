@@ -2,7 +2,7 @@ import positionSensors from '../../configs/Sensors';
 import { ids } from '../../constants';
 import { CSSClasses } from '../../enums';
 import { int, pixels } from '../../interfaces';
-import { getTicks } from '../../libs/Systemz/Clock';
+import { getTicks } from '../../microcontroller/components/Clock';
 import { updateStdOut } from './StdOut';
 
 let currentSensorId = -1;

@@ -2,7 +2,7 @@ import { setupBtn, setupSlider } from './components/UXControls';
 import { addStationsToLayout } from './components/StationsHelper';
 import { resetTrolleyPosition } from './components/Trolley';
 import { addPositionSensors } from './components/PositionSensorsHelper';
-import { onPowerBtnClick } from '../libs/Systemz/Power';
+import { onPowerBtnClick } from '../microcontroller/components/Power';
 import { PinAssignments } from '../enums';
 
 export * from './components/Dashboard';
