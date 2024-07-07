@@ -1,2 +1,3 @@
-export * from '../simulator/constants/ElementIds';
+export * from './DirectionTypes';
+export * from './PinAssignments';
 export * from './SimulationConstants';

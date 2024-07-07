@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ids } from '../../constants';
-import { CSSClasses, PinAssignments } from '../../enums';
+import { PinAssignments } from '../../constants';
 import { JsonData } from '../../interfaces';
+import { CSSClasses, ids } from '../constants';
 
 const pinSelectorHash = {
   [PinAssignments.PAUSE_BTN]: ids.PAUSE_BTN,

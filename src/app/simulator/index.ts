@@ -3,12 +3,14 @@ import { addStationsToLayout } from './components/StationsHelper';
 import { resetTrolleyPosition } from './components/Trolley';
 import { addPositionSensors } from './components/PositionSensorsHelper';
 import { onPowerBtnClick } from '../microcontroller/components/Power';
-import { PinAssignments } from '../enums';
+import { PinAssignments } from '../constants';
 
 export * from './components/Dashboard';
 export * from './components/StationsHelper';
 export * from './components/StdOut';
 export * from './components/Trolley';
+
+export * from '../constants';
 
 export const prepareSimulator = () => {
   addStationsToLayout();

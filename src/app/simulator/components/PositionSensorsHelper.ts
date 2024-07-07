@@ -1,8 +1,7 @@
 import positionSensors from '../../configs/Sensors';
-import { ids } from '../../constants';
-import { CSSClasses } from '../../enums';
 import { int, pixels } from '../../interfaces';
 import { getTicks } from '../../microcontroller/components/Clock';
+import { CSSClasses, ids } from '../constants';
 import { updateStdOut } from './StdOut';
 
 let currentSensorId = -1;
