@@ -5,7 +5,7 @@ import {
 import { pixels } from '../../interfaces';
 import { updateStdOut } from './StdOut';
 import { getState } from '../../main';
-import { getIsPowered } from '../Systemz/Power';
+import { getIsPowered } from '../../libs/Systemz/Power';
 import { checkSensors } from './PositionSensorsHelper';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
