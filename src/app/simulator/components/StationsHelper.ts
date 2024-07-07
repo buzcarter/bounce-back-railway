@@ -7,7 +7,8 @@ import { JsonData, int, pixels } from '../../interfaces';
 import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './Trolley';
-import { SensorTypes } from '../../constants';
+import { ENABLE_STATION_LOG, SensorTypes } from '../../constants';
+import { booleanRead } from '../../libs/mgrs/ControlManager';
 
 let currentStationId: int | null = null;
 
@@ -31,7 +32,7 @@ export const checkStations = (): StationTransistions => {
     currentStationId = station.id;
     setActive(station.id, true);
 
-    if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
+    if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
         Arrived: `${station.name} (${station.id})`,
         layover: station.delay || 'none',
@@ -40,7 +41,7 @@ export const checkStations = (): StationTransistions => {
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
     setActive(currentStationId, false);
-    if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
+    if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
         Departed: currentStationId,
       });

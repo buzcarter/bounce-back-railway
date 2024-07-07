@@ -1,7 +1,6 @@
 // externals
-import {
-  checkStations, getCurrentStation, getCurrentStationId, hasInputChanged, analogRead,
-} from './simulator';
+import { checkStations, getCurrentStation, getCurrentStationId } from './simulator';
+import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
 // locals
 import { int, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
@@ -11,7 +10,7 @@ import { StationTransistions } from './libs/mgrs/StationManager';
 import {
   DASHBOARD_REFRESH_RATE, DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from './constants';
-import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
+import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 
 import './styles';
 
@@ -23,16 +22,11 @@ let speed: velocity = MAX_SPEED;
 let waitUntil = -1;
 
 let isLayover = false;
-let isPaused = false;
 let isSlowHalt = false;
 
 export const getSpeed = () => speed;
 export const setSpeed = (newSpeed: velocity) => { speed = newSpeed; };
-export const getState = () => ({ isLayover, isPaused, speed, direction, powerLevel, isSlowHalt });
-
-const onPauseBtnClick = () => {
-  isPaused = !isPaused;
-};
+export const getState = () => ({ isLayover, speed, direction, powerLevel, isSlowHalt });
 
 const onHaltBtnClick = () => {
   isSlowHalt = !isSlowHalt;
@@ -74,10 +68,6 @@ const handleStationArrival = () => {
 };
 
 const readButtons = () => {
-  if (hasInputChanged(PAUSE_BTN)) {
-    onPauseBtnClick();
-  }
-
   if (hasInputChanged(REVERSE_BTN)) {
     onReverseBtnClick();
   }
@@ -99,7 +89,7 @@ export const loop = () => {
     refreshDashboard();
   }
 
-  if (isPaused) {
+  if (booleanRead(PAUSE_BTN)) {
     return;
   }
 
@@ -152,6 +142,8 @@ export const loop = () => {
       setEvent(EventTypes.OK);
       break;
   }
+
+  resetChangeFlags();
 };
 
 export const setup = () => {

@@ -4,6 +4,6 @@ import { getState } from '../../main';
 import { updateDashboard } from '../../simulator';
 
 export const refreshDashboard = () => {
-  const { isLayover, isPaused, speed, direction, powerLevel, isSlowHalt } = getState();
-  updateDashboard({ isLayover, isPaused, speed, direction, powerLevel, isSlowHalt });
+  const { isLayover, speed, direction, powerLevel, isSlowHalt } = getState();
+  updateDashboard({ isLayover, speed, direction, powerLevel, isSlowHalt });
 };

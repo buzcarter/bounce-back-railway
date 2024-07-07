@@ -1,11 +1,11 @@
+import { POWER_BTN } from './app/constants';
+import { booleanRead } from './app/libs/mgrs/ControlManager';
 import { loop, setup } from './app/main';
-import {
-  CLOCK_SPEED, getIsPowered, getTicks, resetTicks, updateTicks,
-} from './app/microcontroller';
+import { CLOCK_SPEED, getTicks, resetTicks, updateTicks } from './app/microcontroller';
 import { prepareSimulator, startSimulator, updateClock } from './app/simulator';
 
 const onClockTick = () => {
-  if (!getIsPowered()) {
+  if (!booleanRead(POWER_BTN)) {
     return;
   }
 

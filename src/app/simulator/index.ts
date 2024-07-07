@@ -1,16 +1,17 @@
 // externals
 import {
-  DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from '../constants';
-import { getIsPowered, getTicks, onPowerBtnClick } from '../microcontroller';
+import { booleanRead } from '../libs/mgrs/ControlManager';
+import { getTicks } from '../microcontroller';
 // locals
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
 import { addPositionSensors } from './components/PositionSensorsHelper';
 import { addStationsToLayout } from './components/StationsHelper';
 import { getPosition, moveTrolley, resetTrolleyPosition } from './components/Trolley';
-import { setupBtn, setupSlider } from './components/UXControls';
+import { setupBtn } from './components/UXControls';
 
-export { hasInputChanged, setupBtn, setupSlider, readValue as analogRead } from './components/UXControls';
+export { setupBtn } from './components/UXControls';
 export { updateClock } from './components/Dashboard';
 export { checkStations, getCurrentStation, getCurrentStationId } from './components/StationsHelper';
 // export { TRAVEL_DISTANCE, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from './constants';
@@ -21,11 +22,14 @@ export const prepareSimulator = () => {
 
   resetTrolleyPosition();
 
-  setupBtn(POWER_BTN, onPowerBtnClick);
+  setupBtn(POWER_BTN);
   setupBtn(HALT_BTN);
   setupBtn(PAUSE_BTN);
   setupBtn(REVERSE_BTN);
-  setupSlider(SPEED_CONTROL, 50.0);
+  setupBtn(SPEED_CONTROL, 50.0);
+  setupBtn(ENABLE_DASHBORD_LOG);
+  setupBtn(ENABLE_SIGNAL_LOG);
+  setupBtn(ENABLE_STATION_LOG);
 };
 
 export const startSimulator = () => {
@@ -36,13 +40,13 @@ export const startSimulator = () => {
 export const updateDashboard = ({
   direction = DirectionTypes.NOT_SET,
   isLayover = false,
-  isPaused = false,
   isSlowHalt = false,
   powerLevel = 0,
   speed = 0,
 } = {}) => {
   const position = getPosition();
-  setStatusLED({ isPowered: getIsPowered(), isSlowHalt, isLayover, isPaused });
+  const isPaused = booleanRead(PAUSE_BTN);
+  setStatusLED({ isPowered: booleanRead(POWER_BTN), isSlowHalt, isLayover, isPaused });
   refreshDashboard({
     ticks: getTicks(),
     isLayover,

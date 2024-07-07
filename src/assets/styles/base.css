@@ -12,6 +12,10 @@ p {
   line-height: 1.5;
 }
 
+input[type="checkbox" i] {
+  margin: 3px 3px 3px 4px;
+}
+
 .container {
   margin: var(--default-spacing) auto;
   width: var(--layout-width);

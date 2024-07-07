@@ -1,19 +1,21 @@
 // externals
 import { pixels } from '../../interfaces';
 import { getState } from '../../main';
-import { getIsPowered } from '../../microcontroller';
 // locals
 import { updateStdOut } from './StdOut';
 import { checkSensors } from './PositionSensorsHelper';
 import { ids, INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
+import { booleanRead } from '../../libs/mgrs/ControlManager';
+import { PAUSE_BTN, POWER_BTN } from '../../constants';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 
 const trolleyEle = document.getElementById(ids.VEHICLE) || document.createElement('div');
 
 export const moveTrolley = () => {
-  const isPowered = getIsPowered();
-  const { isLayover, isPaused, speed, direction } = getState();
+  const isPowered = booleanRead(POWER_BTN);
+  const isPaused = booleanRead(PAUSE_BTN);
+  const { isLayover, speed, direction } = getState();
   const isDisabled = isLayover || !isPowered || isPaused;
   if (!isDisabled) {
     position += speed * direction;

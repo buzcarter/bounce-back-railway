@@ -1,5 +1,7 @@
 // externals
+import { ENABLE_SIGNAL_LOG } from '../../constants';
 import { int, pixels } from '../../interfaces';
+import { booleanRead } from '../../libs/mgrs/ControlManager';
 // locals
 import { CSSClasses, ids } from '../constants';
 import { getSignals } from './StationsHelper';
@@ -25,10 +27,12 @@ export const addPositionSensors = () => {
       sensorEle.title = name;
 
       railEle.appendChild(sensorEle);
-      updateStdOut({
-        'Add Sensor': `${id}: ${name}`,
-        at: position,
-      });
+      if (booleanRead(ENABLE_SIGNAL_LOG)) {
+        updateStdOut({
+          'Add Sensor': `${id}: ${name}`,
+          at: position,
+        });
+      }
     });
 };
 
@@ -42,19 +46,23 @@ export const checkSensors = (left: pixels, right: pixels) => {
   const sensor = index > -1 ? signals[index] : null;
   if (!sensor && currentSensorId > -1) {
     setActive(currentSensorId, false);
-    updateStdOut({
-      sensor: currentSensorId,
-      state: 'off',
-    });
+    if (booleanRead(ENABLE_SIGNAL_LOG)) {
+      updateStdOut({
+        sensor: currentSensorId,
+        state: 'off',
+      });
+    }
     currentSensorId = -1;
   } else if (sensor && sensor.id !== currentSensorId) {
     currentSensorId = sensor.id;
     setActive(currentSensorId, true);
-    updateStdOut({
-      sensor: sensor.id,
-      state: 'on',
-      name: sensor.name,
-    });
+    if (booleanRead(ENABLE_SIGNAL_LOG)) {
+      updateStdOut({
+        sensor: sensor.id,
+        state: 'on',
+        name: sensor.name,
+      });
+    }
   }
   return sensor;
 };

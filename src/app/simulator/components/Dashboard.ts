@@ -1,5 +1,6 @@
-import { DirectionTypes } from '../../constants';
+import { DirectionTypes, ENABLE_DASHBORD_LOG } from '../../constants';
 import { clockTick, int, pixels, velocity } from '../../interfaces';
+import { booleanRead } from '../../libs/mgrs/ControlManager';
 import { CLOCK_SPEED } from '../../microcontroller';
 import { CSSClasses, ids } from '../constants';
 import { updateStdOut } from './StdOut';
@@ -37,7 +38,7 @@ export const refreshDashboard = (
   (document.getElementById(ids.DSPLY_SPEED) as HTMLInputElement).value = currentState.speed;
   (document.getElementById(ids.DSPLY_MAX_SPEED) as HTMLInputElement).value = currentState.maxSpeed;
 
-  if ((document.getElementById(ids.ENABLE_DASHBORD_LOG) as HTMLInputElement).checked) {
+  if (booleanRead(ENABLE_DASHBORD_LOG)) {
     updateStdOut(currentState);
   }
 };
