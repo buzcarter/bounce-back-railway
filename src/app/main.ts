@@ -1,14 +1,18 @@
+// externals
+import {
+  checkStations, getCurrentStation, getCurrentStationId, hasInputChanged, analogRead,
+} from './simulator';
+// locals
 import { int, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
-import {
-  DASHBOARD_REFRESH_RATE, DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, REVERSE_BTN, SPEED_CONTROL,
-} from './constants';
-import { Serial, getTicks } from './microcontroller';
-import { hasInputChanged, readValue } from './simulator/components/UXControls';
-import { checkStations, getCurrentStation, getCurrentStationId } from './simulator/components/StationsHelper';
 import { StationTransistions } from './libs/mgrs/StationManager';
+import {
+  DASHBOARD_REFRESH_RATE, DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+} from './constants';
+import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
+
 import './styles';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
@@ -40,7 +44,7 @@ const onReverseBtnClick = () => {
 };
 
 const onSpeedChange = () => {
-  powerLevel = readValue(SPEED_CONTROL);
+  powerLevel = analogRead(SPEED_CONTROL);
   speed = MAX_SPEED * powerLevel;
 };
 
@@ -152,6 +156,12 @@ export const loop = () => {
 
 export const setup = () => {
   Serial.begin(9600);
+
+  pinMode(POWER_BTN, INPUT);
+  pinMode(PAUSE_BTN, INPUT);
+  pinMode(HALT_BTN, INPUT);
+  pinMode(REVERSE_BTN, INPUT);
+  pinMode(SPEED_CONTROL, INPUT);
 
   onSpeedChange();
 };

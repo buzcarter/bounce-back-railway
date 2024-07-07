@@ -11,8 +11,9 @@ import { addStationsToLayout } from './components/StationsHelper';
 import { getPosition, moveTrolley, resetTrolleyPosition } from './components/Trolley';
 import { setupBtn, setupSlider } from './components/UXControls';
 
-export { setupBtn, setupSlider, readValue } from './components/UXControls';
+export { hasInputChanged, setupBtn, setupSlider, readValue as analogRead } from './components/UXControls';
 export { updateClock } from './components/Dashboard';
+export { checkStations, getCurrentStation, getCurrentStationId } from './components/StationsHelper';
 
 export const prepareSimulator = () => {
   addStationsToLayout();

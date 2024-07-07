@@ -14,6 +14,10 @@ const getStationByPostion = (pos: pixels) => stations.find((station: { position:
 
 export const getCurrentStation = () => stations.find((station: { id: int}) => station.id === currentStationId);
 
+const setActiveIndicator = (stationId: int, isActive: boolean) => {
+  document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
+};
+
 export const checkStations = (): StationTransistions => {
   const position = getPosition();
   let transition = StationTransistions.NO_CHANGE;
@@ -21,8 +25,7 @@ export const checkStations = (): StationTransistions => {
   if (station && station.id !== currentStationId) {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
-    const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${station.id}"]`);
-    sensorEle?.classList.add(CSSClasses.SENSOR_ACTIVE);
+    setActiveIndicator(station.id, true);
 
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
       updateStdOut({
@@ -32,8 +35,7 @@ export const checkStations = (): StationTransistions => {
     }
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
-    const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${currentStationId}"]`);
-    sensorEle?.classList.remove(CSSClasses.SENSOR_ACTIVE);
+    setActiveIndicator(currentStationId, false);
     if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
       updateStdOut({
         // ticks,
