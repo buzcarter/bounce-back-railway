@@ -1,7 +1,6 @@
 /* eslint-disable key-spacing, no-multi-spaces */
 export const ids = Object.freeze({
   DSPLY_CLOCK:           'display-clock',
-  DSPLY_COMMAND:         'display-command',
   DSPLY_DIRECTION:       'display-direction',
   DSPLY_POSITION:        'display-position',
   DSPLY_POWER:           'display-power',

@@ -32,7 +32,6 @@ export const refreshDashboard = (
   directionEle!.classList.toggle(CSSClasses.LEFT_ARROW, direction === DirectionTypes.LEFT);
   directionEle!.classList.toggle(CSSClasses.RIGHT_ARROW, direction === DirectionTypes.RIGHT);
 
-  (document.getElementById(ids.DSPLY_COMMAND) as HTMLInputElement).value = currentState.action;
   (document.getElementById(ids.DSPLY_POSITION) as HTMLInputElement).value = currentState.position;
   (document.getElementById(ids.DSPLY_POWER) as HTMLInputElement).value = currentState.power;
   (document.getElementById(ids.DSPLY_SPEED) as HTMLInputElement).value = currentState.speed;
