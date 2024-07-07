@@ -26,8 +26,27 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  // globals: {},
+  plugins: [
+    'import',
+  ],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   rules: {
+    // Example rules
+    'import/no-unresolved': 'error',
+    'import/named': 'error',
+    'import/namespace': 'error',
+    'import/default': 'error',
+    'import/export': 'error',
+    'import/order': ['error', {
+      'newlines-between': 'always',
+      groups: ['builtin', 'external', 'internal'],
+    }],
     '@typescript-eslint/no-shadow': ERROR,
     camelcase: OFF,
     'default-case': OFF,
