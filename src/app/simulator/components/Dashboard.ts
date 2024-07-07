@@ -1,21 +1,26 @@
-import { DirectionTypes } from '../../constants';
-import { clockTick, int, pixels, velocity } from '../../interfaces';
-import { CLOCK_SPEED } from '../../microcontroller';
+import { DirectionTypes, MAX_SPEED } from '../../constants';
+import { int, velocity } from '../../interfaces';
+import { CLOCK_SPEED, getTicks } from '../../microcontroller';
 import { CSSClasses, ids } from '../constants';
 import { updateStdOut } from './StdOut';
+import { getPosition } from './Trolley';
 
 export const updateDashboard = (
-  { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {
-    ticks: clockTick,
-    isLayover: boolean,
-    isPaused: boolean,
-    direction: DirectionTypes,
-    position: pixels,
-    powerLevel: number,
-    speed: velocity,
-    maxSpeed: velocity,
+  { direction,
+    isLayover,
+    isPaused,
+    powerLevel,
+    speed }: {
+  direction: DirectionTypes,
+  isLayover: boolean,
+  isPaused: boolean,
+  powerLevel: number,
+  speed: velocity,
   },
 ) => {
+  const ticks = getTicks();
+  const position = getPosition();
+  const maxSpeed = MAX_SPEED;
   const currentState = {
     ticks,
     action: isLayover || isPaused ? 'Pause' : 'Move',

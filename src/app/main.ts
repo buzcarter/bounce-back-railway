@@ -96,7 +96,13 @@ export const loop = () => {
   const position = getPosition();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
     setStatusLED({ isPowered: getIsPowered(), isSlowHalt, isLayover, isPaused });
-    updateDashboard({ ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed: MAX_SPEED });
+    updateDashboard({
+      direction,
+      isLayover,
+      isPaused,
+      powerLevel,
+      speed,
+    });
   }
 
   if (isPaused) {
