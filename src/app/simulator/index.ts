@@ -5,10 +5,11 @@ import { addPositionSensors } from './components/PositionSensorsHelper';
 import { onPowerBtnClick } from '../microcontroller/components/Power';
 import { PinAssignments } from '../constants';
 
-export * from './components/Dashboard';
-export * from './components/StationsHelper';
-export * from './components/StdOut';
-export * from './components/Trolley';
+export { setupBtn, setupSlider, readValue } from './components/UXControls';
+// export * from './components/Dashboard';
+// export * from './components/StationsHelper';
+// export * from './components/StdOut';
+// export * from './components/Trolley';
 
 export * from '../constants';
 
