@@ -1,7 +1,7 @@
 import { int, velocity } from './interfaces';
 import { DASHBOARD_REFRESH_RATE, DirectionTypes, MAX_SPEED, PinAssignments } from './constants';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
-import { EventTypes, get as getEvent, set as setEvent } from './libs/mgrs/EventManager';
+import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { readValue, hasInputChanged } from './simulator/components/UXControls';
 import { getTicks } from './microcontroller/components/Clock';
 import { getIsPowered } from './microcontroller/components/Power';

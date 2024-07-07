@@ -1,6 +1,5 @@
 import positionSensors from '../../configs/Sensors';
 import { int, pixels } from '../../interfaces';
-import { getTicks } from '../../microcontroller/components/Clock';
 import { CSSClasses, ids } from '../constants';
 import { updateStdOut } from './StdOut';
 
@@ -42,7 +41,6 @@ export const checkSensors = (left: pixels, right: pixels) => {
     updateStdOut({
       sensor: currentSensorId,
       state: 'off',
-      ticks: getTicks(),
     });
     currentSensorId = -1;
   } else if (sensor && sensor.id !== currentSensorId) {
@@ -52,7 +50,6 @@ export const checkSensors = (left: pixels, right: pixels) => {
       sensor: sensor.id,
       state: 'on',
       name: sensor.name,
-      ticks: getTicks(),
     });
   }
   return sensor;

@@ -2,9 +2,9 @@ import { INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../../c
 import { pixels } from '../../interfaces';
 import { updateStdOut } from './StdOut';
 import { getState } from '../../main';
-import { getIsPowered } from '../../microcontroller/components/Power';
 import { checkSensors } from './PositionSensorsHelper';
 import { ids } from '../constants';
+import { getIsPowered } from '../../microcontroller';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 

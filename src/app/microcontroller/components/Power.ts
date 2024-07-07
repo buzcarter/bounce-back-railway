@@ -1,4 +1,4 @@
-import { resetTicks } from '../../microcontroller/components/Clock';
+import { resetTicks } from './Clock';
 
 let isPowered = false;
 
