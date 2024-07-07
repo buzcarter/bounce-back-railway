@@ -4,11 +4,15 @@ import * as Serial from './Serial';
 // externals
 import { uint8_t } from '../../interfaces';
 import { PinAssignments } from '../../constants';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { setupBtn, setupSlider } from '../../simulator';
+import { onPowerBtnClick } from './Power';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const pinMode = (pin: uint8_t, mode: uint8_t) => {
   switch (pin) {
     case PinAssignments.POWER_BTN:
+      onPowerBtnClick();
       // setupBtn(pin, onPowerBtnClick);
       break;
     case PinAssignments.SPEED_CONTROL:
@@ -16,6 +20,7 @@ export const pinMode = (pin: uint8_t, mode: uint8_t) => {
       break;
     default:
       // setupBtn(pin);
+      break;
   }
 };
 
