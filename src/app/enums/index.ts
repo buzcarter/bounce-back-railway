@@ -1,3 +1,3 @@
 export * from '../simulator/constants/CSSClasses';
-export * from './DirectionTypes';
-export * from './PinAssignments';
+export * from '../constants/DirectionTypes';
+export * from '../constants/PinAssignments';
