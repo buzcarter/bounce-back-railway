@@ -1,5 +1,5 @@
-import { SENSOR_THRESHOLD } from '../../constants';
 import { uint8_t } from '../../interfaces';
+import { SENSOR_THRESHOLD } from '../../microcontroller/constants/ArduinoUno';
 import { updateStdOut } from '../../simulator/components/StdOut';
 import { analogRead } from '../Componentz/IRSensor';
 

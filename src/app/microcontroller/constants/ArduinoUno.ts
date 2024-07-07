@@ -1,4 +1,4 @@
-import { uint10_t, volts } from '../interfaces';
+import { uint10_t, volts } from '../../interfaces';
 
 // #region Analog Pins
 /*
