@@ -1,9 +1,8 @@
 /* eslint-disable key-spacing, no-multi-spaces */
 import { milliseconds, pixels, velocity } from '../interfaces';
+import { CLOCK_SPEED } from '../microcontroller';
 
 // #region Timing/Speed contraints
-/** (ms/tick) i.e. tick duration */
-export const CLOCK_SPEED: milliseconds               =    5;
 /** minimum time to completely travers the "Travel Distance" */
 export const MIN_TIME_TO_COMPLETE: milliseconds      = 6000;
 /** Time between Dashbord updates */

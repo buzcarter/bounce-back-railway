@@ -1,5 +1,5 @@
-import { CLOCK_SPEED, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
-import { DirectionTypes } from '../enums';
+import { DirectionTypes, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
+import { CLOCK_SPEED } from '../microcontroller';
 
 export const stations = [{
   id: 1,

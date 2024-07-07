@@ -1,4 +1,4 @@
-import { uint10_t, volts } from '../interfaces';
+import { int, uint10_t, volts } from '../../interfaces';
 
 // #region Analog Pins
 /*
@@ -61,3 +61,6 @@ export const SENSOR_THRESHOLD: uint10_t = 500;
 export const DIGITAL_LOW: volts = 0.8;
 /** Above 2.0v is considred ON */
 export const DIGITAL_HIGH: volts = 2.0;
+
+export const OUTPUT: int = 1;
+export const INPUT: int = 0;

@@ -16,6 +16,6 @@ export enum EventTypes {
 let currentEvent: EventTypes = EventTypes.OK;
 
 // eslint-disable-next-line no-return-assign
-export const set = (eventType: EventTypes): EventTypes => currentEvent = eventType;
+export const setEvent = (eventType: EventTypes): EventTypes => currentEvent = eventType;
 
-export const get = (): EventTypes => currentEvent;
+export const getEvent = (): EventTypes => currentEvent;

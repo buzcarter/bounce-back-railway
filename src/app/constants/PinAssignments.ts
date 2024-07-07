@@ -1,5 +1,5 @@
 import { uint10_t } from '../interfaces';
-import { LED_BUILTIN, PWM_5 } from './ArduinoUno';
+import { LED_BUILTIN, PWM_5 } from '../microcontroller/constants/ArduinoUno';
 
 // Motor Driver Pins
 export const MOTOR_REVERSE_OUT: uint10_t = 3; // to L298N_IN2
@@ -8,3 +8,11 @@ export const MOTOR_SPEED_OUT: uint10_t = PWM_5; // to L298N_ENA
 
 // LED Output Pins
 export const CLOCK_LED_OUT: uint10_t = LED_BUILTIN;
+
+export enum PinAssignments {
+  PAUSE_BTN = 0,
+  HALT_BTN = 1,
+  POWER_BTN = 2,
+  REVERSE_BTN = 3,
+  SPEED_CONTROL = 4,
+}
