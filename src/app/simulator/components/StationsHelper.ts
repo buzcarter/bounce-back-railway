@@ -1,31 +1,38 @@
+// externals
 import { stations } from '../../configs/Stations';
-import { STATION_SAFETY_LENGTH } from '../../constants';
-import { JsonData, int, integer, pixels } from '../../interfaces';
-import { CSSClasses, ids } from '../constants';
+import { StationTransistions } from '../../libs/mgrs/StationManager';
+// integer,
+import { JsonData, int, pixels } from '../../interfaces';
+// locals
+import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
-
-export enum StationTransistions {
-  ARRIVAL = 1,
-  DEPARTURE = 2,
-  NO_CHANGE = 0,
-}
+import { getPosition } from './Trolley';
+import { ENABLE_STATION_LOG, SensorTypes } from '../../constants';
+import { booleanRead } from '../../libs/mgrs/ControlManager';
 
 let currentStationId: int | null = null;
 
-const getStationByPostion = (pos: pixels) => stations.find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
+const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);
+export const getSignals = getByType.bind(null, SensorTypes.SIGNAL);
+export const getStations = getByType.bind(null, SensorTypes.STATION);
+export const getCurrentStation = () => getStations().find((station: { id: int}) => station.id === currentStationId);
 
-export const getCurrentStation = () => stations.find((station: { id: int}) => station.id === currentStationId);
+const getStationByPostion = (pos: pixels) => getStations().find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
-export const checkStations = (position: number): StationTransistions => {
+const setActive = (stationId: int, isActive: boolean) => {
+  document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
+};
+
+export const checkStations = (): StationTransistions => {
+  const position = getPosition();
   let transition = StationTransistions.NO_CHANGE;
   const station = getStationByPostion(position);
   if (station && station.id !== currentStationId) {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
-    const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${station.id}"]`);
-    sensorEle?.classList.add(CSSClasses.SENSOR_ACTIVE);
+    setActive(station.id, true);
 
-    if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
+    if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
         Arrived: `${station.name} (${station.id})`,
         layover: station.delay || 'none',
@@ -33,11 +40,9 @@ export const checkStations = (position: number): StationTransistions => {
     }
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
-    const sensorEle = document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${currentStationId}"]`);
-    sensorEle?.classList.remove(CSSClasses.SENSOR_ACTIVE);
-    if ((document.getElementById(ids.ENABLE_STATION_LOG) as HTMLInputElement).checked) {
+    setActive(currentStationId, false);
+    if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
-        // ticks,
         Departed: currentStationId,
       });
     }
@@ -63,30 +68,33 @@ export const addStationsToLayout = () => {
     throw new Error('Layout elements not found');
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  stations.forEach(({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData}) => {
-    const stationEle = document.createElement('span');
-    stationEle.classList.add(CSSClasses.ICON, `${CSSClasses.ICON_PREFIX}${icon}`);
-    stationEle.title = name;
-    stationEle.dataset.stationId = id as unknown as string;
-    applyStyles(stationEle, style as unknown as JsonData);
+  getStations()
+    .forEach((station) => {
+      // ({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData})
+      const {
+        id, name, position, icon, style,
+      } = station;
+      const stationEle = document.createElement('span');
+      stationEle.classList.add(CSSClasses.ICON, `${CSSClasses.ICON_PREFIX}${icon}`);
+      stationEle.title = name;
+      stationEle.dataset.stationId = id as unknown as string;
+      applyStyles(stationEle, style as unknown as JsonData);
 
-    layoutEle.appendChild(stationEle);
+      layoutEle.appendChild(stationEle);
 
-    const sensorEle = document.createElement('span');
-    sensorEle.classList.add(CSSClasses.SENSOR);
-    sensorEle.style.left = `${position}px`;
-    sensorEle.dataset.sensorForStation = id as unknown as string;
-    sensorEle.dataset.position = position.toString();
-    sensorEle.title = name;
+      const sensorEle = document.createElement('span');
+      sensorEle.classList.add(CSSClasses.SENSOR);
+      sensorEle.style.left = `${position}px`;
+      sensorEle.dataset.sensorForStation = id as unknown as string;
+      sensorEle.dataset.position = position.toString();
+      sensorEle.title = name;
 
-    railEle.appendChild(sensorEle);
-    updateStdOut({
-      'Add Station': `${id}: "${name}"`,
-      at: `${position}px (from left)`,
+      railEle.appendChild(sensorEle);
+      updateStdOut({
+        'Add Station': `${id}: "${name}"`,
+        at: `${position}px (from left)`,
+      });
     });
-  });
 };
 
 export const getCurrentStationId = () => currentStationId;

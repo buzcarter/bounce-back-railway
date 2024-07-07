@@ -3,7 +3,7 @@ import { getTicks } from '../../microcontroller';
 import { CSSClasses, ids } from '../constants';
 
 export const updateStdOut = (message: JsonData) => {
-  const stdOutEle = document.getElementById(ids.STD_OUT);
+  const p = document.createElement('p');
   Object.entries({
     ticks: getTicks(),
     ...message,
@@ -21,12 +21,11 @@ export const updateStdOut = (message: JsonData) => {
 
       const spaceEle = document.createTextNode(' ');
 
-      stdOutEle!.appendChild(keyEle);
-      stdOutEle!.appendChild(colonEle);
-      stdOutEle!.appendChild(valueEle);
-      stdOutEle!.appendChild(spaceEle);
+      p.appendChild(keyEle);
+      p.appendChild(colonEle);
+      p.appendChild(valueEle);
+      p.appendChild(spaceEle);
     });
 
-  const lineBreakEle = document.createElement('br');
-  stdOutEle!.appendChild(lineBreakEle);
+  document.getElementById(ids.STD_OUT)!.prepend(p);
 };

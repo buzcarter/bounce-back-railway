@@ -1,15 +1,15 @@
-import { resetTicks, updateTicks } from './app/microcontroller/components/Clock';
+import { POWER_BTN } from './app/constants';
+import { booleanRead } from './app/libs/mgrs/ControlManager';
 import { loop, setup } from './app/main';
-import { prepareSimulator } from './app/simulator';
-import { moveTrolley } from './app/simulator/components/Trolley';
-import { getIsPowered } from './app/microcontroller/components/Power';
-import { CLOCK_SPEED } from './app/microcontroller';
+import { CLOCK_SPEED, getTicks, resetTicks, updateTicks } from './app/microcontroller';
+import { prepareSimulator, startSimulator, updateClock } from './app/simulator';
 
 const onClockTick = () => {
-  if (!getIsPowered()) {
+  if (!booleanRead(POWER_BTN)) {
     return;
   }
 
+  updateClock(getTicks());
   loop();
   updateTicks();
 };
@@ -17,11 +17,9 @@ const onClockTick = () => {
 const main = () => {
   prepareSimulator();
   resetTicks();
-
   setup();
   setInterval(onClockTick, CLOCK_SPEED);
-
-  moveTrolley();
+  startSimulator();
 };
 
 main();

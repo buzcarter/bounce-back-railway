@@ -26,7 +26,7 @@
                 <input type="text" id="display-max-speed" class="dashboard__display" readonly>
             </div>
             <div class="dashboard__guage">
-                <label for="display-current-speed">Speed</label>
+                <label for="display-current-speed">Speed <span id="display-status" class="status"></span></label>
                 <input type="text" id="display-current-speed" class="dashboard__display" readonly>
             </div>
             <div class="dashboard__guage">
@@ -37,24 +37,21 @@
                 <label for="display-direction">Direction</label>
                 <span id="display-direction" class="icon icon--direction"></span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-command">Engaged</label>
-                <input style="display: none;" type="text" id="display-command" class="dashboard__display" readonly>
-                <span id="display-status" class="status"></span>
-            </div>
         </section>
         <section class="section controls">
-            <button id="powerBtn" class="icon-btn icon--btn-power">Power</button>
-            <button id="pauseBtn" class="icon-btn icon--btn-pause">Pause</button>
-            <button id="haltBtn" class="icon-btn icon--btn-halt">Halt</button>
-            <button id="reverseBtn" class="icon-btn icon--btn-reverse">Reverse</button>
-            <input type="range" id="speedControl" class="slider" min="0" max="100" value="50">
+            <button id="powerBtn" data-type="boolean" class="icon-btn icon--btn-power" data-name="Power Button">Power</button>
+            <button id="pauseBtn" data-type="boolean" class="icon-btn icon--btn-pause" data-name="Pause Button">Pause</button>
+            <button id="haltBtn" data-type="boolean" class="icon-btn icon--btn-halt" data-name="Halt Button">Halt</button>
+            <button id="reverseBtn" data-type="boolean" class="icon-btn icon--btn-reverse" data-name="Reverse Button">Reverse</button>
+            <input type="range" id="speedControl" data-type="analog" class="slider" min="0" max="100" value="50" data-name="Speed Control">
         </section>
         <section class="section controls">
             Logging
-            <label><input type="checkbox" id="enableStationsLogCbx">Stations</label>
-            <label><input type="checkbox" id="enableDashboardLogCbx">Dashboard</label>
-        <section class="section stdout" id="std-out"></section>
+            <label><input type="checkbox" data-type="checkbox" id="enableSignalsLogCbx" data-name="Log Signals Crossings">Signals</label>
+            <label><input type="checkbox" data-type="checkbox" id="enableStationsLogCbx" data-name="Log Station Crossings">Stations</label>
+            <label><input type="checkbox" data-type="checkbox" id="enableDashboardLogCbx" data-name="Log Dashboard Updates">Dashboard</label>
+            <section class="section stdout" id="std-out"></section>
+        </section>
     </main>
     <script src="../../dist/trolley-controller.bundle.js"></script>
 </body>

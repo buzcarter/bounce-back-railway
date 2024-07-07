@@ -1,8 +1,10 @@
-import { DirectionTypes, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
+import { DirectionTypes, SensorTypes } from '../constants';
 import { CLOCK_SPEED } from '../microcontroller';
+import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../simulator/constants';
 
 export const stations = [{
   id: 1,
+  type: SensorTypes.STATION,
   name: 'LA Central Station',
   position: MIN_LEFT_EDGE, // px from left
   reverseDirection: true,
@@ -14,6 +16,7 @@ export const stations = [{
   },
 }, {
   id: 2,
+  type: SensorTypes.STATION,
   name: 'Claremont Station',
   position: MAX_RIGHT_EDGE, // px from left
   reverseDirection: true,
@@ -25,6 +28,7 @@ export const stations = [{
   },
 }, {
   id: 3,
+  type: SensorTypes.STATION,
   name: 'Burbank Platform',
   position: 400, // px from left
   reverseDirection: false,
@@ -35,6 +39,7 @@ export const stations = [{
   },
 }, {
   id: 4,
+  type: SensorTypes.STATION,
   name: 'Atwater Crossing',
   position: 700, // px from left
   reverseDirection: false,
@@ -45,4 +50,16 @@ export const stations = [{
     right: '172px',
     height: '22px',
   },
+}, {
+  id: 10,
+  type: SensorTypes.SIGNAL,
+  name: 'South Gate Crossing',
+  position: 250,
+  delay: 0,
+}, {
+  id: 11,
+  type: SensorTypes.SIGNAL,
+  name: '26 Ave (Higland Park)',
+  position: 150,
+  delay: 0,
 }];
