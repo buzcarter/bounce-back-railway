@@ -1,6 +1,8 @@
-import positionSensors from '../../configs/Sensors';
+// externals
 import { int, pixels } from '../../interfaces';
+// locals
 import { CSSClasses, ids } from '../constants';
+import { getSignals } from './StationsHelper';
 import { updateStdOut } from './StdOut';
 
 let currentSensorId = -1;
@@ -13,20 +15,21 @@ export const addPositionSensors = () => {
     return;
   }
 
-  positionSensors.forEach(({ id, name, position }) => {
-    const sensorEle = document.createElement('span');
-    sensorEle.classList.add(CSSClasses.PROXIMITY_SENSOR);
-    sensorEle.title = name;
-    sensorEle.style.left = `${position}px`;
-    sensorEle.id = getSensorId(id);
-    sensorEle.title = name;
+  getSignals()
+    .forEach(({ id, name, position }) => {
+      const sensorEle = document.createElement('span');
+      sensorEle.classList.add(CSSClasses.PROXIMITY_SENSOR);
+      sensorEle.title = name;
+      sensorEle.style.left = `${position}px`;
+      sensorEle.id = getSensorId(id);
+      sensorEle.title = name;
 
-    railEle.appendChild(sensorEle);
-    updateStdOut({
-      'Add Sensor': `${id}: ${name}`,
-      at: position,
+      railEle.appendChild(sensorEle);
+      updateStdOut({
+        'Add Sensor': `${id}: ${name}`,
+        at: position,
+      });
     });
-  });
 };
 
 const setActive = (id: int, isActive: boolean) => {
@@ -34,8 +37,9 @@ const setActive = (id: int, isActive: boolean) => {
 };
 
 export const checkSensors = (left: pixels, right: pixels) => {
-  const index = positionSensors.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
-  const sensor = index > -1 ? positionSensors[index] : null;
+  const signals = getSignals();
+  const index = signals.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
+  const sensor = index > -1 ? signals[index] : null;
   if (!sensor && currentSensorId > -1) {
     setActive(currentSensorId, false);
     updateStdOut({
