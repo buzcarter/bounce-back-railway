@@ -1,3 +1,3 @@
 export * from '../simulator/constants/ElementIds';
-export * from './Constants';
+export * from './SimulationConstants';
 export * from './ProjectPinAssignments';
