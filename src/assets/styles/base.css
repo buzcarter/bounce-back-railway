@@ -1,11 +1,15 @@
 /* .                             */
-/* --------- Document ---------- */
+/* ------------- base ---------- */
 /* .                             */
 body {
   background-color: var(--color-neutral-700);
   color: var(--color-neutral-500);
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
+}
+
+p {
+  line-height: 1.5;
 }
 
 .container {
