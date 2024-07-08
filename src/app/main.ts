@@ -8,48 +8,41 @@ import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
 import {
-  DASHBOARD_REFRESH_RATE, DirectionTypes, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DASHBOARD_REFRESH_RATE, DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 
 import './styles';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
-/** Percentage of `maxSpeed`, 1.0 = 100% */
-let powerLevel = 1;
 /** (px/tick) current speed */
 let speed: velocity = MAX_SPEED;
-let waitUntil = -1;
-
-let isLayover = false;
-let isSlowHalt = false;
+let waitUntil = 0;
 
 export const getSpeed = () => speed;
 export const setSpeed = (newSpeed: velocity) => { speed = newSpeed; };
-export const getState = () => ({ isLayover, speed, direction, powerLevel, isSlowHalt });
+export const getState = () => ({ isLayover: waitUntil > 0, speed, direction });
 
 const onHaltBtnClick = () => {
-  isSlowHalt = !isSlowHalt;
-  setEvent(isSlowHalt ? EventTypes.BEGIN_SLOW_STOP : EventTypes.BEGIN_SLOW_START);
+  setEvent(booleanRead(HALT_BTN) ? EventTypes.BEGIN_SLOW_STOP : EventTypes.BEGIN_SLOW_START);
 };
 
 const onReverseBtnClick = () => {
   direction *= -1;
 };
 
+/** Percentage of `maxSpeed`, 1.0 = 100% */
 const onSpeedChange = () => {
-  powerLevel = analogRead(SPEED_CONTROL);
-  speed = MAX_SPEED * powerLevel;
+  speed = MAX_SPEED * analogRead(SPEED_CONTROL);
 };
 
 const setLayoverDuration = (length: int) => {
   if (length > 0) {
-    isLayover = true;
     waitUntil = getTicks() + length;
   }
 };
 
-const handleStationArrival = () => {
+const onStationArrival = () => {
   if (getCurrentStationId() === null) {
     return;
   }
@@ -94,11 +87,10 @@ export const loop = () => {
   }
 
   if (ticks >= waitUntil && waitUntil > 0) {
-    isLayover = false;
-    waitUntil = -1;
+    waitUntil = 0;
   }
 
-  if (isLayover) {
+  if (waitUntil > 0) {
     return;
   }
 
@@ -135,7 +127,7 @@ export const loop = () => {
       }
       break;
     case EventTypes.STATION_ARRIVAL:
-      handleStationArrival();
+      onStationArrival();
       setEvent(EventTypes.OK);
       break;
     case EventTypes.STATION_DEPARTURE:
@@ -153,7 +145,12 @@ export const setup = () => {
   pinMode(PAUSE_BTN, INPUT);
   pinMode(HALT_BTN, INPUT);
   pinMode(REVERSE_BTN, INPUT);
+
   pinMode(SPEED_CONTROL, INPUT);
+
+  pinMode(ENABLE_DASHBORD_LOG, INPUT);
+  pinMode(ENABLE_SIGNAL_LOG, INPUT);
+  pinMode(ENABLE_STATION_LOG, INPUT);
 
   onSpeedChange();
 };

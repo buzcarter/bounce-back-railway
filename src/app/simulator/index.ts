@@ -2,7 +2,7 @@
 import {
   DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from '../constants';
-import { booleanRead } from '../libs/mgrs/ControlManager';
+import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
 // locals
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
@@ -38,13 +38,15 @@ export const startSimulator = () => {
 export const updateDashboard = ({
   direction = DirectionTypes.NOT_SET,
   isLayover = false,
-  isSlowHalt = false,
-  powerLevel = 0,
   speed = 0,
 } = {}) => {
   const position = getPosition();
+  const isPowered = booleanRead(POWER_BTN);
   const isPaused = booleanRead(PAUSE_BTN);
-  setStatusLED({ isPowered: booleanRead(POWER_BTN), isSlowHalt, isLayover, isPaused });
+  const isSlowHalt = booleanRead(HALT_BTN);
+  const powerLevel = analogRead(SPEED_CONTROL);
+
+  setStatusLED({ isPowered, isSlowHalt, isLayover, isPaused });
   refreshDashboard({
     ticks: getTicks(),
     isLayover,
