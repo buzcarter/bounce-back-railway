@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-spaces */
 import { int, uint10_t, volts } from '../../interfaces';
 
 // #region Analog Pins
@@ -26,16 +27,16 @@ export const A5: uint10_t = PIN_A5;
 
 // #region Digital Pins
 // Pins 0-13 serve as digital input/output pins.
-export const PIN_D0: uint10_t = 0;
-export const PIN_D1: uint10_t = 1;
-export const PIN_D2: uint10_t = 2;
-export const PIN_D3: uint10_t = 3;
-export const PIN_D4: uint10_t = 4;
-export const PIN_D5: uint10_t = 5;
-export const PIN_D6: uint10_t = 6;
-export const PIN_D7: uint10_t = 7;
-export const PIN_D8: uint10_t = 8;
-export const PIN_D9: uint10_t = 9;
+export const PIN_D0: uint10_t  =  0;
+export const PIN_D1: uint10_t  =  1;
+export const PIN_D2: uint10_t  =  2;
+export const PIN_D3: uint10_t  =  3;
+export const PIN_D4: uint10_t  =  4;
+export const PIN_D5: uint10_t  =  5;
+export const PIN_D6: uint10_t  =  6;
+export const PIN_D7: uint10_t  =  7;
+export const PIN_D8: uint10_t  =  8;
+export const PIN_D9: uint10_t  =  9;
 export const PIN_D10: uint10_t = 10;
 export const PIN_D11: uint10_t = 11;
 export const PIN_D12: uint10_t = 12;
@@ -45,22 +46,27 @@ export const PIN_D13: uint10_t = 13;
 export const LED_BUILTIN: uint10_t = PIN_D13;
 
 // Pins 3,5,6,9,10,11 have PWM capability.
-export const PWM_3: uint10_t = PIN_D3;
-export const PWM_5: uint10_t = PIN_D5;
-export const PWM_6: uint10_t = PIN_D6;
-export const PWM_9: uint10_t = PIN_D9;
+export const PWM_3: uint10_t  = PIN_D3;
+export const PWM_5: uint10_t  = PIN_D5;
+export const PWM_6: uint10_t  = PIN_D6;
+export const PWM_9: uint10_t  = PIN_D9;
 export const PWM_10: uint10_t = PIN_D10;
 export const PWM_11: uint10_t = PIN_D11;
 
 // #endregion
 
 /** Cutoff for IR proximity filter, 0 - 1023 */
-export const SENSOR_THRESHOLD: uint10_t = 500;
+export const SENSOR_THRESHOLD: uint10_t          =  500; // this is the real sensor value
+export const SENSOR_OBJECT_DETECTED: uint10_t    = 1023; // example "ON" value, something is close enough to reflect tangible light back to the sensor
+export const SENSOR_ALL_CLEAR: uint10_t          =   64; // example "OFF" value, (unobstructed) there's nothing reflecting light back to the sensor
 
 /** Below 0.8v is considered OFF */
-export const DIGITAL_LOW: volts = 0.8;
+export const DIGITAL_LOW: volts   = 0.8;
 /** Above 2.0v is considred ON */
-export const DIGITAL_HIGH: volts = 2.0;
+export const DIGITAL_HIGH: volts  = 2.0;
 
-export const OUTPUT: int = 1;
-export const INPUT: int = 0;
+export const ON   = DIGITAL_LOW;
+export const OFF  = DIGITAL_HIGH;
+
+export const OUTPUT: int   = 1;
+export const INPUT: int    = 0;

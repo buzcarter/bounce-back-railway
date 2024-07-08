@@ -7,7 +7,8 @@ import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './Trolley';
 import { ENABLE_STATION_LOG, SensorTypes } from '../../constants';
-import { booleanRead } from '../../libs/mgrs/ControlManager';
+import { analogWrite, booleanRead } from '../../libs/mgrs/ControlManager';
+import { SENSOR_OBJECT_DETECTED, SENSOR_ALL_CLEAR } from '../../microcontroller';
 
 let currentStationId: int | null = null;
 
@@ -30,7 +31,7 @@ export const checkStations = (): StationTransistions => {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
     setActive(station.id, true);
-
+    analogWrite(station.id, SENSOR_OBJECT_DETECTED);
     if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
         Arrived: `${station.name} (${station.id})`,
@@ -40,6 +41,7 @@ export const checkStations = (): StationTransistions => {
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
     setActive(currentStationId, false);
+    analogWrite(currentStationId, SENSOR_ALL_CLEAR);
     if (booleanRead(ENABLE_STATION_LOG)) {
       updateStdOut({
         Departed: currentStationId,

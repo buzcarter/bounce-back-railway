@@ -3,9 +3,9 @@ import {
   ENABLE_DASHBORD_LOG,
   ENABLE_SIGNAL_LOG,
   ENABLE_STATION_LOG,
-  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING, SPEED_CONTROL,
 } from '../../constants';
-import { Serial } from '../../microcontroller';
+import { SENSOR_OBJECT_DETECTED, SENSOR_ALL_CLEAR, Serial } from '../../microcontroller';
 
 interface CurrentState {
   value: unknown,
@@ -55,6 +55,36 @@ const currentStates: CurrentStates = {
   },
   [ENABLE_SIGNAL_LOG]: {
     value: null,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_LT_LA]: {
+    value: SENSOR_ALL_CLEAR,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_RT_CLAREMONT]: {
+    value: SENSOR_ALL_CLEAR,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_MIDDLE_BURBANK]: {
+    value: SENSOR_ALL_CLEAR,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_ATWATER_XING]: {
+    value: SENSOR_ALL_CLEAR,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_SOUTH_GATE_XING]: {
+    value: SENSOR_ALL_CLEAR,
+    isChanged: false,
+    name: '',
+  },
+  [SENSOR_26TH_AVE_XING]: {
+    value: SENSOR_ALL_CLEAR,
     isChanged: false,
     name: '',
   },
