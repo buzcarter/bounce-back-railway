@@ -9,6 +9,12 @@ import { uint8_t } from '../../interfaces';
 import { setInitialValue, booleanToggle, analogWrite } from '../../libs/mgrs/ControlManager';
 import { CSSClasses, ids } from '../constants';
 
+enum ControlTypes {
+  BOOLEAN = 'boolean',
+  CHECKBOX = 'checkbox',
+  ANALOG = 'analog',
+}
+
 const pinSelectorHash = {
   [HALT_BTN]: ids.HALT_BTN,
   [PAUSE_BTN]: ids.PAUSE_BTN,
@@ -27,13 +33,13 @@ function onClick(event: Event) {
   const { type, pinNbr } = target.dataset;
   const pinInt = parseInt(pinNbr || '', 10);
   switch (type) {
-    case 'boolean':
+    case ControlTypes.BOOLEAN:
       {
         const isOn = booleanToggle(pinInt);
         target.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, isOn);
       }
       break;
-    case 'checkbox':
+    case ControlTypes.CHECKBOX:
       booleanToggle(pinInt);
       break;
   }
@@ -64,13 +70,13 @@ export const setupBtn = (pin: uint8_t, initialValue: unknown = false) => {
   ele.dataset.pinNbr = pin as unknown as string;
   const { type } = ele.dataset;
   switch (type) {
-    case 'analog':
+    case ControlTypes.ANALOG:
       (ele as HTMLInputElement).value = initialValue as string;
       setInitialValue(pin, initialValue, ele.dataset.name as string);
       ele.addEventListener('input', onInputChange);
       break;
-    case 'checkbox':
-    case 'boolean':
+    case ControlTypes.CHECKBOX:
+    case ControlTypes.BOOLEAN:
       setInitialValue(pin, false, ele.dataset.name as string);
       ele.addEventListener('click', onClick);
       break;

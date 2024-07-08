@@ -1,7 +1,6 @@
 // externals
 import { stations } from '../../configs/Stations';
 import { StationTransistions } from '../../libs/mgrs/StationManager';
-// integer,
 import { JsonData, int, pixels } from '../../interfaces';
 // locals
 import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
@@ -70,7 +69,6 @@ export const addStationsToLayout = () => {
 
   getStations()
     .forEach((station) => {
-      // ({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData})
       const {
         id, name, position, icon, style,
       } = station;

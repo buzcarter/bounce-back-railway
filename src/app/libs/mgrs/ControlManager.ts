@@ -5,7 +5,7 @@ import {
   ENABLE_STATION_LOG,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
 } from '../../constants';
-import { updateStdOut } from '../../simulator/components/StdOut';
+import { Serial } from '../../microcontroller';
 
 interface CurrentState {
   value: unknown,
@@ -74,7 +74,7 @@ export const updateValue = (pin: uint8_t, value: unknown): unknown => {
     return value;
   }
 
-  updateStdOut({
+  Serial.println({
     pin,
     value: value as number,
     name: state.name,

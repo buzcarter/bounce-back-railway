@@ -7,3 +7,4 @@ export const refreshDashboard = () => {
   const { isLayover, speed, direction, powerLevel, isSlowHalt } = getState();
   updateDashboard({ isLayover, speed, direction, powerLevel, isSlowHalt });
 };
+// TODO:
