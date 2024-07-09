@@ -1,7 +1,6 @@
 import { stations } from '../../configs/Stations';
-import { SensorTypes } from '../../constants';
+import { SENSOR_VOLTS_THRESHOLD, SensorTypes } from '../../constants';
 import { uint8_t } from '../../interfaces';
-import { SENSOR_THRESHOLD } from '../../microcontroller';
 import { analogRead } from './ControlManager';
 
 export enum StationTransistions {
@@ -21,7 +20,7 @@ const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type
  * until after the train has visited a different station.
  */
 const checkStation = (pin: uint8_t): boolean => {
-  const isAtStation = analogRead(pin) > SENSOR_THRESHOLD;
+  const isAtStation = analogRead(pin) > SENSOR_VOLTS_THRESHOLD;
   if (isAtStation && currentStation === pin) {
     return false;
   }

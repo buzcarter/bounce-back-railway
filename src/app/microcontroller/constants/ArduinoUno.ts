@@ -55,11 +55,6 @@ export const PWM_11: uint10_t = PIN_D11;
 
 // #endregion
 
-/** Cutoff for IR proximity filter, 0 - 1023 */
-export const SENSOR_THRESHOLD: uint10_t          =  500; // this is the real sensor value
-export const SENSOR_OBJECT_DETECTED: uint10_t    = 1023; // example "ON" value, something is close enough to reflect tangible light back to the sensor
-export const SENSOR_ALL_CLEAR: uint10_t          =   64; // example "OFF" value, (unobstructed) there's nothing reflecting light back to the sensor
-
 /** Below 0.8v is considered OFF */
 export const DIGITAL_LOW: volts   = 0.8;
 /** Above 2.0v is considred ON */

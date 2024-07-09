@@ -1,6 +1,7 @@
 // externals
 import {
   DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  uint10_MAX,
 } from '../constants';
 import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
@@ -25,7 +26,7 @@ export const prepareSimulator = () => {
   setupBtn(HALT_BTN);
   setupBtn(PAUSE_BTN);
   setupBtn(REVERSE_BTN);
-  setupBtn(SPEED_CONTROL, 50.0);
+  setupBtn(SPEED_CONTROL, uint10_MAX / 2);
   setupBtn(ENABLE_DASHBORD_LOG);
   setupBtn(ENABLE_SIGNAL_LOG);
   setupBtn(ENABLE_STATION_LOG);
@@ -44,7 +45,7 @@ export const updateDashboard = ({
   const isPowered = booleanRead(POWER_BTN);
   const isPaused = booleanRead(PAUSE_BTN);
   const isSlowHalt = booleanRead(HALT_BTN);
-  const powerLevel = analogRead(SPEED_CONTROL);
+  const powerLevel = analogRead(SPEED_CONTROL) / uint10_MAX;
 
   setStatusLED({ isPowered, isSlowHalt, isLayover, isPaused });
   refreshDashboard({

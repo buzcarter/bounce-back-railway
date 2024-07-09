@@ -9,6 +9,7 @@ import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { checkAllSensors, getCurrentStationSensor, StationTransistions } from './libs/mgrs/StationManager';
 import {
   DASHBOARD_REFRESH_RATE, DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  uint10_MAX,
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 
@@ -31,9 +32,9 @@ const onReverseBtnClick = () => {
   direction *= -1;
 };
 
-/** Percentage of `maxSpeed`, 1.0 = 100% */
+/** Value between 0 & `maxSpeed` */
 const onSpeedChange = () => {
-  speed = MAX_SPEED * analogRead(SPEED_CONTROL);
+  speed = MAX_SPEED * (analogRead(SPEED_CONTROL) / uint10_MAX);
 };
 
 const setLayoverDuration = (length: int) => {
@@ -79,7 +80,7 @@ export const loop = () => {
   checkAllSensors();
   const sensedStation = getCurrentStationSensor();
   if (sensedStation > -1) {
-    Serial.println({ 'current triggered station': sensedStation });
+    // Serial.println({ 'current triggered station': sensedStation });
   }
 
   const ticks = getTicks();
