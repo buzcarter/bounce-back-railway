@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
-  ENABLE_DASHBORD_LOG,
-  ENABLE_SIGNAL_LOG,
-  ENABLE_STATION_LOG,
+  DASHBORD_CHBX,
+  SIGNAL_CHBX,
+  STATION_CHBX,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  CONTROL_PANEL_CHBX,
 } from '../../constants';
 import { uint8_t } from '../../interfaces';
 import { setInitialValue, booleanToggle, analogWrite } from '../../libs/mgrs/ControlManager';
 import { CSSClasses, ids } from '../constants';
+
+enum ControlTypes {
+  BOOLEAN = 'boolean',
+  CHECKBOX = 'checkbox',
+  ANALOG = 'analog',
+}
 
 const pinSelectorHash = {
   [HALT_BTN]: ids.HALT_BTN,
@@ -17,9 +24,10 @@ const pinSelectorHash = {
 
   [SPEED_CONTROL]: ids.SPEED_CONTROL,
 
-  [ENABLE_DASHBORD_LOG]: ids.ENABLE_DASHBORD_LOG,
-  [ENABLE_SIGNAL_LOG]: ids.ENABLE_SIGNAL_LOG,
-  [ENABLE_STATION_LOG]: ids.ENABLE_STATION_LOG,
+  [CONTROL_PANEL_CHBX]: ids.LOG_CONTROL_PANEL,
+  [DASHBORD_CHBX]: ids.LOG_DASHBORD,
+  [SIGNAL_CHBX]: ids.LOG_SIGNAL,
+  [STATION_CHBX]: ids.LOG_STATION,
 };
 
 function onClick(event: Event) {
@@ -27,13 +35,13 @@ function onClick(event: Event) {
   const { type, pinNbr } = target.dataset;
   const pinInt = parseInt(pinNbr || '', 10);
   switch (type) {
-    case 'boolean':
+    case ControlTypes.BOOLEAN:
       {
         const isOn = booleanToggle(pinInt);
         target.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, isOn);
       }
       break;
-    case 'checkbox':
+    case ControlTypes.CHECKBOX:
       booleanToggle(pinInt);
       break;
   }
@@ -64,13 +72,13 @@ export const setupBtn = (pin: uint8_t, initialValue: unknown = false) => {
   ele.dataset.pinNbr = pin as unknown as string;
   const { type } = ele.dataset;
   switch (type) {
-    case 'analog':
+    case ControlTypes.ANALOG:
       (ele as HTMLInputElement).value = initialValue as string;
       setInitialValue(pin, initialValue, ele.dataset.name as string);
       ele.addEventListener('input', onInputChange);
       break;
-    case 'checkbox':
-    case 'boolean':
+    case ControlTypes.CHECKBOX:
+    case ControlTypes.BOOLEAN:
       setInitialValue(pin, false, ele.dataset.name as string);
       ele.addEventListener('click', onClick);
       break;

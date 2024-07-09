@@ -1,8 +1,10 @@
 // externals
 import {
-  DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  uint10_MAX,
+  CONTROL_PANEL_CHBX,
 } from '../constants';
-import { booleanRead } from '../libs/mgrs/ControlManager';
+import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
 // locals
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
@@ -14,7 +16,6 @@ import { setupBtn } from './components/UXControls';
 export { setupBtn } from './components/UXControls';
 export { updateClock } from './components/Dashboard';
 export { checkStations, getCurrentStation, getCurrentStationId } from './components/StationsHelper';
-// export { TRAVEL_DISTANCE, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from './constants';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -26,27 +27,29 @@ export const prepareSimulator = () => {
   setupBtn(HALT_BTN);
   setupBtn(PAUSE_BTN);
   setupBtn(REVERSE_BTN);
-  setupBtn(SPEED_CONTROL, 50.0);
-  setupBtn(ENABLE_DASHBORD_LOG);
-  setupBtn(ENABLE_SIGNAL_LOG);
-  setupBtn(ENABLE_STATION_LOG);
+  setupBtn(SPEED_CONTROL, uint10_MAX / 2);
+  setupBtn(CONTROL_PANEL_CHBX);
+  setupBtn(DASHBORD_CHBX);
+  setupBtn(SIGNAL_CHBX);
+  setupBtn(STATION_CHBX);
 };
 
 export const startSimulator = () => {
-  // checkStations();
   moveTrolley();
 };
 
 export const updateDashboard = ({
   direction = DirectionTypes.NOT_SET,
   isLayover = false,
-  isSlowHalt = false,
-  powerLevel = 0,
   speed = 0,
 } = {}) => {
   const position = getPosition();
+  const isPowered = booleanRead(POWER_BTN);
   const isPaused = booleanRead(PAUSE_BTN);
-  setStatusLED({ isPowered: booleanRead(POWER_BTN), isSlowHalt, isLayover, isPaused });
+  const isSlowHalt = booleanRead(HALT_BTN);
+  const powerLevel = analogRead(SPEED_CONTROL) / uint10_MAX;
+
+  setStatusLED({ isPowered, isSlowHalt, isLayover, isPaused });
   refreshDashboard({
     ticks: getTicks(),
     isLayover,

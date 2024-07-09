@@ -1,9 +1,11 @@
-import { DirectionTypes, SensorTypes } from '../constants';
+import {
+  DirectionTypes, SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING, SensorTypes,
+} from '../constants';
 import { CLOCK_SPEED } from '../microcontroller';
 import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../simulator/constants';
 
 export const stations = [{
-  id: 1,
+  id: SENSOR_LT_LA,
   type: SensorTypes.STATION,
   name: 'LA Central Station',
   position: MIN_LEFT_EDGE, // px from left
@@ -15,7 +17,7 @@ export const stations = [{
     top: '68px', left: '16px',
   },
 }, {
-  id: 2,
+  id: SENSOR_RT_CLAREMONT,
   type: SensorTypes.STATION,
   name: 'Claremont Station',
   position: MAX_RIGHT_EDGE, // px from left
@@ -27,7 +29,7 @@ export const stations = [{
     top: '68px', right: '16px',
   },
 }, {
-  id: 3,
+  id: SENSOR_MIDDLE_BURBANK,
   type: SensorTypes.STATION,
   name: 'Burbank Platform',
   position: 400, // px from left
@@ -38,7 +40,7 @@ export const stations = [{
     top: '64px', right: '50%',
   },
 }, {
-  id: 4,
+  id: SENSOR_ATWATER_XING,
   type: SensorTypes.STATION,
   name: 'Atwater Crossing',
   position: 700, // px from left
@@ -51,13 +53,13 @@ export const stations = [{
     height: '22px',
   },
 }, {
-  id: 10,
+  id: SENSOR_SOUTH_GATE_XING,
   type: SensorTypes.SIGNAL,
   name: 'South Gate Crossing',
   position: 250,
   delay: 0,
 }, {
-  id: 11,
+  id: SENSOR_26TH_AVE_XING,
   type: SensorTypes.SIGNAL,
   name: '26 Ave (Higland Park)',
   position: 150,

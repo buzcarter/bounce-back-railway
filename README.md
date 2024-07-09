@@ -6,7 +6,11 @@ A JavaScript visual prototype implementation for a mini-train microcontroller th
 
 This simplified prototype railway is for debugging logic before completeing the micro-conroller (C++) coding and circuit schematics.
 
-Since this is meant to somewhat mimic the Arduino's abilities and programming style (`setup` & `loop`, for example) we'll eschew JS niceties like smooth animations be `requestAnimationFrame`, and no callbacks. 
+This mimic Arduino's abilities and programming style, your main.ts file should export `setup` & `loop` methods. We'll eschew JS niceties such as callbacks outside the simulator.
+
+* "simulator" -- handles HTML interactions
+* "microproccessor" -- familiar framework for I/O read/write
+* main & all the rest is your app
 
 ## 💾 Installation
 
@@ -26,6 +30,21 @@ npm run build
 
 2. 🕹️ Open "src\views\index.html" in your browser
 
+### Developing
+
+Start webpack in watch mode to autorun build whenever a file changes:
+
+```sh
+npm start
+```
+
+#### Manually Lint
+
+```sh
+npm run lint
+npm run lint:fix
+```
+
 ## 🎁 Resources
 
 * [Icons](https://www.iconbolt.com/)
@@ -33,4 +52,4 @@ npm run build
 
 ## ✔️ TODO List
 
-* Power is a mess, should directly interact with microcontroller.
+* 

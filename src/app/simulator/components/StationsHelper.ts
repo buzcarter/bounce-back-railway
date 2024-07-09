@@ -1,14 +1,13 @@
 // externals
 import { stations } from '../../configs/Stations';
 import { StationTransistions } from '../../libs/mgrs/StationManager';
-// integer,
 import { JsonData, int, pixels } from '../../interfaces';
 // locals
 import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './Trolley';
-import { ENABLE_STATION_LOG, SensorTypes } from '../../constants';
-import { booleanRead } from '../../libs/mgrs/ControlManager';
+import { STATION_CHBX, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
+import { analogWrite, booleanRead } from '../../libs/mgrs/ControlManager';
 
 let currentStationId: int | null = null;
 
@@ -31,8 +30,8 @@ export const checkStations = (): StationTransistions => {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
     setActive(station.id, true);
-
-    if (booleanRead(ENABLE_STATION_LOG)) {
+    analogWrite(station.id, SENSOR_VOLTS_OBJECT_DETECTED);
+    if (booleanRead(STATION_CHBX)) {
       updateStdOut({
         Arrived: `${station.name} (${station.id})`,
         layover: station.delay || 'none',
@@ -41,7 +40,8 @@ export const checkStations = (): StationTransistions => {
   } else if (!station && currentStationId !== null) {
     transition = StationTransistions.DEPARTURE;
     setActive(currentStationId, false);
-    if (booleanRead(ENABLE_STATION_LOG)) {
+    analogWrite(currentStationId, SENSOR_VOLTS_ALL_CLEAR);
+    if (booleanRead(STATION_CHBX)) {
       updateStdOut({
         Departed: currentStationId,
       });
@@ -70,7 +70,6 @@ export const addStationsToLayout = () => {
 
   getStations()
     .forEach((station) => {
-      // ({ icon, name, id, position, style }: { icon: string, name: string, id: integer, position: pixels, style: JsonData})
       const {
         id, name, position, icon, style,
       } = station;
