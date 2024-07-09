@@ -14,9 +14,10 @@ export const ids = Object.freeze({
 
   SPEED_CONTROL:         'speedControl',
 
-  ENABLE_DASHBORD_LOG:   'enableDashboardLogCbx',
-  ENABLE_STATION_LOG:    'enableStationsLogCbx',
-  ENABLE_SIGNAL_LOG:     'enableSignalsLogCbx',
+  LOG_CONTROL_PANEL:     'enableControlPanelLogCbx',
+  LOG_DASHBORD:          'enableDashboardLogCbx',
+  LOG_STATION:           'enableStationsLogCbx',
+  LOG_SIGNAL:            'enableSignalsLogCbx',
 
   LAYOUT:                'layout',
   RAIL:                  'layout-rail',

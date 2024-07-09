@@ -8,8 +8,9 @@ import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { checkAllSensors, getCurrentStationSensor, StationTransistions } from './libs/mgrs/StationManager';
 import {
-  DASHBOARD_REFRESH_RATE, DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DASHBOARD_REFRESH_RATE, DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
+  CONTROL_PANEL_CHBX,
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 
@@ -154,9 +155,10 @@ export const setup = () => {
 
   pinMode(SPEED_CONTROL, INPUT);
 
-  pinMode(ENABLE_DASHBORD_LOG, INPUT);
-  pinMode(ENABLE_SIGNAL_LOG, INPUT);
-  pinMode(ENABLE_STATION_LOG, INPUT);
+  pinMode(CONTROL_PANEL_CHBX, INPUT);
+  pinMode(DASHBORD_CHBX, INPUT);
+  pinMode(SIGNAL_CHBX, INPUT);
+  pinMode(STATION_CHBX, INPUT);
 
   onSpeedChange();
 };

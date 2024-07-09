@@ -1,7 +1,8 @@
 // externals
 import {
-  DirectionTypes, ENABLE_DASHBORD_LOG, ENABLE_SIGNAL_LOG, ENABLE_STATION_LOG, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
+  CONTROL_PANEL_CHBX,
 } from '../constants';
 import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
@@ -27,9 +28,10 @@ export const prepareSimulator = () => {
   setupBtn(PAUSE_BTN);
   setupBtn(REVERSE_BTN);
   setupBtn(SPEED_CONTROL, uint10_MAX / 2);
-  setupBtn(ENABLE_DASHBORD_LOG);
-  setupBtn(ENABLE_SIGNAL_LOG);
-  setupBtn(ENABLE_STATION_LOG);
+  setupBtn(CONTROL_PANEL_CHBX);
+  setupBtn(DASHBORD_CHBX);
+  setupBtn(SIGNAL_CHBX);
+  setupBtn(STATION_CHBX);
 };
 
 export const startSimulator = () => {

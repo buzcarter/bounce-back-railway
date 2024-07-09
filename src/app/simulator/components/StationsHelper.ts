@@ -6,7 +6,7 @@ import { JsonData, int, pixels } from '../../interfaces';
 import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './Trolley';
-import { ENABLE_STATION_LOG, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
+import { STATION_CHBX, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
 import { analogWrite, booleanRead } from '../../libs/mgrs/ControlManager';
 
 let currentStationId: int | null = null;
@@ -31,7 +31,7 @@ export const checkStations = (): StationTransistions => {
     currentStationId = station.id;
     setActive(station.id, true);
     analogWrite(station.id, SENSOR_VOLTS_OBJECT_DETECTED);
-    if (booleanRead(ENABLE_STATION_LOG)) {
+    if (booleanRead(STATION_CHBX)) {
       updateStdOut({
         Arrived: `${station.name} (${station.id})`,
         layover: station.delay || 'none',
@@ -41,7 +41,7 @@ export const checkStations = (): StationTransistions => {
     transition = StationTransistions.DEPARTURE;
     setActive(currentStationId, false);
     analogWrite(currentStationId, SENSOR_VOLTS_ALL_CLEAR);
-    if (booleanRead(ENABLE_STATION_LOG)) {
+    if (booleanRead(STATION_CHBX)) {
       updateStdOut({
         Departed: currentStationId,
       });

@@ -1,10 +1,11 @@
 import { uint10_t, uint8_t } from '../../interfaces';
 import {
-  ENABLE_DASHBORD_LOG,
-  ENABLE_SIGNAL_LOG,
-  ENABLE_STATION_LOG,
+  DASHBORD_CHBX,
+  SIGNAL_CHBX,
+  STATION_CHBX,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING, SENSOR_VOLTS_ALL_CLEAR, SPEED_CONTROL,
   uint10_MAX,
+  CONTROL_PANEL_CHBX,
 } from '../../constants';
 import { Serial } from '../../microcontroller';
 
@@ -44,17 +45,22 @@ const currentStates: CurrentStates = {
     isChanged: false,
     name: '',
   },
-  [ENABLE_DASHBORD_LOG]: {
+  [CONTROL_PANEL_CHBX]: {
     value: null,
     isChanged: false,
     name: '',
   },
-  [ENABLE_STATION_LOG]: {
+  [DASHBORD_CHBX]: {
     value: null,
     isChanged: false,
     name: '',
   },
-  [ENABLE_SIGNAL_LOG]: {
+  [STATION_CHBX]: {
+    value: null,
+    isChanged: false,
+    name: '',
+  },
+  [SIGNAL_CHBX]: {
     value: null,
     isChanged: false,
     name: '',
@@ -108,11 +114,14 @@ const updateValue = (pin: uint8_t, value: unknown): unknown => {
     return value;
   }
 
-  Serial.println({
-    pin,
-    value: value as number,
-    name: state.name,
-  });
+  // eslint-disable-next-line no-use-before-define
+  if (booleanRead(CONTROL_PANEL_CHBX)) {
+    Serial.println({
+      pin,
+      value: value as number,
+      name: state.name,
+    });
+  }
 
   if (state.value !== value) {
     state.value = value;

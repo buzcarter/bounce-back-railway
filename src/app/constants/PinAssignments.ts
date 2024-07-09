@@ -25,9 +25,10 @@ export const REVERSE_BTN: uint8_t           = 103;
 
 export const SPEED_CONTROL: uint8_t         = 104;
 
-export const ENABLE_DASHBORD_LOG: uint8_t   = 105;
-export const ENABLE_SIGNAL_LOG: uint8_t     = 106;
-export const ENABLE_STATION_LOG: uint8_t    = 107;
+export const CONTROL_PANEL_CHBX: uint8_t    = 108;
+export const DASHBORD_CHBX: uint8_t         = 105;
+export const SIGNAL_CHBX: uint8_t           = 106;
+export const STATION_CHBX: uint8_t          = 107;
 
 // LED Output Pins
 export const CLOCK_LED_OUT: uint10_t        = LED_BUILTIN;

@@ -1,5 +1,5 @@
 // externals
-import { ENABLE_SIGNAL_LOG } from '../../constants';
+import { SIGNAL_CHBX } from '../../constants';
 import { int, pixels } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 // locals
@@ -27,7 +27,7 @@ export const addPositionSensors = () => {
       sensorEle.title = name;
 
       railEle.appendChild(sensorEle);
-      if (booleanRead(ENABLE_SIGNAL_LOG)) {
+      if (booleanRead(SIGNAL_CHBX)) {
         updateStdOut({
           'Add Sensor': `${id}: ${name}`,
           at: position,
@@ -46,7 +46,7 @@ export const checkSensors = (left: pixels, right: pixels) => {
   const sensor = index > -1 ? signals[index] : null;
   if (!sensor && currentSensorId > -1) {
     setActive(currentSensorId, false);
-    if (booleanRead(ENABLE_SIGNAL_LOG)) {
+    if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
         sensor: currentSensorId,
         state: 'off',
@@ -56,7 +56,7 @@ export const checkSensors = (left: pixels, right: pixels) => {
   } else if (sensor && sensor.id !== currentSensorId) {
     currentSensorId = sensor.id;
     setActive(currentSensorId, true);
-    if (booleanRead(ENABLE_SIGNAL_LOG)) {
+    if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
         sensor: sensor.id,
         state: 'on',
