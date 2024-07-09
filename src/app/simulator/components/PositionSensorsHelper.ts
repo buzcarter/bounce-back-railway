@@ -11,7 +11,7 @@ let currentSensorId = -1;
 
 const getSensorId = (id: int) => `sensor-${id}`;
 
-export const addPositionSensors = () => {
+export const addSensorsToRail = () => {
   const railEle = document.getElementById(ids.RAIL);
   if (!railEle) {
     return;

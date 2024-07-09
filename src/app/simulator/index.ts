@@ -6,11 +6,12 @@ import {
 } from '../constants';
 import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
+import { startAnimation } from './components/AnimateTrolley';
 // locals
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
-import { addPositionSensors } from './components/PositionSensorsHelper';
+import { addSensorsToRail } from './components/PositionSensorsHelper';
 import { addStationsToLayout } from './components/StationsHelper';
-import { getPosition, moveTrolley, resetTrolleyPosition } from './components/Trolley';
+import { getPosition, resetPosition } from './components/TrolleyUI';
 import { setupBtn } from './components/UXControls';
 
 export { setupBtn } from './components/UXControls';
@@ -19,9 +20,9 @@ export { checkStations, getCurrentStation, getCurrentStationId } from './compone
 
 export const prepareSimulator = () => {
   addStationsToLayout();
-  addPositionSensors();
+  addSensorsToRail();
 
-  resetTrolleyPosition();
+  resetPosition();
 
   setupBtn(POWER_BTN);
   setupBtn(HALT_BTN);
@@ -35,7 +36,7 @@ export const prepareSimulator = () => {
 };
 
 export const startSimulator = () => {
-  moveTrolley();
+  startAnimation();
 };
 
 export const updateDashboard = ({

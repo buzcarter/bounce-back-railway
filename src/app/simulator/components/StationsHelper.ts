@@ -5,7 +5,7 @@ import { JsonData, int, pixels } from '../../interfaces';
 // locals
 import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
-import { getPosition } from './Trolley';
+import { getPosition } from './TrolleyUI';
 import { STATION_CHBX, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
 import { analogWrite, booleanRead } from '../../libs/mgrs/ControlManager';
 
