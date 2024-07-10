@@ -2,6 +2,7 @@ import { DirectionTypes, DASHBORD_CHBX } from '../../constants';
 import { clockTick, int, pixels, velocity } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 import { CLOCK_SPEED } from '../../microcontroller';
+// locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
 

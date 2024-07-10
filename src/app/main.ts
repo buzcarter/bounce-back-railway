@@ -1,7 +1,7 @@
 // externals
 import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
 // locals
-import { int, velocity } from './interfaces';
+import { int, uint8_t, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
@@ -12,8 +12,9 @@ import {
   CONTROL_PANEL_CHBX,
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
-import { getTransition, pollSensors as pollPointSensors, getCurrentStation, getCurrentStationId } from './libs/mgrs/PointCensorManager';
-
+import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
+import { getStations } from './configs/StationUtils';
+// include styles for WebPack
 import './styles';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
@@ -49,7 +50,7 @@ const onStationArrival = () => {
     return;
   }
 
-  const station = getCurrentStation();
+  const station = getStations().find(({ id }: { id: uint8_t}) => id === getCurrentStationId());
   if (!station) {
     return;
   }

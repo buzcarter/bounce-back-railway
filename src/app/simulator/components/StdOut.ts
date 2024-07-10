@@ -1,5 +1,6 @@
 import { JsonData } from '../../interfaces';
 import { getTicks } from '../../microcontroller';
+// locals
 import { CSSClasses, ElementIds } from '../constants';
 
 export const updateStdOut = (message: JsonData) => {

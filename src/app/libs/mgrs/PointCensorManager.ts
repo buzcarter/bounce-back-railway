@@ -1,9 +1,11 @@
+// local
+import { getStations } from '../../configs/StationUtils';
 import { SENSOR_VOLTS_THRESHOLD, STATION_CHBX } from '../../constants';
 import { uint8_t } from '../../interfaces';
-import { Serial } from '../../microcontroller';
-import { getStations } from '../../simulator/components/StationsHelper';
-import { analogRead, booleanRead } from './ControlManager';
 import { StationTransistions } from './StationManager';
+import { analogRead, booleanRead } from './ControlManager';
+// external
+import { Serial } from '../../microcontroller';
 
 let currentStationId: uint8_t | null = null;
 
@@ -12,8 +14,6 @@ export const pollSensors = () => null;
 // export const clearSensors = () => null;
 
 // export const resetCurrentSensor = () => null;
-
-export const getCurrentStation = () => getStations().find((station: { id: uint8_t}) => station.id === currentStationId);
 
 export const getCurrentStationId = () => currentStationId;
 
