@@ -3,8 +3,8 @@ import { getState } from '../../main';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 import { PAUSE_BTN, POWER_BTN } from '../../constants';
 // locals
-import { tripSensors as checkProximitySensors } from './RangeSensors';
-import { tripSensors } from './PointSensors';
+import { tripSensors as tripRangeSensors } from './RangeSensors';
+import { tripSensors as tripPointSensors } from './PointSensors';
 import { updatePosition } from './TrolleyUI';
 import { TROLLEY_LENGTH } from '../constants';
 
@@ -20,8 +20,8 @@ export const startAnimation = () => {
     const position = updatePosition(speed, direction);
     const left = position - TROLLEY_EDGES;
     const right = position + TROLLEY_EDGES;
-    checkProximitySensors(left, right);
-    tripSensors(position);
+    tripRangeSensors(left, right);
+    tripPointSensors(position);
   }
 
   requestAnimationFrame(startAnimation);
