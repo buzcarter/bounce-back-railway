@@ -9,7 +9,7 @@ import { getTicks } from '../microcontroller';
 import { startAnimation } from './components/AnimateTrolley';
 // locals
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
-import { addSensorsToRail } from './components/PositionSensorsHelper';
+import { addSensorsToRail } from './components/RangeSensors';
 import { addStationsToLayout } from './components/StationsHelper';
 import { getPosition, resetPosition } from './components/TrolleyUI';
 import { setupBtn } from './components/UXControls';

@@ -40,7 +40,7 @@ const setActive = (id: int, isActive: boolean) => {
   document.getElementById(getSensorId(id))?.classList.toggle(CSSClasses.PROXIMITY_SENSOR_ACTIVE, isActive);
 };
 
-export const checkSensors = (left: pixels, right: pixels) => {
+export const tripSensors = (left: pixels, right: pixels) => {
   const signals = getSignals();
   const index = signals.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
   const sensor = index > -1 ? signals[index] : null;

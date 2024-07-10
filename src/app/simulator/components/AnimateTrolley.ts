@@ -3,8 +3,12 @@ import { getState } from '../../main';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 import { PAUSE_BTN, POWER_BTN } from '../../constants';
 // locals
-import { checkSensors } from './PositionSensorsHelper';
+import { tripSensors as checkProximitySensors } from './RangeSensors';
+import { tripSensors } from './PointSensors';
 import { updatePosition } from './TrolleyUI';
+import { TROLLEY_LENGTH } from '../constants';
+
+const TROLLEY_EDGES = TROLLEY_LENGTH / 2;
 
 export const startAnimation = () => {
   const { isLayover, speed, direction } = getState();
@@ -14,7 +18,10 @@ export const startAnimation = () => {
 
   if (!isDisabled) {
     const position = updatePosition(speed, direction);
-    checkSensors(position - 16, position + 16);
+    const left = position - TROLLEY_EDGES;
+    const right = position + TROLLEY_EDGES;
+    checkProximitySensors(left, right);
+    tripSensors(position);
   }
 
   requestAnimationFrame(startAnimation);

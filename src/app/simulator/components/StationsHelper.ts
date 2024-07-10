@@ -16,7 +16,7 @@ export const getSignals = getByType.bind(null, SensorTypes.SIGNAL);
 export const getStations = getByType.bind(null, SensorTypes.STATION);
 export const getCurrentStation = () => getStations().find((station: { id: int}) => station.id === currentStationId);
 
-const getStationByPostion = (pos: pixels) => getStations().find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
+export const getStationByPostion = (pos: pixels) => getStations().find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
 const setActive = (stationId: int, isActive: boolean) => {
   document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
