@@ -1,4 +1,4 @@
-import { JsonData } from '../../interfaces';
+import { JsonData } from '../../app/interfaces';
 import { getTicks } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';

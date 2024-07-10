@@ -22,11 +22,12 @@
     }
   ],
   "keywords": [
-    "mini-train",
-    "microcontroller",
+    "arduino",
     "auto-reverse",
-    "model railroad",
     "automation",
+    "microcontroller",
+    "mini-train",
+    "model railroad",
     "trolley"
   ],
   "scripts": {

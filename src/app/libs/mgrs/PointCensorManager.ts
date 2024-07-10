@@ -1,11 +1,11 @@
 // local
-import { getStations } from '../../configs/StationUtils';
+import { getStations } from '../../../configs/StationUtils';
 import { SENSOR_VOLTS_THRESHOLD, STATION_CHBX } from '../../constants';
 import { uint8_t } from '../../interfaces';
 import { StationTransistions } from './StationManager';
 import { analogRead, booleanRead } from './ControlManager';
 // external
-import { Serial } from '../../microcontroller';
+import { Serial } from '../../../microcontroller';
 
 let currentStationId: uint8_t | null = null;
 

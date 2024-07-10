@@ -3,16 +3,18 @@ import {
   DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
   CONTROL_PANEL_CHBX,
-} from '../constants';
-import { analogRead, booleanRead } from '../libs/mgrs/ControlManager';
+} from '../app/constants';
+import { analogRead, booleanRead } from '../app/libs/mgrs/ControlManager';
 import { getTicks } from '../microcontroller';
-import { startAnimation } from './components/AnimateTrolley';
 // locals
+import { startAnimation } from './components/AnimateTrolley';
 import { refreshDashboard, setStatusLED } from './components/Dashboard';
 import { addSensorsToRail } from './components/RangeSensors';
 import { addStationsToLayout } from './components/StationsHelper';
 import { getPosition, resetPosition } from './components/TrolleyUI';
 import { setupBtn } from './components/UXControls';
+// include styles for WebPack
+import './styles';
 
 export { setupBtn } from './components/UXControls';
 export { updateClock } from './components/Dashboard';

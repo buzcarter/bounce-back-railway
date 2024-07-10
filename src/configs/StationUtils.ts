@@ -1,4 +1,4 @@
-import { SensorTypes } from '../constants';
+import { SensorTypes } from '../app/constants';
 import { stations } from './Stations';
 
 const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);

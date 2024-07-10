@@ -1,9 +1,10 @@
 // externals
-import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
+import { INPUT, Serial, getTicks, pinMode } from '../microcontroller';
 // locals
 import { int, uint8_t, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
+// TODO: don't talk to Simulator from the App
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
 import {
@@ -13,9 +14,7 @@ import {
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
-import { getStations } from './configs/StationUtils';
-// include styles for WebPack
-import './styles';
+import { getStations } from '../configs/StationUtils';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** (px/tick) current speed */

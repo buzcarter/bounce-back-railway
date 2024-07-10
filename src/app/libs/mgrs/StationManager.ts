@@ -1,4 +1,4 @@
-import { getStations } from '../../configs/StationUtils';
+import { getStations } from '../../../configs/StationUtils';
 import { SENSOR_VOLTS_THRESHOLD } from '../../constants';
 import { uint8_t } from '../../interfaces';
 // locals

@@ -1,6 +1,6 @@
-import { DirectionTypes, DASHBORD_CHBX } from '../../constants';
-import { clockTick, int, pixels, velocity } from '../../interfaces';
-import { booleanRead } from '../../libs/mgrs/ControlManager';
+import { DirectionTypes, DASHBORD_CHBX } from '../../app/constants';
+import { clockTick, int, pixels, velocity } from '../../app/interfaces';
+import { booleanRead } from '../../app/libs/mgrs/ControlManager';
 import { CLOCK_SPEED } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';

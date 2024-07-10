@@ -2,15 +2,16 @@
 
 [Live Demo 🚀](https://buzcarter.github.io/bounce-back-railway/)
 
-A JavaScript visual prototype implementation for a mini-train microcontroller that auto-reverses at the ends of a straight track, with any number of intermediate "station" stops. Perfect for model railroaders looking for a simple and fun automation solution.
+A JavaScript train simulator to assist with "visual prototyping" a simple microcontroller implementation that supports auto-reversing at the ends of a straight track, with any number of intermediate "station" stops. Convenient for model railroaders looking for a simple way to experiment with microcontrollers and sensors.
 
 This simplified prototype railway is for debugging logic before completeing the micro-conroller (C++) coding and circuit schematics.
 
 This mimic Arduino's abilities and programming style, your main.ts file should export `setup` & `loop` methods. We'll eschew JS niceties such as callbacks outside the simulator.
 
-* "simulator" -- handles HTML interactions
-* "microproccessor" -- familiar framework for I/O read/write
-* main & all the rest is your app
+* 🎛️ "app" -- your project code
+* 🔧"config" -- define your station/sensor locations
+* ⏲️ "microproccessor" -- familiar framework for I/O read/write
+* 📺 "simulator" -- handles HTML interactions
 
 ## 💾 Installation
 
@@ -22,13 +23,13 @@ npm install
 
 1. 🔨 Build
 
-Command + Shift + B or via terminal:
-
 ```sh
 npm run build
 ```
 
-2. 🕹️ Open "src\views\index.html" in your browser
+If you're using Visual Studio Code the `tasks.json` includes a default build entry so you press Command + Shift + B to build.
+
+2. 🕹️ Open "src/simulator/assets/views/index.html" in your browser: `file:///PATH-TO-YOUR-CODE/src/simulator/assets/views/index.html
 
 ### Developing
 

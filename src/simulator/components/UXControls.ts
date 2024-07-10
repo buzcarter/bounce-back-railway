@@ -5,9 +5,9 @@ import {
   STATION_CHBX,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   CONTROL_PANEL_CHBX,
-} from '../../constants';
-import { uint8_t } from '../../interfaces';
-import { setInitialValue, booleanToggle, analogWrite } from '../../libs/mgrs/ControlManager';
+} from '../../app/constants';
+import { uint8_t } from '../../app/interfaces';
+import { setInitialValue, booleanToggle, analogWrite } from '../../app/libs/mgrs/ControlManager';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 
