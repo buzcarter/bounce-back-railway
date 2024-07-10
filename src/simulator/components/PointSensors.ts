@@ -1,10 +1,12 @@
 // External
-import { getStations } from '../../configs/StationUtils';
-import { SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED } from '../../app/constants';
-import { pixels } from '../../app/interfaces';
-import { analogWrite } from '../../app/libs/mgrs/ControlManager';
+import {
+  getStations,
+  SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED,
+  STATION_SAFETY_LENGTH,
+  pixels,
+} from '../../common';
+import { analogWrite } from '../../app';
 // locals
-import { STATION_SAFETY_LENGTH } from '../constants';
 import { setActive } from './StationsHelper';
 
 let currentSensorId = -1;

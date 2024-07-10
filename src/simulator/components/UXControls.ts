@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { setInitialValue, booleanToggle, analogWrite } from '../../app';
 import {
+  uint8_t,
   DASHBORD_CHBX,
   SIGNAL_CHBX,
   STATION_CHBX,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   CONTROL_PANEL_CHBX,
-} from '../../app/constants';
-import { uint8_t } from '../../app/interfaces';
-import { setInitialValue, booleanToggle, analogWrite } from '../../app/libs/mgrs/ControlManager';
+
+} from '../../common';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 

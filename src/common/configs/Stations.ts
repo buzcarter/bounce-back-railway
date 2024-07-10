@@ -1,8 +1,10 @@
+import { DirectionTypes } from '../constants/DirectionTypes';
+import { CLOCK_SPEED } from '../constants/MicrocontrollerConstants';
 import {
-  DirectionTypes, SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING, SensorTypes,
-} from '../app/constants';
-import { CLOCK_SPEED } from '../microcontroller';
-import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../simulator/constants';
+  SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
+} from '../constants/PinAssignments';
+import { SensorTypes } from '../constants/SensorTypes';
+import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants/SimulatorConstants';
 
 export const stations = [{
   id: SENSOR_LT_LA,

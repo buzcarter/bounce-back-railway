@@ -1,8 +1,8 @@
 /* eslint-disable no-multi-spaces */
-import { uint10_t, uint8_t } from '../interfaces';
+import { uint10_t, uint8_t } from '../interfaces/CoreTypes';
 import {
   LED_BUILTIN, PIN_A0, PIN_A1, PIN_A2, PIN_A3, PIN_A4, PIN_A5, PWM_5,
-} from '../../microcontroller';
+} from './ArduinoUno';
 
 // Motor Driver Pins
 export const MOTOR_REVERSE_OUT: uint10_t    = 3; // to L298N_IN2

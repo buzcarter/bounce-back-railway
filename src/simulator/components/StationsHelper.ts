@@ -1,6 +1,8 @@
 // externals
-import { getStations } from '../../configs/StationUtils';
-import { JsonData, uint8_t } from '../../app/interfaces';
+import {
+  getStations,
+  JsonData, uint8_t,
+} from '../../common';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';

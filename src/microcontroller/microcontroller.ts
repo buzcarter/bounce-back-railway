@@ -1,8 +1,9 @@
-import { POWER_BTN } from '../app/constants';
-import { booleanRead } from '../app/libs/mgrs/ControlManager';
-import { loop, setup } from '../app/main';
-import { CLOCK_SPEED, getTicks, resetTicks, updateTicks } from './';
+import { POWER_BTN } from '../common';
+import { booleanRead, loop, setup } from '../app';
 import { prepareSimulator, startSimulator, updateClock } from '../simulator';
+// locals
+import { getTicks, resetTicks, updateTicks } from './components/Clock';
+import { CLOCK_SPEED } from '../common';
 
 const onClockTick = () => {
   if (!booleanRead(POWER_BTN)) {

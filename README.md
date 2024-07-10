@@ -1,56 +1,72 @@
-# 🪃 Bounce Back Railway 🚃 
+# 🎛️ Microcontroller Simulator Playground
 
 [Live Demo 🚀](https://buzcarter.github.io/bounce-back-railway/)
 
-A JavaScript train simulator to assist with "visual prototyping" a simple microcontroller implementation that supports auto-reversing at the ends of a straight track, with any number of intermediate "station" stops. Convenient for model railroaders looking for a simple way to experiment with microcontrollers and sensors.
+## Why This Project?
 
-This simplified prototype railway is for debugging logic before completeing the micro-conroller (C++) coding and circuit schematics.
+When I started programming microcontrollers—specifically the Arduino Uno—I quickly realized how time-consuming it was to wire up sensors, write code, flash the controller, and run it. The process was slow and tedious, especially for someone just learning microcontrollers or who is impatient.
 
-This mimic Arduino's abilities and programming style, your main.ts file should export `setup` & `loop` methods. We'll eschew JS niceties such as callbacks outside the simulator.
+That's why I created this project: a simulator, a mock controller, and a web app that allows you to visualize and debug signals from mock sensors without needing to spend hours moving jumpers around breadboards. I chose TypeScript for this project because its type system makes it easier to transition your app from JavaScript to C++.
 
-* 🎛️ "app" -- your project code
-* 🔧"config" -- define your station/sensor locations
-* ⏲️ "microproccessor" -- familiar framework for I/O read/write
-* 📺 "simulator" -- handles HTML interactions
+## Project Overview
 
-## 💾 Installation
+This project is divided into four main components:
+
+1. **App**: Your project code.
+2. **Mock Microcontroller**: A familiar framework for I/O read/write operations.
+3. **Web Simulator**: Handles HTML interactions and visualizes the microcontroller's behavior.
+4. **Configuration**: Define your station/sensor locations and other settings.
+
+## Features
+
+- **Train Simulator**: Focus on triggering sensors and managing various states quickly through "visual prototyping" of a simple layout.
+- **Control Parameters**: Supports auto-reversing at the ends of a straight track, speed control, pauses, and reverse, with any number of intermediate "station" stops.
+- **Familiar Project Setup**: Mimics Arduino's programming style with `setup` & `loop` methods, making it easy to transition from the simulator to actual hardware.
+
+## 🛠️ Installation
 
 ```sh
 npm install
 ```
 
-## 🎚️ Usage
-
-1. 🔨 Build
-
 ```sh
-npm run build
+git clone https://github.com/buzcarter/bounce-back-railway.git
+npm install
 ```
 
-If you're using Visual Studio Code the `tasks.json` includes a default build entry so you press Command + Shift + B to build.
+## 🎮 Usage
 
-2. 🕹️ Open "src/simulator/assets/views/index.html" in your browser: `file:///PATH-TO-YOUR-CODE/src/simulator/assets/views/index.html
+1. **Build**
 
-### Developing
+    ```sh
+    npm run build
+    ```
 
-Start webpack in watch mode to autorun build whenever a file changes:
+    If you're using Visual Studio Code, the tasks.json includes a default build entry, so you can press Command + Shift + B to build.
+
+2. **Open in Browser**
+
+    Open `dist/index.html` in your browser:
+
+    ```
+    file:///PATH-TO-YOUR-CODE/dist/index.html
+    ```
+
+## 👨‍💻 Developing
+
+### Auto-Build
+
+Start webpack in watch mode: auto-runs the build whenever a file changes:
 
 ```sh
 npm start
 ```
 
-#### Manually Lint
+### Manual Linting
 
 ```sh
 npm run lint
 npm run lint:fix
 ```
 
-## 🎁 Resources
-
-* [Icons](https://www.iconbolt.com/)
-* [Jittery Trolley, "Getting Jittery On Hover Using Only CSS"](https://www.kirupa.com/snippets/getting_jittery_on_hover_using_only_css.htm)
-
-## ✔️ TODO List
-
-* 
+Enjoy exploring the world of microcontrollers with ease and speed!

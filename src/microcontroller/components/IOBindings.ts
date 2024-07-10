@@ -1,4 +1,4 @@
-import { uint8_t } from '../../app/interfaces';
+import { uint8_t } from '../../common';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const pinMode = (pin: uint8_t, mode: uint8_t) => {

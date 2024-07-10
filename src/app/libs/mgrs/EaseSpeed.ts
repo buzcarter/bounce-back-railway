@@ -1,8 +1,9 @@
-import { HALT_DURATION } from '../constants';
-import { int, velocity } from '../interfaces';
-import { setSpeed } from '../main';
+import { setSpeed } from '../../main';
 // external
-import { CLOCK_SPEED } from '../../microcontroller';
+import {
+  CLOCK_SPEED, int, velocity,
+  HALT_DURATION,
+} from '../../../common';
 
 let currentStep: int = 0;
 let nbrSteps: int = 0;

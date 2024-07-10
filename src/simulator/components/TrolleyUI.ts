@@ -1,9 +1,12 @@
 // externals
-import { pixels, velocity } from '../../app/interfaces';
-import { DirectionTypes } from '../../app/constants';
+import {
+  pixels, velocity,
+  INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE,
+  DirectionTypes,
+} from '../../common';
 // locals
 import { updateStdOut } from './StdOut';
-import { ElementIds, INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';
+import { ElementIds } from '../constants';
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 

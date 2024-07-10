@@ -1,5 +1,5 @@
-import { JsonData, int } from '../../app/interfaces';
-import { updateStdOut } from '../../simulator/components/StdOut';
+import { JsonData, int } from '../../common';
+import { updateStdOut } from '../../simulator';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const begin = (baudRate: int) => {};
