@@ -1,0 +1,25 @@
+.section {
+  background-color: var(--section-bg-color);
+  border-radius: var(--border-radius);
+  border: solid 1px var(--border-color);
+  margin: var(--default-spacing) auto;
+  padding: var(--default-spacing);
+}
+
+.section--logging {
+  background-color: var(--logging-bg-color);
+  color: var(--logging-color);
+}
+
+.section--simulator {
+  background-color: var(--simulator-bg-color);
+  height: var(--simulator-height);
+  padding: 0;
+  position: relative;
+  width: var(--simulator-width);
+}
+
+.section__heading {
+  font-size: 16px;
+  margin: var(--default-spacing) 0;
+}

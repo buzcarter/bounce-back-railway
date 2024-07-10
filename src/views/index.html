@@ -7,46 +7,52 @@
 </head>
 <body>
     <main class="container">
-        <section id="layout" class="layout">
-            <div id="layout-rail" class="layout__rail">
-                <span id="layout-vehicle" class="icon icon--trolley layout__vehicle" alt="Trolley"></span>
+        <section id="layout" class="section section--simulator">
+            <div id="layout-rail" class="simulator__rail">
+                <span id="layout-trolley" class="icon icon--trolley simulator__trolley" alt="Trolley"></span>
             </div>
         </section>
         <section class="section dashboard">
-            <div class="dashboard__guage">
-                <label for="display-clock">Clock</label>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-clock">Clock</label>
                 <input type="text" id="display-clock" class="dashboard__display" readonly>
+                <span class="dashboard__units">ticks</span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-position">Position</label>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-position">Position</label>
                 <input type="text" id="display-position" class="dashboard__display" readonly>
+                <span class="dashboard__units">pixels</span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-max-speed">Max Speed</label>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-max-speed">Max Speed</label>
                 <input type="text" id="display-max-speed" class="dashboard__display" readonly>
+                <span class="dashboard__units">px/s</span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-current-speed">Speed <span id="display-status" class="status"></span></label>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-current-speed">Speed <span id="display-status" class="status"></span></label>
                 <input type="text" id="display-current-speed" class="dashboard__display" readonly>
+                <span class="dashboard__units">px/s</span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-power">Power</label>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-power">Power</label>
                 <input type="text" id="display-power" class="dashboard__display" readonly>
+                <span class="dashboard__units">&nbsp;</span>
             </div>
-            <div class="dashboard__guage">
-                <label for="display-direction">Direction</label>
-                <span id="display-direction" class="icon icon--direction"></span>
+            <div class="dashboard__gauge">
+                <label class="dashboard__label" for="display-direction">Direction</label>
+                <span id="display-direction" class="icon icon--direction icon--right-arrow icon--rotatable"></span>
+                <span class="dashboard__units">&nbsp;</span>
             </div>
         </section>
-        <section class="section controls">
+        <section class="section section--controls">
             <button id="powerBtn" data-type="boolean" class="icon-btn icon--btn-power" data-name="Power Button">Power</button>
             <button id="pauseBtn" data-type="boolean" class="icon-btn icon--btn-pause" data-name="Pause Button">Pause</button>
             <button id="haltBtn" data-type="boolean" class="icon-btn icon--btn-halt" data-name="Halt Button">Halt</button>
             <button id="reverseBtn" data-type="boolean" class="icon-btn icon--btn-reverse" data-name="Reverse Button">Reverse</button>
             <input type="range" id="speedControl" data-type="analog" class="slider" min="0" max="1023" value="512" data-name="Speed Control">
         </section>
-        <section class="section controls">
-            Logging
+        <section class="section section--logging">
+            <h2 class="section__heading">Logging</h2>
             <label><input type="checkbox" data-type="checkbox" id="enableSignalsLogCbx" data-name="Log Signals Crossings Chkbx">Signals</label>
             <label><input type="checkbox" data-type="checkbox" id="enableStationsLogCbx" data-name="Log Station Crossings Chkbx">Stations</label>
             <label><input type="checkbox" data-type="checkbox" id="enableDashboardLogCbx" data-name="Log Dashboard Updates Chkbx">Dashboard</label>

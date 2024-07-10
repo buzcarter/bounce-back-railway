@@ -1,18 +1,18 @@
 // externals
-import { checkStations, getCurrentStation, getCurrentStationId } from './simulator';
 import { INPUT, Serial, getTicks, pinMode } from './microcontroller';
 // locals
 import { int, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
-import { checkAllSensors, getCurrentStationSensor, StationTransistions } from './libs/mgrs/StationManager';
+import { getCurrentStationSensor, StationTransistions } from './libs/mgrs/StationManager';
 import {
   DASHBOARD_REFRESH_RATE, DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
   CONTROL_PANEL_CHBX,
 } from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
+import { getTransition, pollSensors as pollPointSensors, getCurrentStation, getCurrentStationId } from './libs/mgrs/PointCensorManager';
 
 import './styles';
 
@@ -62,7 +62,7 @@ const onStationArrival = () => {
   setLayoverDuration(station.delay);
 };
 
-const readButtons = () => {
+const pollButtons = () => {
   if (hasInputChanged(REVERSE_BTN)) {
     onReverseBtnClick();
   }
@@ -77,8 +77,9 @@ const readButtons = () => {
 };
 
 export const loop = () => {
-  readButtons();
-  checkAllSensors();
+  pollButtons();
+  pollPointSensors();
+  // checkAllSensors();
   const sensedStation = getCurrentStationSensor();
   if (sensedStation > -1) {
     // Serial.println({ 'current triggered station': sensedStation });
@@ -101,7 +102,7 @@ export const loop = () => {
     return;
   }
 
-  switch (checkStations()) {
+  switch (getTransition()) {
     case StationTransistions.ARRIVAL:
       setEvent(EventTypes.STATION_ARRIVAL);
       break;
@@ -142,6 +143,7 @@ export const loop = () => {
       break;
   }
 
+  // clearPointSensors();
   resetChangeFlags();
 };
 

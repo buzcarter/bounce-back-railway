@@ -3,7 +3,7 @@ import { SIGNAL_CHBX } from '../../constants';
 import { int, pixels } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 // locals
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 import { getSignals } from './StationsHelper';
 import { updateStdOut } from './StdOut';
 
@@ -11,8 +11,8 @@ let currentSensorId = -1;
 
 const getSensorId = (id: int) => `sensor-${id}`;
 
-export const addPositionSensors = () => {
-  const railEle = document.getElementById(ids.RAIL);
+export const addSensorsToRail = () => {
+  const railEle = document.getElementById(ElementIds.RAIL);
   if (!railEle) {
     return;
   }
@@ -40,7 +40,7 @@ const setActive = (id: int, isActive: boolean) => {
   document.getElementById(getSensorId(id))?.classList.toggle(CSSClasses.PROXIMITY_SENSOR_ACTIVE, isActive);
 };
 
-export const checkSensors = (left: pixels, right: pixels) => {
+export const tripSensors = (left: pixels, right: pixels) => {
   const signals = getSignals();
   const index = signals.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
   const sensor = index > -1 ? signals[index] : null;

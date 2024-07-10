@@ -4,7 +4,7 @@
 body {
   background-color: var(--color-neutral-700);
   color: var(--color-neutral-500);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family-arial);
   font-size: 12px;
 }
 
@@ -18,13 +18,5 @@ input[type="checkbox" i] {
 
 .container {
   margin: var(--default-spacing) auto;
-  width: var(--layout-width);
-}
-
-.section {
-  background-color: var(--color-neutral-100);
-  border-radius: var(--border-radius);
-  border: solid 1px var(--border-color);
-  margin: var(--default-spacing) auto;
-  padding: var(--default-spacing);
+  width: var(--simulator-width);
 }

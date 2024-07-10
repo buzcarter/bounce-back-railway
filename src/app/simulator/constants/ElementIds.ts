@@ -1,5 +1,5 @@
 /* eslint-disable key-spacing, no-multi-spaces */
-export const ids = Object.freeze({
+export const ElementIds = Object.freeze({
   DSPLY_CLOCK:           'display-clock',
   DSPLY_DIRECTION:       'display-direction',
   DSPLY_POSITION:        'display-position',
@@ -21,7 +21,7 @@ export const ids = Object.freeze({
 
   LAYOUT:                'layout',
   RAIL:                  'layout-rail',
-  VEHICLE:               'layout-vehicle',
+  TROLLEY:               'layout-trolley',
 
   STATUS:                'display-status',
   STD_OUT:               'std-out',

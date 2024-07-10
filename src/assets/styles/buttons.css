@@ -12,6 +12,7 @@
 .icon-btn {
   opacity: 0.5;
   cursor: pointer;
+  background-color: transparent;
   background-position: center top;
   background-repeat: no-repeat;
   background-size: contain;

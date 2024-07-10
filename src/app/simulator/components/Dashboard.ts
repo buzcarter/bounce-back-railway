@@ -2,7 +2,7 @@ import { DirectionTypes, DASHBORD_CHBX } from '../../constants';
 import { clockTick, int, pixels, velocity } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 import { CLOCK_SPEED } from '../../microcontroller';
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
 
 export const refreshDashboard = (
@@ -23,19 +23,16 @@ export const refreshDashboard = (
     direction: direction === DirectionTypes.RIGHT ? 'Right' : 'Left',
     position: position.toFixed(1),
     power: `${(powerLevel * 100).toFixed(1)}%`,
-    speed: `${((1000 / CLOCK_SPEED) * speed).toFixed(1)} px/s`,
+    speed: ((1000 / CLOCK_SPEED) * speed).toFixed(1),
     // eslint-disable-next-line no-mixed-operators
-    maxSpeed: `${((1000 / CLOCK_SPEED) * maxSpeed).toFixed(1)} px/s`,
+    maxSpeed: ((1000 / CLOCK_SPEED) * maxSpeed).toFixed(1),
   };
 
-  const directionEle = document.getElementById(ids.DSPLY_DIRECTION);
-  directionEle!.classList.toggle(CSSClasses.LEFT_ARROW, direction === DirectionTypes.LEFT);
-  directionEle!.classList.toggle(CSSClasses.RIGHT_ARROW, direction === DirectionTypes.RIGHT);
-
-  (document.getElementById(ids.DSPLY_POSITION) as HTMLInputElement).value = currentState.position;
-  (document.getElementById(ids.DSPLY_POWER) as HTMLInputElement).value = currentState.power;
-  (document.getElementById(ids.DSPLY_SPEED) as HTMLInputElement).value = currentState.speed;
-  (document.getElementById(ids.DSPLY_MAX_SPEED) as HTMLInputElement).value = currentState.maxSpeed;
+  document.getElementById(ElementIds.DSPLY_DIRECTION)!.classList.toggle(CSSClasses.ICON_ROTATE, direction === DirectionTypes.LEFT);
+  (document.getElementById(ElementIds.DSPLY_POSITION) as HTMLInputElement).value = currentState.position;
+  (document.getElementById(ElementIds.DSPLY_POWER) as HTMLInputElement).value = currentState.power;
+  (document.getElementById(ElementIds.DSPLY_SPEED) as HTMLInputElement).value = currentState.speed;
+  (document.getElementById(ElementIds.DSPLY_MAX_SPEED) as HTMLInputElement).value = currentState.maxSpeed;
 
   if (booleanRead(DASHBORD_CHBX)) {
     updateStdOut(currentState);
@@ -43,7 +40,7 @@ export const refreshDashboard = (
 };
 
 export const updateClock = (ticks: int) => {
-  (document.getElementById(ids.DSPLY_CLOCK) as HTMLInputElement).value = ticks as unknown as string;
+  (document.getElementById(ElementIds.DSPLY_CLOCK) as HTMLInputElement).value = ticks as unknown as string;
 };
 
 export const setStatusLED = ({ isPowered, isSlowHalt, isLayover, isPaused }: {
@@ -56,7 +53,7 @@ export const setStatusLED = ({ isPowered, isSlowHalt, isLayover, isPaused }: {
   const statusClass = (!isPowered || isSlowHalt)
     ? CSSClasses.STATUS_STOPPED
     : (isLayover || isPaused ? CSSClasses.STATUS_PAUSED : CSSClasses.STATUS_MOVING);
-  const ledEle = document.getElementById(ids.STATUS);
+  const ledEle = document.getElementById(ElementIds.STATUS);
   ledEle!.classList.remove(CSSClasses.STATUS_PAUSED, CSSClasses.STATUS_MOVING, CSSClasses.STATUS_STOPPED);
   ledEle!.classList.add(statusClass);
 };

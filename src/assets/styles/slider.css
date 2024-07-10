@@ -4,10 +4,11 @@
 .slider {
   -webkit-appearance: none;
   appearance: none;
+  border: solid 1px var(--color-neutral-400);
   border-radius: var(--border-radius);
   width: 100px;
   height: 10px;
-  background: var(--color-neutral-200);
+  background: var(--color-neutral-300);
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
@@ -24,6 +25,7 @@
   width: 20px;
   height: 20px;
   background: var(--color-blue-link);
+  border: solid 1px var(--color-neutral-400);
   cursor: pointer;
   border-radius: 50%;
 }
@@ -32,6 +34,7 @@
   width: 20px;
   height: 20px;
   background: var(--color-blue-link);
+  border: solid 1px var(--color-neutral-400);
   cursor: pointer;
   border-radius: 50%;
 }

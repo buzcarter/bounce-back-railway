@@ -11,8 +11,8 @@
   Gap: Var(--Default-Spacing);
 }
 
-.dashboard__guage {
-  width: 75px;
+.dashboard__gauge {
+  width: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,13 +21,24 @@
   font-size: 12px;
 }
 
-.dashboard__display {
-  background-color: var(--color-neutral-100);
-  border-radius: var(--border-radius);
-  border: solid 1px var(--color-neutral-200);
+.dashboard__label {
   color: var(--color-neutral-600);
+}
+
+.dashboard__units {
+  color: var(--color-neutral-400);
+  display: block;
+  text-align: center;
+}
+
+.dashboard__display {
+  background-color: var(--color-neutral-200);
+  border-radius: var(--border-radius);
+  border: solid 1px var(--color-neutral-300);
+  color: var(--color-neutral-600);
+  font-family: var(--font-family-monospace);
   text-align: right;
   margin-top: var(--default-half-spacing);
   padding: var(--default-half-spacing) 5px;
-  width: 75%;
+  width: 80%;
 }

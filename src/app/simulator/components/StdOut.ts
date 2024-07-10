@@ -1,6 +1,6 @@
 import { JsonData } from '../../interfaces';
 import { getTicks } from '../../microcontroller';
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 
 export const updateStdOut = (message: JsonData) => {
   const p = document.createElement('p');
@@ -27,5 +27,5 @@ export const updateStdOut = (message: JsonData) => {
       p.appendChild(spaceEle);
     });
 
-  document.getElementById(ids.STD_OUT)!.prepend(p);
+  document.getElementById(ElementIds.STD_OUT)!.prepend(p);
 };

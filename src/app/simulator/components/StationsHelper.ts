@@ -1,55 +1,19 @@
 // externals
 import { stations } from '../../configs/Stations';
-import { StationTransistions } from '../../libs/mgrs/StationManager';
-import { JsonData, int, pixels } from '../../interfaces';
+import { JsonData, pixels, uint8_t } from '../../interfaces';
 // locals
-import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
+import { CSSClasses, ElementIds, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
-import { getPosition } from './Trolley';
-import { STATION_CHBX, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
-import { analogWrite, booleanRead } from '../../libs/mgrs/ControlManager';
-
-let currentStationId: int | null = null;
+import { SensorTypes } from '../../constants';
 
 const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);
 export const getSignals = getByType.bind(null, SensorTypes.SIGNAL);
 export const getStations = getByType.bind(null, SensorTypes.STATION);
-export const getCurrentStation = () => getStations().find((station: { id: int}) => station.id === currentStationId);
 
-const getStationByPostion = (pos: pixels) => getStations().find((station: { position: int}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
+export const getStationByPostion = (pos: pixels) => getStations().find((station: { position: pixels}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
-const setActive = (stationId: int, isActive: boolean) => {
+export const setActive = (stationId: uint8_t, isActive: boolean) => {
   document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
-};
-
-export const checkStations = (): StationTransistions => {
-  const position = getPosition();
-  let transition = StationTransistions.NO_CHANGE;
-  const station = getStationByPostion(position);
-  if (station && station.id !== currentStationId) {
-    transition = StationTransistions.ARRIVAL;
-    currentStationId = station.id;
-    setActive(station.id, true);
-    analogWrite(station.id, SENSOR_VOLTS_OBJECT_DETECTED);
-    if (booleanRead(STATION_CHBX)) {
-      updateStdOut({
-        Arrived: `${station.name} (${station.id})`,
-        layover: station.delay || 'none',
-      });
-    }
-  } else if (!station && currentStationId !== null) {
-    transition = StationTransistions.DEPARTURE;
-    setActive(currentStationId, false);
-    analogWrite(currentStationId, SENSOR_VOLTS_ALL_CLEAR);
-    if (booleanRead(STATION_CHBX)) {
-      updateStdOut({
-        Departed: currentStationId,
-      });
-    }
-    currentStationId = null;
-  }
-
-  return transition;
 };
 
 const applyStyles = (ele: HTMLElement, styles: JsonData) => {
@@ -62,8 +26,8 @@ const applyStyles = (ele: HTMLElement, styles: JsonData) => {
 };
 
 export const addStationsToLayout = () => {
-  const layoutEle = document.getElementById(ids.LAYOUT);
-  const railEle = document.getElementById(ids.RAIL);
+  const layoutEle = document.getElementById(ElementIds.LAYOUT);
+  const railEle = document.getElementById(ElementIds.RAIL);
   if (!layoutEle || !railEle) {
     throw new Error('Layout elements not found');
   }
@@ -95,5 +59,3 @@ export const addStationsToLayout = () => {
       });
     });
 };
-
-export const getCurrentStationId = () => currentStationId;
