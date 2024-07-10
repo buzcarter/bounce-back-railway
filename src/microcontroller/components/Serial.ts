@@ -1,4 +1,4 @@
-import { JsonData, int } from '../../interfaces';
+import { JsonData, int } from '../../app/interfaces';
 import { updateStdOut } from '../../simulator/components/StdOut';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

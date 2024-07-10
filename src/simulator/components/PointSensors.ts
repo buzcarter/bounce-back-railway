@@ -1,8 +1,8 @@
 // External
 import { getStations } from '../../configs/StationUtils';
-import { SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED } from '../../constants';
-import { pixels } from '../../interfaces';
-import { analogWrite } from '../../libs/mgrs/ControlManager';
+import { SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED } from '../../app/constants';
+import { pixels } from '../../app/interfaces';
+import { analogWrite } from '../../app/libs/mgrs/ControlManager';
 // locals
 import { STATION_SAFETY_LENGTH } from '../constants';
 import { setActive } from './StationsHelper';

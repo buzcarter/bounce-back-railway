@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    'trolley-controller': './src/microcontroller.ts',
+    'trolley-controller': './src/microcontroller/microcontroller.ts',
   },
   output: {
     clean: true,
@@ -49,7 +49,7 @@ module.exports = {
   plugins: [
     // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/views/index.html',
+      template: './src/simulator/assets/views/index.html',
     }),
   ],
   devServer: {

@@ -1,7 +1,7 @@
 // externals
-import { getState } from '../../main';
-import { booleanRead } from '../../libs/mgrs/ControlManager';
-import { PAUSE_BTN, POWER_BTN } from '../../constants';
+import { getState } from '../../app/main';
+import { booleanRead } from '../../app/libs/mgrs/ControlManager';
+import { PAUSE_BTN, POWER_BTN } from '../../app/constants';
 // locals
 import { tripSensors as tripRangeSensors } from './RangeSensors';
 import { tripSensors as tripPointSensors } from './PointSensors';

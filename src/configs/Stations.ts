@@ -1,6 +1,6 @@
 import {
   DirectionTypes, SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING, SensorTypes,
-} from '../constants';
+} from '../app/constants';
 import { CLOCK_SPEED } from '../microcontroller';
 import { MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../simulator/constants';
 

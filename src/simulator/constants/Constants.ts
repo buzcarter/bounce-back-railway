@@ -1,5 +1,5 @@
 /* eslint-disable key-spacing, no-multi-spaces */
-import { pixels } from '../../interfaces';
+import { pixels } from '../../app/interfaces';
 
 export const ICON_SIZE: pixels                =   32;
 export const STATION_SAFETY_LENGTH: pixels    =    8;

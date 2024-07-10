@@ -15,9 +15,8 @@
     "target": "es6"
   },
   "include": [
-    "./src/app/**/*.ts",
-    "./src/app/**/*.js",
-    "./src/microcontroller.ts"
+    "./src/**/*.ts",
+    "./src/**/*.js"
   ],
   "exclude": [
     "**/*.test.js",

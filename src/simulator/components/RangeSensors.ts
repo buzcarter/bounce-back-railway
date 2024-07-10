@@ -1,8 +1,8 @@
 // externals
 import { getSignals } from '../../configs/StationUtils';
-import { SIGNAL_CHBX } from '../../constants';
-import { int, pixels } from '../../interfaces';
-import { booleanRead } from '../../libs/mgrs/ControlManager';
+import { SIGNAL_CHBX } from '../../app/constants';
+import { int, pixels } from '../../app/interfaces';
+import { booleanRead } from '../../app/libs/mgrs/ControlManager';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';

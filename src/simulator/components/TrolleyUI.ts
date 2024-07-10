@@ -1,6 +1,6 @@
 // externals
-import { pixels, velocity } from '../../interfaces';
-import { DirectionTypes } from '../../constants';
+import { pixels, velocity } from '../../app/interfaces';
+import { DirectionTypes } from '../../app/constants';
 // locals
 import { updateStdOut } from './StdOut';
 import { ElementIds, INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } from '../constants';

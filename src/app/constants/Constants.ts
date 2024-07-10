@@ -1,8 +1,8 @@
 /* eslint-disable key-spacing, no-multi-spaces */
 import { milliseconds, uint10_t, uint8_t, velocity } from '../interfaces';
-import { CLOCK_SPEED } from '../microcontroller';
+import { CLOCK_SPEED } from '../../microcontroller';
 // TODO: don't talk to simulator
-import { TRAVEL_DISTANCE } from '../simulator/constants';
+import { TRAVEL_DISTANCE } from '../../simulator/constants';
 
 /** minimum time to completely travers the "Travel Distance" */
 export const MIN_TIME_TO_COMPLETE: milliseconds      = 6000;

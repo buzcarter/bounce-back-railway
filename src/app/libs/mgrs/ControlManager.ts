@@ -7,7 +7,7 @@ import {
   uint10_MAX,
   CONTROL_PANEL_CHBX,
 } from '../../constants';
-import { Serial } from '../../microcontroller';
+import { Serial } from '../../../microcontroller';
 
 interface CurrentState {
   value: unknown,
