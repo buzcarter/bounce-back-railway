@@ -8,12 +8,10 @@ export enum CSSClasses {
   ICON_PREFIX          = 'icon--',
 
   ICON_BTN_ACTIVE      = 'icon-btn--active',
+  ICON_ROTATE          = 'icon--rotate',
 
   STD_OUT_KEY          = 'stdout__key',
   STD_OUT_VALUE        = 'stdout__value',
-
-  LEFT_ARROW           = 'icon--left-arrow',
-  RIGHT_ARROW          = 'icon--right-arrow',
 
   SENSOR               = 'proximity-sensor',
   SENSOR_ACTIVE        = 'proximity-sensor--active',

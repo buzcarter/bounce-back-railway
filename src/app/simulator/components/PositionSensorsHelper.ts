@@ -3,7 +3,7 @@ import { SIGNAL_CHBX } from '../../constants';
 import { int, pixels } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 // locals
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 import { getSignals } from './StationsHelper';
 import { updateStdOut } from './StdOut';
 
@@ -12,7 +12,7 @@ let currentSensorId = -1;
 const getSensorId = (id: int) => `sensor-${id}`;
 
 export const addSensorsToRail = () => {
-  const railEle = document.getElementById(ids.RAIL);
+  const railEle = document.getElementById(ElementIds.RAIL);
   if (!railEle) {
     return;
   }

@@ -8,7 +8,7 @@ import {
 } from '../../constants';
 import { uint8_t } from '../../interfaces';
 import { setInitialValue, booleanToggle, analogWrite } from '../../libs/mgrs/ControlManager';
-import { CSSClasses, ids } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 
 enum ControlTypes {
   BOOLEAN = 'boolean',
@@ -17,20 +17,20 @@ enum ControlTypes {
 }
 
 const pinSelectorHash = {
-  [HALT_BTN]: ids.HALT_BTN,
-  [PAUSE_BTN]: ids.PAUSE_BTN,
-  [POWER_BTN]: ids.POWER_BTN,
-  [REVERSE_BTN]: ids.REVERSE_BTN,
+  [HALT_BTN]: ElementIds.HALT_BTN,
+  [PAUSE_BTN]: ElementIds.PAUSE_BTN,
+  [POWER_BTN]: ElementIds.POWER_BTN,
+  [REVERSE_BTN]: ElementIds.REVERSE_BTN,
 
-  [SPEED_CONTROL]: ids.SPEED_CONTROL,
+  [SPEED_CONTROL]: ElementIds.SPEED_CONTROL,
 
-  [CONTROL_PANEL_CHBX]: ids.LOG_CONTROL_PANEL,
-  [DASHBORD_CHBX]: ids.LOG_DASHBORD,
-  [SIGNAL_CHBX]: ids.LOG_SIGNAL,
-  [STATION_CHBX]: ids.LOG_STATION,
+  [CONTROL_PANEL_CHBX]: ElementIds.LOG_CONTROL_PANEL,
+  [DASHBORD_CHBX]: ElementIds.LOG_DASHBORD,
+  [SIGNAL_CHBX]: ElementIds.LOG_SIGNAL,
+  [STATION_CHBX]: ElementIds.LOG_STATION,
 };
 
-function onClick(event: Event) {
+const onClick = (event: Event) => {
   const target = event.target as HTMLElement;
   const { type, pinNbr } = target.dataset;
   const pinInt = parseInt(pinNbr || '', 10);
@@ -45,14 +45,14 @@ function onClick(event: Event) {
       booleanToggle(pinInt);
       break;
   }
-}
+};
 
-function onInputChange(event: Event) {
+const onInputChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const { pinNbr } = target.dataset;
   const pinInt = parseInt(pinNbr || '', 10);
   analogWrite(pinInt, parseFloat(target.value));
-}
+};
 
 const pinToElement = (pin: uint8_t): HTMLElement | null => {
   const selector = pinSelectorHash[pin];

@@ -36,6 +36,9 @@
   --color-status-disabled:            #b3b3b3;
   --color-status-available-seat:      #4aa7f6;
   --color-status-accessibility-seat:  #0059ff;
+  /* font stack */
+  --font-family-arial:                Arial, sans-serif;
+  --font-family-monospace:            Consolas, 'Courier New', monospace;
   /* .                             */
   /* --------- Semantic ---------- */
   /* .                             */
@@ -49,9 +52,14 @@
   --rail-length:           calc(800px + var(--icon-size));
   --rail-color:            var(--color-neutral-500);
   /* . */
-  --layout-height:         calc(4 * var(--icon-size));
-  --layout-width:          calc(var(--rail-length) + 2 * (var(--icon-size) + var(--default-spacing) + var(--default-half-spacing)));
-  --laybout-background-color: var(--color-neutral-200);
+  --simulator-height:      calc(4 * var(--icon-size));
+  --simulator-width:       calc(var(--rail-length) + 2 * (var(--icon-size) + var(--default-spacing) + var(--default-half-spacing)));
+  --simulator-bg-color:    var(--color-neutral-100);
+  /* . */
+  --section-bg-color:      var(--color-neutral-200);
+  /* . */
+  --logging-bg-color:      var(--color-neutral-600);
+  --logging-color:         var(--color-neutral-100);
   /* . */
   --border-radius:           4px;
   --border-color:          var(--color-neutral-400);

@@ -3,7 +3,7 @@ import { stations } from '../../configs/Stations';
 import { StationTransistions } from '../../libs/mgrs/StationManager';
 import { JsonData, int, pixels } from '../../interfaces';
 // locals
-import { CSSClasses, ids, STATION_SAFETY_LENGTH } from '../constants';
+import { CSSClasses, ElementIds, STATION_SAFETY_LENGTH } from '../constants';
 import { updateStdOut } from './StdOut';
 import { getPosition } from './TrolleyUI';
 import { STATION_CHBX, SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED, SensorTypes } from '../../constants';
@@ -62,8 +62,8 @@ const applyStyles = (ele: HTMLElement, styles: JsonData) => {
 };
 
 export const addStationsToLayout = () => {
-  const layoutEle = document.getElementById(ids.LAYOUT);
-  const railEle = document.getElementById(ids.RAIL);
+  const layoutEle = document.getElementById(ElementIds.LAYOUT);
+  const railEle = document.getElementById(ElementIds.RAIL);
   if (!layoutEle || !railEle) {
     throw new Error('Layout elements not found');
   }

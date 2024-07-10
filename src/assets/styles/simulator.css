@@ -1,36 +1,28 @@
 /* .                             */
 /* ---- Layout Simulation ------ */
 /* .                             */
-.layout {
-  background-color: var(--laybout-background-color);
-  border-radius: var(--border-radius);
-  height: var(--layout-height);
-  position: relative;
-  width: var(--layout-width);
-}
-
-.layout__rail {
+.simulator__rail {
   background-color: var(--rail-color);
   border-radius: calc(var(--rail-height) / 2);
   height: var(--rail-height);
-  left: calc((var(--layout-width) - var(--rail-length)) / 2);
+  left: calc((var(--simulator-width) - var(--rail-length)) / 2);
   position: absolute;
   top: var(--rail-pos-top);
   width: var(--rail-length);
 }
 
-.layout__vehicle {
+.simulator__vehicle {
   --indicator-size: var(--rail-height);
   --indicator-halved: calc(var(--indicator-size) / 2);
 }
 
-.layout__vehicle {
+.simulator__vehicle {
   /* left: calc(0.5 * var(--icon-size)); */
   transform: translateX(calc(-0.5 * var(--icon-size)));
 }
 
 /* triangle indicator (centered 0, 0) */
-.layout__vehicle::before {
+.simulator__vehicle::before {
   border-top: var(--indicator-size) solid var(--color-orange-300);
   border-left: var(--indicator-halved) solid transparent;
   border-right: var(--indicator-halved) solid transparent;
@@ -42,7 +34,7 @@
 }
 
 /* two lines marking front/rear of vehicle */
-.layout__vehicle::after {
+.simulator__vehicle::after {
   border-color: var(--color-neutral-300);
   border-style: solid;
   border-width: 0 1px;
