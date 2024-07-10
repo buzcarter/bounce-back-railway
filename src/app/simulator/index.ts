@@ -16,7 +16,6 @@ import { setupBtn } from './components/UXControls';
 
 export { setupBtn } from './components/UXControls';
 export { updateClock } from './components/Dashboard';
-export { checkStations, getCurrentStation, getCurrentStationId } from './components/StationsHelper';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
