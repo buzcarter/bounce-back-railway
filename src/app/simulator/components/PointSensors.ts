@@ -1,11 +1,16 @@
 // External
+import { getStations } from '../../configs/StationUtils';
 import { SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED } from '../../constants';
 import { pixels } from '../../interfaces';
 import { analogWrite } from '../../libs/mgrs/ControlManager';
 // locals
-import { getStationByPostion, setActive } from './StationsHelper';
+import { STATION_SAFETY_LENGTH } from '../constants';
+import { setActive } from './StationsHelper';
 
 let currentSensorId = -1;
+
+export const getStationByPostion = (pos: pixels) => getStations()
+  .find((station: { position: pixels}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
 export const tripSensors = (position: pixels): void => {
   const station = getStationByPostion(position);

@@ -1,16 +1,9 @@
 // externals
-import { stations } from '../../configs/Stations';
-import { JsonData, pixels, uint8_t } from '../../interfaces';
+import { getStations } from '../../configs/StationUtils';
+import { JsonData, uint8_t } from '../../interfaces';
 // locals
-import { CSSClasses, ElementIds, STATION_SAFETY_LENGTH } from '../constants';
+import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
-import { SensorTypes } from '../../constants';
-
-const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);
-export const getSignals = getByType.bind(null, SensorTypes.SIGNAL);
-export const getStations = getByType.bind(null, SensorTypes.STATION);
-
-export const getStationByPostion = (pos: pixels) => getStations().find((station: { position: pixels}) => (pos > (station.position - STATION_SAFETY_LENGTH) && pos < (station.position + STATION_SAFETY_LENGTH)));
 
 export const setActive = (stationId: uint8_t, isActive: boolean) => {
   document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);

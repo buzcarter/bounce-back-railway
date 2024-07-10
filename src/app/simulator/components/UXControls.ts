@@ -8,6 +8,7 @@ import {
 } from '../../constants';
 import { uint8_t } from '../../interfaces';
 import { setInitialValue, booleanToggle, analogWrite } from '../../libs/mgrs/ControlManager';
+// locals
 import { CSSClasses, ElementIds } from '../constants';
 
 enum ControlTypes {

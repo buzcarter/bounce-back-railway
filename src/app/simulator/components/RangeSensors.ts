@@ -1,10 +1,10 @@
 // externals
+import { getSignals } from '../../configs/StationUtils';
 import { SIGNAL_CHBX } from '../../constants';
 import { int, pixels } from '../../interfaces';
 import { booleanRead } from '../../libs/mgrs/ControlManager';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
-import { getSignals } from './StationsHelper';
 import { updateStdOut } from './StdOut';
 
 let currentSensorId = -1;

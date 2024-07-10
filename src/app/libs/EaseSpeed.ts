@@ -1,6 +1,7 @@
 import { HALT_DURATION } from '../constants';
 import { int, velocity } from '../interfaces';
 import { setSpeed } from '../main';
+// external
 import { CLOCK_SPEED } from '../microcontroller';
 
 let currentStep: int = 0;
