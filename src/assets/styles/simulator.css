@@ -11,18 +11,18 @@
   width: var(--rail-length);
 }
 
-.simulator__vehicle {
+.simulator__trolley {
   --indicator-size: var(--rail-height);
   --indicator-halved: calc(var(--indicator-size) / 2);
 }
 
-.simulator__vehicle {
+.simulator__trolley {
   /* left: calc(0.5 * var(--icon-size)); */
   transform: translateX(calc(-0.5 * var(--icon-size)));
 }
 
 /* triangle indicator (centered 0, 0) */
-.simulator__vehicle::before {
+.simulator__trolley::before {
   border-top: var(--indicator-size) solid var(--color-orange-300);
   border-left: var(--indicator-halved) solid transparent;
   border-right: var(--indicator-halved) solid transparent;
@@ -33,8 +33,8 @@
   position: absolute;
 }
 
-/* two lines marking front/rear of vehicle */
-.simulator__vehicle::after {
+/* two lines marking front/rear of trolley */
+.simulator__trolley::after {
   border-color: var(--color-neutral-300);
   border-style: solid;
   border-width: 0 1px;

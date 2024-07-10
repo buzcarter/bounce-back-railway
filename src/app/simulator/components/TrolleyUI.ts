@@ -7,7 +7,7 @@ import { ElementIds, INITIAL_TROLLEY_POSITION, MAX_RIGHT_EDGE, MIN_LEFT_EDGE } f
 
 let position: pixels = INITIAL_TROLLEY_POSITION;
 
-const trolleyEle = document.getElementById(ElementIds.VEHICLE) || document.createElement('div');
+const trolleyEle = document.getElementById(ElementIds.TROLLEY) || document.createElement('div');
 
 export const updatePosition = (speed: velocity, direction: DirectionTypes): pixels => {
   position += speed * direction;

@@ -21,7 +21,7 @@ export const ElementIds = Object.freeze({
 
   LAYOUT:                'layout',
   RAIL:                  'layout-rail',
-  VEHICLE:               'layout-vehicle',
+  TROLLEY:               'layout-trolley',
 
   STATUS:                'display-status',
   STD_OUT:               'std-out',
