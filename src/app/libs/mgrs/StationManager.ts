@@ -1,6 +1,7 @@
-import { stations } from '../../configs/Stations';
-import { SENSOR_VOLTS_THRESHOLD, SensorTypes } from '../../constants';
+import { getStations } from '../../configs/StationUtils';
+import { SENSOR_VOLTS_THRESHOLD } from '../../constants';
 import { uint8_t } from '../../interfaces';
+// locals
 import { analogRead } from './ControlManager';
 
 export enum StationTransistions {
@@ -10,8 +11,6 @@ export enum StationTransistions {
 }
 
 let currentStation: uint8_t = -1;
-
-const getByType = (filterType: SensorTypes) => stations.filter(({ type }: { type: SensorTypes}) => type === filterType);
 
 /**
  * Check if the train has *arrived* at a station by reading the IR proximity
@@ -32,7 +31,7 @@ const checkStation = (pin: uint8_t): boolean => {
 };
 
 export const checkAllSensors = () => {
-  getByType(SensorTypes.STATION).forEach(({ id }) => {
+  getStations().forEach(({ id }) => {
     checkStation(id);
   });
 };

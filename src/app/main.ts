@@ -5,7 +5,7 @@ import { int, uint8_t, velocity } from './interfaces';
 import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 import { refreshDashboard } from './libs/mgrs/LCDManager';
-import { getCurrentStationSensor, StationTransistions } from './libs/mgrs/StationManager';
+import { StationTransistions } from './libs/mgrs/StationManager';
 import {
   DASHBOARD_REFRESH_RATE, DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
@@ -81,10 +81,10 @@ export const loop = () => {
   pollButtons();
   pollPointSensors();
   // checkAllSensors();
-  const sensedStation = getCurrentStationSensor();
-  if (sensedStation > -1) {
-    // Serial.println({ 'current triggered station': sensedStation });
-  }
+  // const sensedStation = getCurrentStationSensor();
+  // if (sensedStation > -1) {
+  //   // Serial.println({ 'current triggered station': sensedStation });
+  // }
 
   const ticks = getTicks();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
