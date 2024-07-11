@@ -49,6 +49,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/simulator/assets/views/index.html',
+      favicon: './src/simulator/assets/images/favicon.png',
     }),
   ],
   devServer: {
