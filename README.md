@@ -1,4 +1,8 @@
-# 🎛️ Microcontroller Simulator Playground
+<div style="height: 128px; margin: 0 auto; text-align: center;"><img src="./docs/images/logo.svg" style="height: 128px"/></div>
+
+# 🎛️ Bounce-Back Railway
+
+> _A Model Train Microcontroller Playground_
 
 [Live Demo 🚀](https://buzcarter.github.io/bounce-back-railway/)
 
