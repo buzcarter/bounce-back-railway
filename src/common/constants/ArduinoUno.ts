@@ -1,5 +1,5 @@
 /* eslint-disable no-multi-spaces */
-import { int, uint10_t, volts } from '../../app/interfaces';
+import { int, uint10_t, volts } from '../interfaces/CoreTypes';
 
 // #region Analog Pins
 /*

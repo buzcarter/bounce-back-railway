@@ -47,7 +47,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/simulator/assets/views/index.html',
     }),

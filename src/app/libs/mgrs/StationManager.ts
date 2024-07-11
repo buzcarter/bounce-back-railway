@@ -1,6 +1,4 @@
-import { getStations } from '../../../configs/StationUtils';
-import { SENSOR_VOLTS_THRESHOLD } from '../../constants';
-import { uint8_t } from '../../interfaces';
+import { getStations, SENSOR_VOLTS_THRESHOLD, uint8_t } from '../../../common';
 // locals
 import { analogRead } from './ControlManager';
 

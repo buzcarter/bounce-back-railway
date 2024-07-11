@@ -1,20 +1,20 @@
 // externals
-import { INPUT, Serial, getTicks, pinMode } from '../microcontroller';
+import { Serial, getTicks, pinMode } from '../microcontroller';
+import {
+  INPUT,
+  int, uint8_t, velocity, getStations, MAX_SPEED, DASHBOARD_REFRESH_RATE,
+  DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  uint10_MAX,
+  CONTROL_PANEL_CHBX,
+} from '../common';
 // locals
-import { int, uint8_t, velocity } from './interfaces';
-import { slowStop, slowStart, continueSpeedChange } from './libs/EaseSpeed';
+import { slowStop, slowStart, continueSpeedChange } from './libs/mgrs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 // TODO: don't talk to Simulator from the App
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
-import {
-  DASHBOARD_REFRESH_RATE, DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, MAX_SPEED, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
-  uint10_MAX,
-  CONTROL_PANEL_CHBX,
-} from './constants';
 import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
-import { getStations } from '../configs/StationUtils';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** (px/tick) current speed */

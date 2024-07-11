@@ -1,4 +1,4 @@
-import { clockTick } from '../../app/interfaces';
+import { clockTick } from '../../common';
 
 let ticks: clockTick = 0;
 

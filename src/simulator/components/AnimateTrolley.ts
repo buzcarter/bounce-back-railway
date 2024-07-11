@@ -1,12 +1,10 @@
 // externals
-import { getState } from '../../app/main';
-import { booleanRead } from '../../app/libs/mgrs/ControlManager';
-import { PAUSE_BTN, POWER_BTN } from '../../app/constants';
+import { POWER_BTN, PAUSE_BTN, TROLLEY_LENGTH } from '../../common';
+import { getState, booleanRead } from '../../app';
 // locals
 import { tripSensors as tripRangeSensors } from './RangeSensors';
 import { tripSensors as tripPointSensors } from './PointSensors';
 import { updatePosition } from './TrolleyUI';
-import { TROLLEY_LENGTH } from '../constants';
 
 const TROLLEY_EDGES = TROLLEY_LENGTH / 2;
 
