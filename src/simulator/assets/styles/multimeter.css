@@ -1,0 +1,23 @@
+.multimeter {
+  display: flex;
+  list-style-type: none;
+  /* padding: 0;
+  margin: 0;  */
+}
+
+.multimeter__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  width: 4em;
+}
+
+.multimeter__pin,
+.multimeter__value {
+  text-align: center;
+}
+
+.multimeter__item:last-child {
+  margin-right: 0;
+}

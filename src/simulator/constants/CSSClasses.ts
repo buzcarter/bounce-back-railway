@@ -18,4 +18,8 @@ export enum CSSClasses {
 
   PROXIMITY_SENSOR     = 'proximity-boundary-sensor',
   PROXIMITY_SENSOR_ACTIVE = 'proximity-boundary-sensor--active',
+
+  MULTIMETER__ITEM           = 'multimeter__item',
+  MULTIMETER__PIN            = 'multimeter__pin',
+  MULTIMETER__VALUE          = 'multimeter__value',
 }

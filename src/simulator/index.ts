@@ -1,5 +1,5 @@
 // include styles for WebPack
-import './styles';
+import './assets/styles';
 
 // public interface
 export { updateClock } from './components/Dashboard';

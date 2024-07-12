@@ -131,7 +131,7 @@ const pinToElement = (pin: uint8_t): HTMLElement | null => {
   return document.getElementById(selector);
 };
 
-export const initialize = () => {
+export const attachEventHandlers = () => {
   Object.keys(inputControls)
     .forEach((pin) => {
       const pinInt = parseInt(pin || '', 10);
@@ -159,3 +159,5 @@ export const initialize = () => {
       }
     });
 };
+
+export const getPins = (): uint8_t[] => Object.keys(inputControls).map((pin) => parseInt(pin, 10));

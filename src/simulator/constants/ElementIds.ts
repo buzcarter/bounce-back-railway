@@ -25,4 +25,6 @@ export const ElementIds = Object.freeze({
 
   STATUS:                'display-status',
   STD_OUT:               'std-out',
+
+  MULTMETR:              'multimeter-list',
 });

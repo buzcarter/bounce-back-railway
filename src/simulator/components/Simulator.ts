@@ -12,7 +12,8 @@ import { addSensorsToRail } from './RangeSensors';
 import { addStationsToLayout } from './StationsHelper';
 import { getPosition, resetPosition } from './TrolleyUI';
 import { booleanRead } from './Utils';
-import { initialize } from './UXControls';
+import { attachEventHandlers, getPins } from './UXControls';
+import { render as addMultimeter } from './Multimeter';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -20,7 +21,8 @@ export const prepareSimulator = () => {
 
   resetPosition();
 
-  initialize();
+  attachEventHandlers();
+  addMultimeter(getPins());
 };
 
 export const startSimulator = () => {
