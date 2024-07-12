@@ -1,14 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { setInitialValue, booleanToggle, analogWrite } from '../../app';
 import {
-  uint8_t,
-  DASHBORD_CHBX,
-  SIGNAL_CHBX,
-  STATION_CHBX,
-  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  uint10_t, uint8_t,
+  DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX,
+  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN,
+  SPEED_CONTROL,
+  SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
+  SENSOR_VOLTS_ALL_CLEAR,
   CONTROL_PANEL_CHBX,
-
+  LOW,
+  uint10_MAX,
+  HIGH_LOW_THRESHOLD,
+  int,
+  HIGH,
 } from '../../common';
+import { analogRead, analogWrite } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 
@@ -17,6 +22,63 @@ enum ControlTypes {
   CHECKBOX = 'checkbox',
   ANALOG = 'analog',
 }
+
+interface InputControl {
+  initialValue: uint10_t,
+  name?: string,
+}
+
+interface InputControlCacheType {
+  [key: string]: InputControl,
+}
+
+const inputControls: InputControlCacheType = {
+  [HALT_BTN]: {
+    initialValue: LOW,
+  },
+  [POWER_BTN]: {
+    initialValue: LOW,
+  },
+  [REVERSE_BTN]: {
+    initialValue: LOW,
+  },
+  [PAUSE_BTN]: {
+    initialValue: LOW,
+  },
+  [SPEED_CONTROL]: {
+    initialValue: Math.floor(uint10_MAX / 2),
+  },
+  [CONTROL_PANEL_CHBX]: {
+    initialValue: LOW,
+  },
+  [DASHBORD_CHBX]: {
+    initialValue: LOW,
+  },
+  [STATION_CHBX]: {
+    initialValue: LOW,
+  },
+  [SIGNAL_CHBX]: {
+    initialValue: LOW,
+  },
+  [SENSOR_LT_LA]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+  [SENSOR_RT_CLAREMONT]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+  [SENSOR_MIDDLE_BURBANK]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+  [SENSOR_ATWATER_XING]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+  [SENSOR_SOUTH_GATE_XING]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+  [SENSOR_26TH_AVE_XING]: {
+    initialValue: SENSOR_VOLTS_ALL_CLEAR,
+  },
+};
 
 const pinSelectorHash = {
   [HALT_BTN]: ElementIds.HALT_BTN,
@@ -32,19 +94,23 @@ const pinSelectorHash = {
   [STATION_CHBX]: ElementIds.LOG_STATION,
 };
 
+const toggle = (pin: uint8_t): int => {
+  const isTrue = analogRead(pin) > HIGH_LOW_THRESHOLD;
+  const newVal = !isTrue ? HIGH : LOW;
+  analogWrite(pin, newVal);
+  return newVal;
+};
+
 const onClick = (event: Event) => {
   const target = event.target as HTMLElement;
   const { type, pinNbr } = target.dataset;
   const pinInt = parseInt(pinNbr || '', 10);
   switch (type) {
     case ControlTypes.BOOLEAN:
-      {
-        const isOn = booleanToggle(pinInt);
-        target.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, isOn);
-      }
+      target.classList.toggle(CSSClasses.ICON_BTN_ACTIVE, toggle(pinInt) > HIGH_LOW_THRESHOLD);
       break;
     case ControlTypes.CHECKBOX:
-      booleanToggle(pinInt);
+      toggle(pinInt);
       break;
   }
 };
@@ -65,25 +131,31 @@ const pinToElement = (pin: uint8_t): HTMLElement | null => {
   return document.getElementById(selector);
 };
 
-export const setupBtn = (pin: uint8_t, initialValue: unknown = false) => {
-  const ele = pinToElement(pin) as HTMLElement;
-  if (!ele) {
-    return null;
-  }
+export const initialize = () => {
+  Object.keys(inputControls)
+    .forEach((pin) => {
+      const pinInt = parseInt(pin || '', 10);
+      const ctl = inputControls[pin];
+      analogWrite(pinInt, ctl.initialValue);
 
-  ele.dataset.pinNbr = pin as unknown as string;
-  const { type } = ele.dataset;
-  switch (type) {
-    case ControlTypes.ANALOG:
-      (ele as HTMLInputElement).value = initialValue as string;
-      setInitialValue(pin, initialValue, ele.dataset.name as string);
-      ele.addEventListener('input', onInputChange);
-      break;
-    case ControlTypes.CHECKBOX:
-    case ControlTypes.BOOLEAN:
-      setInitialValue(pin, false, ele.dataset.name as string);
-      ele.addEventListener('click', onClick);
-      break;
-  }
-  return ele;
+      const ele = pinToElement(pinInt) as HTMLElement;
+      if (!ele) {
+        return;
+      }
+
+      const { name, type } = ele.dataset;
+      ctl.name = name || '';
+      ele.dataset.pinNbr = pin;
+
+      switch (type) {
+        case ControlTypes.ANALOG:
+          (ele as HTMLInputElement).value = ctl.initialValue.toString();
+          ele.addEventListener('input', onInputChange);
+          break;
+        case ControlTypes.CHECKBOX:
+        case ControlTypes.BOOLEAN:
+          ele.addEventListener('click', onClick);
+          break;
+      }
+    });
 };

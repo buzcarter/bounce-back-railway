@@ -55,13 +55,12 @@ export const PWM_11: uint10_t = PIN_D11;
 
 // #endregion
 
-/** Below 0.8v is considered OFF */
-export const DIGITAL_LOW: volts   = 0.8;
-/** Above 2.0v is considred ON */
-export const DIGITAL_HIGH: volts  = 2.0;
+export const LOW: volts                  = 0.8;
+export const HIGH: volts                 = 2.0;
+export const HIGH_LOW_THRESHOLD: volts   =  Math.floor((LOW + HIGH) / 2);
 
-export const ON   = DIGITAL_LOW;
-export const OFF  = DIGITAL_HIGH;
+export const ON: volts                   = LOW;
+export const OFF: volts                  = HIGH;
 
 export const OUTPUT: int   = 1;
 export const INPUT: int    = 0;

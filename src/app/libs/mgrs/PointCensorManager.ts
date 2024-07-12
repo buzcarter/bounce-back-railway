@@ -1,14 +1,14 @@
 // local
 import {
   getStations,
-  SENSOR_VOLTS_THRESHOLD,
+  HIGH_LOW_THRESHOLD,
   STATION_CHBX,
   uint8_t,
 } from '../../../common';
 import { StationTransistions } from './StationManager';
-import { analogRead, booleanRead } from './ControlManager';
+import { booleanRead } from './ControlManager';
 // external
-import { Serial } from '../../../microcontroller';
+import { analogRead, Serial } from '../../../microcontroller';
 
 let currentStationId: uint8_t | null = null;
 
@@ -22,7 +22,7 @@ export const getCurrentStationId = () => currentStationId;
 
 export const getTransition = (): StationTransistions => {
   let transition = StationTransistions.NO_CHANGE;
-  const station = getStations().find(({ id }) => analogRead(id) > SENSOR_VOLTS_THRESHOLD);
+  const station = getStations().find(({ id }) => analogRead(id) > HIGH_LOW_THRESHOLD);
   if (station && station.id !== currentStationId) {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;

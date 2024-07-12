@@ -1,19 +1,18 @@
 // externals
 import {
-  DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, HALT_BTN, PAUSE_BTN, POWER_BTN, SPEED_CONTROL,
   uint10_MAX,
   MAX_SPEED,
-  CONTROL_PANEL_CHBX,
 } from '../../common';
-import { analogRead, booleanRead } from '../../app';
-import { getTicks } from '../../microcontroller';
+import { analogRead, getTicks } from '../../microcontroller';
 // locals
 import { startAnimation } from './AnimateTrolley';
 import { refreshDashboard, setStatusLED } from './Dashboard';
 import { addSensorsToRail } from './RangeSensors';
 import { addStationsToLayout } from './StationsHelper';
 import { getPosition, resetPosition } from './TrolleyUI';
-import { setupBtn } from './UXControls';
+import { booleanRead } from './Utils';
+import { initialize } from './UXControls';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -21,15 +20,7 @@ export const prepareSimulator = () => {
 
   resetPosition();
 
-  setupBtn(POWER_BTN);
-  setupBtn(HALT_BTN);
-  setupBtn(PAUSE_BTN);
-  setupBtn(REVERSE_BTN);
-  setupBtn(SPEED_CONTROL, uint10_MAX / 2);
-  setupBtn(CONTROL_PANEL_CHBX);
-  setupBtn(DASHBORD_CHBX);
-  setupBtn(SIGNAL_CHBX);
-  setupBtn(STATION_CHBX);
+  initialize();
 };
 
 export const startSimulator = () => {

@@ -10,7 +10,6 @@ export const uint10_MAX: uint10_t                    = 1023;
 export const uint8_MAX: uint8_t                      =  254;
 
 /** Cutoff for IR proximity filter, 0 - 1023 */
-export const SENSOR_VOLTS_THRESHOLD: uint10_t        =  500; // this is the real sensor value
 export const SENSOR_VOLTS_ALL_CLEAR: uint10_t        =   64; // example "OFF" value, (unobstructed) there's nothing reflecting light back to the sensor
 export const SENSOR_VOLTS_OBJECT_DETECTED: uint10_t  = uint10_MAX; // example "ON" value, something is close enough to reflect tangible light back to the sensor
 

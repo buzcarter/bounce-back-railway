@@ -5,7 +5,7 @@ import {
   STATION_SAFETY_LENGTH,
   pixels,
 } from '../../common';
-import { analogWrite } from '../../app';
+import { analogWrite } from '../../microcontroller';
 // locals
 import { setActive } from './StationsHelper';
 
