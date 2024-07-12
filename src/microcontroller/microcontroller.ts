@@ -1,9 +1,8 @@
-import { POWER_BTN } from '../common';
+import { POWER_BTN, CLOCK_SPEED } from '../common';
 import { booleanRead, loop, setup } from '../app';
 import { prepareSimulator, startSimulator, updateClock } from '../simulator';
 // locals
 import { getTicks, resetTicks, updateTicks } from './components/Clock';
-import { CLOCK_SPEED } from '../common';
 
 const onClockTick = () => {
   if (!booleanRead(POWER_BTN)) {
