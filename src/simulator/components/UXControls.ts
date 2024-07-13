@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { setInitialValue, booleanToggle, analogWrite } from '../../app';
+import { inputControls } from '../../app/libs/mgrs/ControlManager';
 import {
   uint8_t,
   DASHBORD_CHBX,
@@ -7,7 +8,7 @@ import {
   STATION_CHBX,
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
   CONTROL_PANEL_CHBX,
-
+  getName as getItemName,
 } from '../../common';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
@@ -87,3 +88,7 @@ export const setupBtn = (pin: uint8_t, initialValue: unknown = false) => {
   }
   return ele;
 };
+
+export const getPins = (): uint8_t[] => Object.keys(inputControls).map((pin) => parseInt(pin, 10));
+
+export const getName = (pin: uint8_t): string => inputControls[pin]?.name || getItemName(pin) || '';

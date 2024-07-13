@@ -1,9 +1,9 @@
 // externals
 import { getSignals, SIGNAL_CHBX, int, pixels } from '../../common';
-import { booleanRead } from '../../app';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
+import { booleanRead } from './Utils';
 
 let currentSensorId = -1;
 
@@ -27,7 +27,8 @@ export const addSensorsToRail = () => {
       railEle.appendChild(sensorEle);
       if (booleanRead(SIGNAL_CHBX)) {
         updateStdOut({
-          'Add Sensor': `${id}: ${name}`,
+          pin: id,
+          'add sensor': name,
           at: position,
         });
       }
@@ -46,7 +47,7 @@ export const tripSensors = (left: pixels, right: pixels) => {
     setActive(currentSensorId, false);
     if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
-        sensor: currentSensorId,
+        pin: currentSensorId,
         state: 'off',
       });
     }
@@ -56,7 +57,7 @@ export const tripSensors = (left: pixels, right: pixels) => {
     setActive(currentSensorId, true);
     if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
-        sensor: sensor.id,
+        pin: sensor.id,
         state: 'on',
         name: sensor.name,
       });

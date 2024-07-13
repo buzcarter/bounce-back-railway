@@ -6,9 +6,10 @@ import {
   uint8_t,
 } from '../../../common';
 import { StationTransistions } from './StationManager';
-import { analogRead, booleanRead } from './ControlManager';
+import { analogRead } from './ControlManager';
 // external
 import { Serial } from '../../../microcontroller';
+import { booleanRead } from '../../../simulator/components/Utils';
 
 let currentStationId: uint8_t | null = null;
 
@@ -28,7 +29,9 @@ export const getTransition = (): StationTransistions => {
     currentStationId = station.id;
     if (booleanRead(STATION_CHBX)) {
       Serial.println({
-        Arrived: `${station.name} (${station.id})`,
+        pin: station.id,
+        action: 'arrived',
+        name: station.name,
         layover: station.delay || 'none',
       });
     }
@@ -36,7 +39,8 @@ export const getTransition = (): StationTransistions => {
     transition = StationTransistions.DEPARTURE;
     if (booleanRead(STATION_CHBX)) {
       Serial.println({
-        Departed: currentStationId,
+        pin: currentStationId,
+        action: 'departed',
       });
     }
     currentStationId = null;

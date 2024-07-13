@@ -1,3 +1,4 @@
+import { booleanRead } from '../../../simulator/components/Utils';
 import {
   uint10_t,
   uint8_t,
@@ -158,9 +159,6 @@ export const analogWrite = (pin: uint8_t, value: uint10_t) => {
 };
 
 /**  */
-export const booleanRead = (pin: uint8_t): boolean => Boolean(currentStates[pin]?.value);
-
-/**  */
 export const booleanToggle = (pin: uint8_t): boolean => {
   const state = currentStates[pin];
   if (!state) {
@@ -172,3 +170,5 @@ export const booleanToggle = (pin: uint8_t): boolean => {
 export const booleanWrite = (pin: uint8_t, value: boolean) => {
   updateValue(pin, Boolean(value));
 };
+
+export { currentStates as inputControls };

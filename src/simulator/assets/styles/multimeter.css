@@ -1,0 +1,100 @@
+.multimeter {
+  display: flex;
+  list-style-type: none;
+}
+
+.multimeter__item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: var(--default-half-spacing);
+  max-width: 4em;
+}
+
+.multimeter__value {
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  margin-top: var(--default-spacing);
+  padding: .2em;
+}
+
+.multimeter__value.multimeter--flash {
+  animation: flashValueChange 0.5s ease-out;
+}
+
+.multimeter__pin {
+  background-color: var(--color-neutral-400);
+  border-radius: 50%;
+  color: var(--color-neutral-200);
+  font-weight: normal;
+  height: 24px;
+  padding-top: 5px;
+  text-align: center;
+  width: 24px;
+}
+
+.multimeter__pin.multimeter--flash {
+  animation: flashPinChange 1.5s ease-out;
+}
+
+.multimeter__name {
+  font-size: 80%;
+  height: 42px;
+  margin-top: var(--default-spacing);
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.multimeter__icon {
+  height: 24px;
+  margin-top: var(--default-spacing);
+  position: unset;
+}
+
+.multimeter__item:last-child {
+  margin-right: 0;
+}
+
+@keyframes flashValueChange {
+  0% {
+    background-color: inherit;
+    color: inherit
+  }
+
+  50% {
+    background-color: var(--color-status-success);
+    color: var(--color-neutral-100)
+  }
+
+  100% {
+    background-color: inherit;
+    color: inherit
+  }
+}
+
+@keyframes flashPinChange {
+  0% {
+    background-color: var(--color-neutral-400);
+  }
+
+  5% {
+    background-color: var(--color-neutral-300);
+  }
+
+  15% {
+    background-color: var(--color-neutral-700);
+  }
+
+  70% {
+    background-color: var(--color-neutral-700);
+  }
+
+  92% {
+    background-color: var(--color-neutral-300);
+  }
+
+  100% {
+    background-color: var(--color-neutral-400);
+  }
+}

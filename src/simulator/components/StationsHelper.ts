@@ -49,8 +49,9 @@ export const addStationsToLayout = () => {
 
       railEle.appendChild(sensorEle);
       updateStdOut({
-        'Add Station': `${id}: "${name}"`,
-        at: `${position}px (from left)`,
+        pin: id,
+        'add station': name,
+        at: `${position}px`,
       });
     });
 };

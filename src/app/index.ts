@@ -4,7 +4,6 @@
  */
 
 // Used by microcontroller
-export { booleanRead } from './libs/mgrs/ControlManager';
 export { loop, setup } from './main';
 
 // used by simulator

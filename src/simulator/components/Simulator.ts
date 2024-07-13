@@ -5,7 +5,7 @@ import {
   MAX_SPEED,
   CONTROL_PANEL_CHBX,
 } from '../../common';
-import { analogRead, booleanRead } from '../../app';
+import { analogRead } from '../../app';
 import { getTicks } from '../../microcontroller';
 // locals
 import { startAnimation } from './AnimateTrolley';
@@ -13,7 +13,9 @@ import { refreshDashboard, setStatusLED } from './Dashboard';
 import { addSensorsToRail } from './RangeSensors';
 import { addStationsToLayout } from './StationsHelper';
 import { getPosition, resetPosition } from './TrolleyUI';
-import { setupBtn } from './UXControls';
+import { booleanRead } from './Utils';
+import { setupBtn, getPins } from './UXControls';
+import { render as addMultimeter } from './Multimeter';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -30,6 +32,7 @@ export const prepareSimulator = () => {
   setupBtn(DASHBORD_CHBX);
   setupBtn(SIGNAL_CHBX);
   setupBtn(STATION_CHBX);
+  addMultimeter(getPins());
 };
 
 export const startSimulator = () => {

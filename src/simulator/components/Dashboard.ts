@@ -4,10 +4,10 @@ import {
   DirectionTypes,
   DASHBORD_CHBX,
 } from '../../common';
-import { booleanRead } from '../../app';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
+import { booleanRead } from './Utils';
 
 export const refreshDashboard = (
   { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {

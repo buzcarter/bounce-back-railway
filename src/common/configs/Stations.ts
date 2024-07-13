@@ -60,10 +60,12 @@ export const stations = [{
   name: 'South Gate Crossing',
   position: 250,
   delay: 0,
+  icon: 'location',
 }, {
   id: SENSOR_26TH_AVE_XING,
   type: SensorTypes.SIGNAL,
   name: '26 Ave (Higland Park)',
   position: 150,
   delay: 0,
+  icon: 'location',
 }];
