@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import * as Serial from './Serial';
 import { int, uint10_MAX, uint8_t } from '../../common';
 // locals
 import * as DataStore from './MockDataStore';
+import * as Serial from './Serial';
 
 export const analogRead = (pin: uint8_t): int => DataStore.get(pin);
 

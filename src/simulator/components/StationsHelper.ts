@@ -7,7 +7,7 @@ import {
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
 
-export const setActive = (stationId: uint8_t, isActive: boolean) => {
+export const updateStationUI = (stationId: uint8_t, isActive: boolean) => {
   document.querySelector(`.${CSSClasses.SENSOR}[data-sensor-for-station="${stationId}"]`)?.classList.toggle(CSSClasses.SENSOR_ACTIVE, isActive);
 };
 

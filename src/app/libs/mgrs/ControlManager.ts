@@ -5,11 +5,13 @@ import {
   uint8_t,
   CONTROL_PANEL_CHBX,
   HIGH_LOW_THRESHOLD,
-  HIGH,
-  LOW,
+  OutputModes,
+  DigitalLevels,
 } from '../../../common';
 import { Serial } from '../../../microcontroller';
 import { analogRead } from '../../../microcontroller';
+
+const { LOW, HIGH } = DigitalLevels;
 
 interface CurrentStateObj {
   pin: uint8_t,
@@ -49,6 +51,18 @@ const updateValue = (pin: uint8_t, value: int): int => {
 /** Reads the pin's change/dirty flag */
 export const hasInputChanged = (pin: uint8_t): boolean => getDirtyObject(pin)?.hasChanged ?? false;
 
+export const pollInputs = () => {
+  currentStates.forEach((obj) => {
+    const newVal = analogRead(obj.pin);
+    const state = currentStates.find((t) => t.pin === obj.pin);
+    if (state && state.value !== newVal) {
+      // throw new Error('state.value !== newVal');
+      state.hasChanged = true;
+      state.value = newVal;
+    }
+  });
+};
+
 /**  */
 export const resetChangeFlags = () => {
   currentStates.forEach((obj) => {
@@ -78,4 +92,14 @@ export const booleanWrite = (pin: uint8_t, isTrue: boolean) => {
   const newVal = isTrue ? HIGH : LOW;
   analogWrite(pin, newVal);
   updateValue(pin, newVal);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const ctlPinMode = (pin: uint8_t, mode: OutputModes) => {
+  currentStates.push({
+    pin,
+    value: LOW,
+    hasChanged: false,
+    // mode: mode === OutputModes.OUTPUT ? 'output' : 'input',
+  });
 };

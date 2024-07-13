@@ -7,16 +7,17 @@ import {
   SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
   IR_SENSOR__CLEAR,
   CONTROL_PANEL_CHBX,
-  LOW,
   uint10_MAX,
   HIGH_LOW_THRESHOLD,
   int,
-  HIGH,
+  DigitalLevels,
   getName as getItemName,
 } from '../../common';
 import { analogRead, analogWrite } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
+
+const { LOW, HIGH } = DigitalLevels;
 
 enum ControlTypes {
   BOOLEAN = 'boolean',

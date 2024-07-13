@@ -1,5 +1,5 @@
 /* eslint-disable no-multi-spaces */
-import { int, uint8_t, volts } from '../interfaces/CoreTypes';
+import { uint8_t, volts } from '../interfaces/CoreTypes';
 
 // #region Analog Pins
 /*
@@ -52,17 +52,24 @@ export const PWM_9: uint8_t    = PIN_D9;
 export const PWM_10: uint8_t   = PIN_D10;
 export const PWM_11: uint8_t   = PIN_D11;
 
-/** Below 0.8v is considered OFF */
-export const LOW: volts        = 0.1;
-/** Above 2.0v is considred ON */
-export const HIGH: volts       = 4.7;
-export const HIGH_LOW_THRESHOLD: volts =  LOW + (HIGH - LOW) / 2;
+export enum DigitalLevels {
+  /** Below 0.8v is considered OFF */
+  LOW   = 0.1,
+  /** Above 2.0v is considred ON */
+  HIGH  = 4.7,
+}
 
-export const ON: volts         = HIGH;
-export const OFF: volts        = LOW;
+export const HIGH_LOW_THRESHOLD: volts =  DigitalLevels.LOW + (DigitalLevels.HIGH - DigitalLevels.LOW) / 2;
 
-export const OUTPUT: int       = 1;
-export const INPUT: int        = 0;
+export enum BinaryStates {
+  ON    = DigitalLevels.HIGH,
+  OFF   = DigitalLevels.LOW,
+}
+
+export enum OutputModes {
+  OUTPUT  = 1,
+  INPUT   = 0,
+}
 
 export const MAX_VOLTs: volts  = 5.0;
 

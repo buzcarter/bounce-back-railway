@@ -1,5 +1,8 @@
 // externals
-import { getSignals, SIGNAL_CHBX, int, pixels } from '../../common';
+import {
+  getSignals, SIGNAL_CHBX, int, pixels, IR_SENSOR__BLOCKED, IR_SENSOR__CLEAR,
+} from '../../common';
+import { analogWrite } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 import { updateStdOut } from './StdOut';
@@ -35,7 +38,7 @@ export const addSensorsToRail = () => {
     });
 };
 
-const setActive = (id: int, isActive: boolean) => {
+const updateSensorUI = (id: int, isActive: boolean) => {
   document.getElementById(getSensorId(id))?.classList.toggle(CSSClasses.PROXIMITY_SENSOR_ACTIVE, isActive);
 };
 
@@ -44,7 +47,8 @@ export const tripSensors = (left: pixels, right: pixels) => {
   const index = signals.findIndex((sensor) => sensor.position >= left && sensor.position <= right);
   const sensor = index > -1 ? signals[index] : null;
   if (!sensor && currentSensorId > -1) {
-    setActive(currentSensorId, false);
+    updateSensorUI(currentSensorId, false);
+    analogWrite(currentSensorId, IR_SENSOR__CLEAR);
     if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
         pin: currentSensorId,
@@ -54,7 +58,8 @@ export const tripSensors = (left: pixels, right: pixels) => {
     currentSensorId = -1;
   } else if (sensor && sensor.id !== currentSensorId) {
     currentSensorId = sensor.id;
-    setActive(currentSensorId, true);
+    updateSensorUI(currentSensorId, true);
+    analogWrite(currentSensorId, IR_SENSOR__BLOCKED);
     if (booleanRead(SIGNAL_CHBX)) {
       updateStdOut({
         pin: sensor.id,
