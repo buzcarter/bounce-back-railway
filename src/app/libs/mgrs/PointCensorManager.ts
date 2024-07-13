@@ -6,10 +6,9 @@ import {
   uint8_t,
 } from '../../../common';
 import { StationTransistions } from './StationManager';
-import { analogRead } from './ControlManager';
+import { booleanRead } from './ControlManager';
 // external
-import { Serial } from '../../../microcontroller';
-import { booleanRead } from '../../../simulator/components/Utils';
+import { analogRead, Serial } from '../../../microcontroller';
 
 let currentStationId: uint8_t | null = null;
 

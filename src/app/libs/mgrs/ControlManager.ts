@@ -1,119 +1,29 @@
-import { booleanRead } from '../../../simulator/components/Utils';
+import { analogWrite } from '../../../microcontroller';
 import {
+  int,
   uint10_t,
   uint8_t,
-  uint10_MAX,
-
-  CONTROL_PANEL_CHBX, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX,
-  HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN,
-  SPEED_CONTROL,
-  SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
-  IR_SENSOR__CLEAR,
+  CONTROL_PANEL_CHBX,
+  HIGH_LOW_THRESHOLD,
+  HIGH,
+  LOW,
 } from '../../../common';
 import { Serial } from '../../../microcontroller';
+import { analogRead } from '../../../microcontroller';
 
-interface CurrentState {
-  value: unknown,
-  isChanged: boolean,
-  name: string,
+interface CurrentStateObj {
+  pin: uint8_t,
+  value: uint10_t,
+  hasChanged: boolean,
 }
 
-interface CurrentStates {
-  [key: string]: CurrentState,
-}
+const currentStates: CurrentStateObj[] = [];
 
-const currentStates: CurrentStates = {
-  [HALT_BTN]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [POWER_BTN]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [REVERSE_BTN]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [PAUSE_BTN]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [SPEED_CONTROL]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [CONTROL_PANEL_CHBX]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [DASHBORD_CHBX]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [STATION_CHBX]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [SIGNAL_CHBX]: {
-    value: null,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_LT_LA]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_RT_CLAREMONT]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_MIDDLE_BURBANK]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_ATWATER_XING]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_SOUTH_GATE_XING]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-  [SENSOR_26TH_AVE_XING]: {
-    value: IR_SENSOR__CLEAR,
-    isChanged: false,
-    name: '',
-  },
-};
+const getDirtyObject = (pin: uint8_t) => currentStates.find((t) => t.pin === pin);
 
-/**
- * @protected
- */
-export const setInitialValue = (pin: uint8_t, value: unknown, name: string) => {
-  currentStates[pin] = {
-    value,
-    isChanged: false,
-    name,
-  };
-};
-
-const updateValue = (pin: uint8_t, value: unknown): unknown => {
-  const state = currentStates[pin];
-  if (!state) {
+const updateValue = (pin: uint8_t, value: int): int => {
+  const obj = getDirtyObject(pin);
+  if (!obj) {
     return value;
   }
 
@@ -122,53 +32,47 @@ const updateValue = (pin: uint8_t, value: unknown): unknown => {
     Serial.println({
       pin,
       value: value as number,
-      name: state.name,
+      // name: obj.name,
     });
   }
 
-  if (state.value !== value) {
-    state.value = value;
-    state.isChanged = true;
+  if (obj.value !== value) {
+    obj.value = value;
+    obj.hasChanged = true;
   } else {
-    state.isChanged = false;
+    obj.hasChanged = false;
   }
+  analogWrite(pin, value);
   return value;
 };
 
 /** Reads the pin's change/dirty flag */
-export const hasInputChanged = (pin: uint8_t): boolean => currentStates[pin]?.isChanged ?? false;
+export const hasInputChanged = (pin: uint8_t): boolean => getDirtyObject(pin)?.hasChanged ?? false;
 
 /**  */
 export const resetChangeFlags = () => {
-  Object.values(currentStates).forEach((state) => {
+  currentStates.forEach((obj) => {
     // eslint-disable-next-line no-param-reassign
-    state.isChanged = false;
+    obj.hasChanged = false;
   });
 };
 
-/** Returns a 10-bit number between 0 and 1023 */
-export const analogRead = (pin: uint8_t): uint10_t => (currentStates[pin]?.value as unknown as uint8_t) ?? 0;
-
 /** Set to between 0 and 1023 */
-export const analogWrite = (pin: uint8_t, value: uint10_t) => {
-  if (value < 0 || value > uint10_MAX) {
-    Serial.println({ error: 'Value out of range (uint10_t between 0 - 1023)', pin, value });
-    throw new Error(`analogWrite: Invalid value: ${value}`);
-  }
+export const setAnalogValue = (pin: uint8_t, value: uint10_t) => {
   updateValue(pin, value);
 };
 
 /**  */
+export const booleanRead = (pin: uint8_t): boolean => analogRead(pin) > HIGH_LOW_THRESHOLD;
+
+/**  */
 export const booleanToggle = (pin: uint8_t): boolean => {
-  const state = currentStates[pin];
-  if (!state) {
-    return false;
-  }
-  return updateValue(pin, !state.value) as boolean;
+  const isTrue = analogRead(pin) > HIGH_LOW_THRESHOLD;
+  const newVal = !isTrue ? HIGH : LOW;
+  analogWrite(pin, newVal);
+  return newVal > HIGH_LOW_THRESHOLD;
 };
 
 export const booleanWrite = (pin: uint8_t, value: boolean) => {
-  updateValue(pin, Boolean(value));
+  updateValue(pin, value ? HIGH : LOW);
 };
-
-export { currentStates as inputControls };

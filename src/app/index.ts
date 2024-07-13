@@ -7,14 +7,4 @@
 export { loop, setup } from './main';
 
 // used by simulator
-export {
-  analogRead,
-  analogWrite,
-  // booleanRead,
-  booleanToggle,
-  setInitialValue,
-} from './libs/mgrs/ControlManager';
-
-export {
-  getState,
-} from './main';
+export { getState } from './main';

@@ -1,5 +1,5 @@
 // externals
-import { Serial, getTicks, pinMode } from '../microcontroller';
+import { Serial, analogRead, getTicks, pinMode } from '../microcontroller';
 import {
   INPUT,
   int, uint8_t, velocity, getStations, MAX_SPEED, DASHBOARD_REFRESH_RATE,
@@ -13,9 +13,8 @@ import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
 // TODO: don't talk to Simulator from the App
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
-import { analogRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
+import { booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
 import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
-import { booleanRead } from '../simulator/components/Utils';
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** (px/tick) current speed */

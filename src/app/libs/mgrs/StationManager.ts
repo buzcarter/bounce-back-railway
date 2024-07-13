@@ -1,6 +1,5 @@
-import { getStations, IR_SENSOR__BLOCKED, uint8_t } from '../../../common';
-// locals
-import { analogRead } from './ControlManager';
+import { analogRead } from '../../../microcontroller';
+import { getStations, HIGH_LOW_THRESHOLD, uint8_t } from '../../../common';
 
 export enum StationTransistions {
   ARRIVAL = 1,
@@ -17,7 +16,7 @@ let currentStation: uint8_t = -1;
  * until after the train has visited a different station.
  */
 const checkStation = (pin: uint8_t): boolean => {
-  const isAtStation = analogRead(pin) > IR_SENSOR__BLOCKED;
+  const isAtStation = analogRead(pin) > HIGH_LOW_THRESHOLD;
   if (isAtStation && currentStation === pin) {
     return false;
   }

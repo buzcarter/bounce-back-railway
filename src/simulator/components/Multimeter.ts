@@ -1,5 +1,5 @@
-import { analogRead } from '../../app';
 import { getIcon, int, uint8_t } from '../../common';
+import { analogRead } from '../../microcontroller';
 import { CSSClasses, ElementIds } from '../constants';
 import { getName } from './UXControls';
 
