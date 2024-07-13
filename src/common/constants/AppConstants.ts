@@ -7,7 +7,7 @@ import { TRAVEL_DISTANCE } from './SimulatorConstants';
 
 /* eslint-disable key-spacing, no-multi-spaces */
 export const uint10_MAX: uint10_t                    = 1023;
-export const uint8_MAX: uint8_t                      =  254;
+export const uint8_MAX: uint8_t                      =  255;
 
 /** Cutoff for IR proximity filter, 0 - 1023 */
 export const SENSOR_VOLTS_THRESHOLD: uint10_t        =  500; // this is the real sensor value

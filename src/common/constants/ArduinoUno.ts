@@ -1,67 +1,76 @@
 /* eslint-disable no-multi-spaces */
-import { int, uint10_t, volts } from '../interfaces/CoreTypes';
+import { int, uint8_t, volts } from '../interfaces/CoreTypes';
 
 // #region Analog Pins
 /*
- * Arduino Uno has 6 analog pins (A0-A5), which utilize ADC (Analog to Digital converter)
+ * Arduino Uno has 6-ish analog pins (A0-A5), which utilize ADC (Analog to Digital converter)
  * The ADC has 10-bit resolution, meaning it can represent analog voltage by 1,024 digital levels.
  */
-export const PIN_A0: uint10_t = 0;
-export const PIN_A1: uint10_t = 1;
-export const PIN_A2: uint10_t = 2;
-export const PIN_A3: uint10_t = 3;
-export const PIN_A4: uint10_t = 4;
-export const PIN_A5: uint10_t = 5;
-// export const PIN_A6: uint10_t  = 6;
-// export const PIN_A7: uint10_t  = 7;
 
-export const A0: uint10_t = PIN_A0;
-export const A1: uint10_t = PIN_A1;
-export const A2: uint10_t = PIN_A2;
-export const A3: uint10_t = PIN_A3;
-export const A4: uint10_t = PIN_A4;
-export const A5: uint10_t = PIN_A5;
-// export const A6:  uint10_t = PIN_A6;
-// export const A7:  uint10_t = PIN_A7;
-// #endregion
+export const PIN_A0: uint8_t   = 14;
+export const PIN_A1: uint8_t   = 15;
+export const PIN_A2: uint8_t   = 16;
+export const PIN_A3: uint8_t   = 17;
+export const PIN_A4: uint8_t   = 18;
+export const PIN_A5: uint8_t   = 19;
+export const PIN_A6: uint8_t   = 20;
+export const PIN_A7: uint8_t   = 21;
 
-// #region Digital Pins
+export const A0: uint8_t       = PIN_A0;
+export const A1: uint8_t       = PIN_A1;
+export const A2: uint8_t       = PIN_A2;
+export const A3: uint8_t       = PIN_A3;
+export const A4: uint8_t       = PIN_A4;
+export const A5: uint8_t       = PIN_A5;
+export const A6: uint8_t       = PIN_A6;
+export const A7: uint8_t       = PIN_A7;
+
 // Pins 0-13 serve as digital input/output pins.
-export const PIN_D0: uint10_t  =  0;
-export const PIN_D1: uint10_t  =  1;
-export const PIN_D2: uint10_t  =  2;
-export const PIN_D3: uint10_t  =  3;
-export const PIN_D4: uint10_t  =  4;
-export const PIN_D5: uint10_t  =  5;
-export const PIN_D6: uint10_t  =  6;
-export const PIN_D7: uint10_t  =  7;
-export const PIN_D8: uint10_t  =  8;
-export const PIN_D9: uint10_t  =  9;
-export const PIN_D10: uint10_t = 10;
-export const PIN_D11: uint10_t = 11;
-export const PIN_D12: uint10_t = 12;
-export const PIN_D13: uint10_t = 13;
+export const PIN_D0: uint8_t   =  0;
+export const PIN_D1: uint8_t   =  1;
+export const PIN_D2: uint8_t   =  2;
+export const PIN_D3: uint8_t   =  3;
+export const PIN_D4: uint8_t   =  4;
+export const PIN_D5: uint8_t   =  5;
+export const PIN_D6: uint8_t   =  6;
+export const PIN_D7: uint8_t   =  7;
+export const PIN_D8: uint8_t   =  8;
+export const PIN_D9: uint8_t   =  9;
+export const PIN_D10: uint8_t  = 10;
+export const PIN_D11: uint8_t  = 11;
+export const PIN_D12: uint8_t  = 12;
+export const PIN_D13: uint8_t  = 13;
 
 // Pin 13 is connected to the built-in LED.
-export const LED_BUILTIN: uint10_t = PIN_D13;
+export const LED_BUILTIN: uint8_t  = PIN_D13;
 
 // Pins 3,5,6,9,10,11 have PWM capability.
-export const PWM_3: uint10_t  = PIN_D3;
-export const PWM_5: uint10_t  = PIN_D5;
-export const PWM_6: uint10_t  = PIN_D6;
-export const PWM_9: uint10_t  = PIN_D9;
-export const PWM_10: uint10_t = PIN_D10;
-export const PWM_11: uint10_t = PIN_D11;
-
-// #endregion
+export const PWM_3: uint8_t    = PIN_D3;
+export const PWM_5: uint8_t    = PIN_D5;
+export const PWM_6: uint8_t    = PIN_D6;
+export const PWM_9: uint8_t    = PIN_D9;
+export const PWM_10: uint8_t   = PIN_D10;
+export const PWM_11: uint8_t   = PIN_D11;
 
 /** Below 0.8v is considered OFF */
-export const DIGITAL_LOW: volts   = 0.8;
+export const LOW: volts        = 0.1;
 /** Above 2.0v is considred ON */
-export const DIGITAL_HIGH: volts  = 2.0;
+export const HIGH: volts       = 4.7;
+export const HIGH_LOW_THRESHOLD: volts =  LOW + (HIGH - LOW) / 2;
 
-export const ON   = DIGITAL_LOW;
-export const OFF  = DIGITAL_HIGH;
+export const ON: volts         = LOW;
+export const OFF: volts        = HIGH;
 
-export const OUTPUT: int   = 1;
-export const INPUT: int    = 0;
+export const OUTPUT: int       = 1;
+export const INPUT: int        = 0;
+
+export const MAX_VOLTs: volts  = 5.0;
+
+export const digitalPinHasPWM = (pin: uint8_t): boolean => (
+  (pin) === PWM_3
+  || (pin) === PWM_5
+  || (pin) === PWM_6
+  || (pin) === PWM_9
+  || (pin) === PWM_10
+  || (pin) === PWM_11
+);
