@@ -8,7 +8,7 @@ import {
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN,
   SPEED_CONTROL,
   SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
-  SENSOR_VOLTS_ALL_CLEAR,
+  IR_SENSOR__CLEAR,
 } from '../../../common';
 import { Serial } from '../../../microcontroller';
 
@@ -69,32 +69,32 @@ const currentStates: CurrentStates = {
     name: '',
   },
   [SENSOR_LT_LA]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },
   [SENSOR_RT_CLAREMONT]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },
   [SENSOR_MIDDLE_BURBANK]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },
   [SENSOR_ATWATER_XING]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },
   [SENSOR_SOUTH_GATE_XING]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },
   [SENSOR_26TH_AVE_XING]: {
-    value: SENSOR_VOLTS_ALL_CLEAR,
+    value: IR_SENSOR__CLEAR,
     isChanged: false,
     name: '',
   },

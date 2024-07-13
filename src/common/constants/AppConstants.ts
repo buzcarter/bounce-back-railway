@@ -2,6 +2,7 @@ import {
   milliseconds, velocity, uint10_t,
   uint8_t,
 } from '../interfaces/CoreTypes';
+import { OFF, ON } from './ArduinoUno';
 import { CLOCK_SPEED } from './MicrocontrollerConstants';
 import { TRAVEL_DISTANCE } from './SimulatorConstants';
 
@@ -10,9 +11,8 @@ export const uint10_MAX: uint10_t                    = 1023;
 export const uint8_MAX: uint8_t                      =  255;
 
 /** Cutoff for IR proximity filter, 0 - 1023 */
-export const SENSOR_VOLTS_THRESHOLD: uint10_t        =  500; // this is the real sensor value
-export const SENSOR_VOLTS_ALL_CLEAR: uint10_t        =   64; // example "OFF" value, (unobstructed) there's nothing reflecting light back to the sensor
-export const SENSOR_VOLTS_OBJECT_DETECTED: uint10_t  = uint10_MAX; // example "ON" value, something is close enough to reflect tangible light back to the sensor
+export const IR_SENSOR__BLOCKED: uint10_t            =   ON; // using ON/OFF for now (believe the real sensor value for "blocked" is 500? verify. OFF is 64?)
+export const IR_SENSOR__CLEAR: uint10_t              =  OFF; // example "OFF" value, (unobstructed) there's nothing reflecting light back to the sensor
 
 /* eslint-disable key-spacing, no-multi-spaces */
 /** minimum time to completely travers the "Travel Distance" */

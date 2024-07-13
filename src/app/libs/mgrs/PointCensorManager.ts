@@ -1,7 +1,7 @@
 // local
 import {
   getStations,
-  SENSOR_VOLTS_THRESHOLD,
+  HIGH_LOW_THRESHOLD,
   STATION_CHBX,
   uint8_t,
 } from '../../../common';
@@ -23,15 +23,14 @@ export const getCurrentStationId = () => currentStationId;
 
 export const getTransition = (): StationTransistions => {
   let transition = StationTransistions.NO_CHANGE;
-  const station = getStations().find(({ id }) => analogRead(id) > SENSOR_VOLTS_THRESHOLD);
+  const station = getStations().find(({ id }) => analogRead(id) > HIGH_LOW_THRESHOLD);
   if (station && station.id !== currentStationId) {
     transition = StationTransistions.ARRIVAL;
     currentStationId = station.id;
     if (booleanRead(STATION_CHBX)) {
       Serial.println({
         pin: station.id,
-        action: 'arrived',
-        name: station.name,
+        arrived: station.name,
         layover: station.delay || 'none',
       });
     }
@@ -40,7 +39,7 @@ export const getTransition = (): StationTransistions => {
     if (booleanRead(STATION_CHBX)) {
       Serial.println({
         pin: currentStationId,
-        action: 'departed',
+        departed: '',
       });
     }
     currentStationId = null;

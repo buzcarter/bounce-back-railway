@@ -58,8 +58,8 @@ export const LOW: volts        = 0.1;
 export const HIGH: volts       = 4.7;
 export const HIGH_LOW_THRESHOLD: volts =  LOW + (HIGH - LOW) / 2;
 
-export const ON: volts         = LOW;
-export const OFF: volts        = HIGH;
+export const ON: volts         = HIGH;
+export const OFF: volts        = LOW;
 
 export const OUTPUT: int       = 1;
 export const INPUT: int        = 0;

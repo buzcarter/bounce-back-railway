@@ -1,4 +1,4 @@
-import { getStations, SENSOR_VOLTS_THRESHOLD, uint8_t } from '../../../common';
+import { getStations, IR_SENSOR__BLOCKED, uint8_t } from '../../../common';
 // locals
 import { analogRead } from './ControlManager';
 
@@ -17,7 +17,7 @@ let currentStation: uint8_t = -1;
  * until after the train has visited a different station.
  */
 const checkStation = (pin: uint8_t): boolean => {
-  const isAtStation = analogRead(pin) > SENSOR_VOLTS_THRESHOLD;
+  const isAtStation = analogRead(pin) > IR_SENSOR__BLOCKED;
   if (isAtStation && currentStation === pin) {
     return false;
   }

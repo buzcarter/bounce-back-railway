@@ -1,7 +1,7 @@
 // External
 import {
   getStations,
-  SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED,
+  IR_SENSOR__CLEAR, IR_SENSOR__BLOCKED,
   STATION_SAFETY_LENGTH,
   pixels,
 } from '../../common';
@@ -17,11 +17,11 @@ export const getStationByPostion = (pos: pixels) => getStations()
 export const tripSensors = (position: pixels): void => {
   const station = getStationByPostion(position);
   if (station && station.id !== currentSensorId) {
-    analogWrite(station.id, SENSOR_VOLTS_OBJECT_DETECTED);
+    analogWrite(station.id, IR_SENSOR__BLOCKED);
     setActive(station.id, true);
     currentSensorId = station.id;
   } else if (!station && currentSensorId > -1) {
-    analogWrite(currentSensorId, SENSOR_VOLTS_ALL_CLEAR);
+    analogWrite(currentSensorId, IR_SENSOR__CLEAR);
     setActive(currentSensorId, false);
     currentSensorId = -1;
   }
