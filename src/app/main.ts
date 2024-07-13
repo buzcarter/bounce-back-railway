@@ -10,7 +10,6 @@ import {
 // locals
 import { slowStop, slowStart, continueSpeedChange } from './libs/mgrs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
-// TODO: don't talk to Simulator from the App
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
 import { booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
@@ -79,11 +78,6 @@ const pollButtons = () => {
 export const loop = () => {
   pollButtons();
   pollPointSensors();
-  // checkAllSensors();
-  // const sensedStation = getCurrentStationSensor();
-  // if (sensedStation > -1) {
-  //   // Serial.println({ 'current triggered station': sensedStation });
-  // }
 
   const ticks = getTicks();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
@@ -143,7 +137,6 @@ export const loop = () => {
       break;
   }
 
-  // clearPointSensors();
   resetChangeFlags();
 };
 

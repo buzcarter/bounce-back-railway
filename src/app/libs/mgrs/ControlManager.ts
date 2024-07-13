@@ -70,9 +70,12 @@ export const booleanToggle = (pin: uint8_t): boolean => {
   const isTrue = analogRead(pin) > HIGH_LOW_THRESHOLD;
   const newVal = !isTrue ? HIGH : LOW;
   analogWrite(pin, newVal);
+  updateValue(pin, newVal);
   return newVal > HIGH_LOW_THRESHOLD;
 };
 
-export const booleanWrite = (pin: uint8_t, value: boolean) => {
-  updateValue(pin, value ? HIGH : LOW);
+export const booleanWrite = (pin: uint8_t, isTrue: boolean) => {
+  const newVal = isTrue ? HIGH : LOW;
+  analogWrite(pin, newVal);
+  updateValue(pin, newVal);
 };

@@ -18,7 +18,7 @@ export const IR_SENSOR__CLEAR: uint10_t              =  OFF; // example "OFF" va
 /** minimum time to completely travers the "Travel Distance" */
 export const MIN_TIME_TO_COMPLETE: milliseconds      = 6000;
 /** Time between Dashbord updates */
-export const DASHBOARD_REFRESH_RATE: milliseconds    =  10 * CLOCK_SPEED;
+export const DASHBOARD_REFRESH_RATE: milliseconds    = 10 * CLOCK_SPEED;
 /** Time required for a slow start/stop */
 export const HALT_DURATION: milliseconds             = 1750;
 
