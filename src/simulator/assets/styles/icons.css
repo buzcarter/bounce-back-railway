@@ -21,7 +21,6 @@
 }
 
 .icon--barrier,
-.icon--location,
 .icon--station-1,
 .icon--station-2,
 .icon--station-3,
@@ -50,6 +49,10 @@
 
 .icon--station-3 {
   background-image: url(../images/icons/station-3.svg);
+}
+
+.icon--toilet-paper-roll {
+  background-image: url(../images/icons/toilet-paper-roll.svg);
 }
 
 .icon--trolley {

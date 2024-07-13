@@ -14,6 +14,7 @@ import { getPosition, resetPosition } from './TrolleyUI';
 import { booleanRead } from './Utils';
 import { attachEventHandlers, getPins } from './UXControls';
 import { render as addMultimeter } from './Multimeter';
+import { attach as attachLogging } from './Logging';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -23,6 +24,7 @@ export const prepareSimulator = () => {
 
   attachEventHandlers();
   addMultimeter(getPins());
+  attachLogging();
 };
 
 export const startSimulator = () => {
