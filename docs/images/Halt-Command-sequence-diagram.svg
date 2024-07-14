@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="2049.12px" height="2540.541px" viewBox="-64.608 -145.541 2049.12 2540.541"
+	 enable-background="new -64.608 -145.541 2049.12 2540.541" xml:space="preserve">
+<g id="bg_x5F_blocks">
+	<rect x="-64.608" y="-4.541" fill="#CFD3C6" width="2049.12" height="2399.541"/>
+	<rect x="103.704" y="-4.541" fill="#CDE0DA" width="468.834" height="2399.541"/>
+	<rect x="572.538" y="-4.541" fill="#A6B5B0" width="442.921" height="2399.541"/>
+	<rect x="-64.608" y="-4.541" fill="#FFDDB7" width="168.312" height="2399.541"/>
+	<rect x="-64.608" y="-145.541" fill="#CFD3C6" width="2049.12" height="141"/>
+	<rect x="103.704" y="-145.541" fill="#CDE0DA" width="468.834" height="141"/>
+	<rect x="572.538" y="-145.541" fill="#A6B5B0" width="442.921" height="141"/>
+	<rect x="-64.608" y="-145.541" fill="#FFDDB7" width="168.312" height="141"/>
+	<g>
+		<text transform="matrix(1 0 0 1 205.6836 -55.7881)" fill="#7A7A7A" font-family="'MyriadPro-Regular'" font-size="58">Simulator</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 607.7046 -55.7881)" fill="#7A7A7A" font-family="'MyriadPro-Regular'" font-size="58">Microprocessor</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 1472.0903 -55.0684)" fill="#7A7A7A" font-family="'MyriadPro-Regular'" font-size="58">App</text>
+	</g>
+</g>
+<g id="exorted_x5F_UML_x5F_Diagram">
+	<desc>
+		title%20Halt%20(Slow%20Stop)%0A%0Aactor%20User%0A%0Aparticipant%20Simulator%0Aparticipant%20AnimateTrolley%0Aparticipant%20TrolleyUI%0A%0Aparticipant%20Microprocessor%0Aparticipant%20AnalogWiring%0Aparticipant%20DataStore%0A%0Aparticipant%20App%0Aparticipant%20Main%0Aparticipant%20Events%0Aparticipant%20ControlManager%0Aparticipant%20currentStates%0A%0Anote%20over%20User%2CSimulator%3A%20**Page%20Load**%5Cnboots%5Cnmicrocontroller%0A%0AMicroprocessor--%3EApp%3A%0AApp-%3EMain%3Asetup%0AMain-%3EControlManager%3Ainitialize%20states%0AControlManager-%3EcurrentStates%3Aset%0A%0ASimulator-%3EAnimateTrolley%3AstartAnimation%0AAnimateTrolley%3C-%3EApp%3AgetState%0AAnimateTrolley-%3ETrolleyUI%3AupdatePosition%0ATrolleyUI-%3ESimulator%3A%20redraw%20Trolley%0AAnimateTrolley--%3E%3EAnimateTrolley%3A%20ends%20with%5CnrequestAnimationFrame%0Anote%20over%20Simulator%3A%20attach%20event%5Cnhandlers%0A%0AMicroprocessor--%3E%3EMicroprocessor%3Astart%20Loop%20timer%0Anote%20over%20User%2CSimulator%3A%20**Page%20Ready**%0A%0AUser--%3E%3E(3)Simulator%3AClicks%20%22Halt%22%20Button%0ASimulator-%3EMicroprocessor%3AonClick%20handler%5CnCall%20**analogWrite**%0AMicroprocessor-%3EAnalogWiring%3AanalogWrite%0AAnalogWiring-%3EDataStore%3A%20**set(pin%2C%20value)**%5CnSaves%20name%2Fvalue%0ADataStore-%3ESimulator%3A**updateMultimeter**%0A%0AApp(3)%3C--Microprocessor%3A%20trigger%20next%20tick%20to%20%22loop%22%0A%0AApp-%3EMain%3Aloop%0AMain-%3E%3EControlManager%3APoll%20Inputs%0AControlManager%3C-%3EAnalogWiring%3A**analogRead**%5Cncompare%20current%20value%20to%20prior%20value%0AControlManager-%3EcurrentStates%3Aset%20**hasChanged**%20%26%20**value**%0AMain-%3EControlManager%3A**hasInputChanged**%20%5Cn(HALT_BTN)%0AControlManager%3C--%3EcurrentStates%3A**hasChanged**%0AControlManager-%3EMain%3Areturn%20**true**%0AMain-%3EEvents%3A**setEvent**%20%5Cn%22BEGIN_SLOW_STOP%22%0AMain%3C-%3EEvents%3A**getEvent**%0AMain-%3EEaseSpeed%3A**slowStop**%5Cnsave%20current%20speed%5CnisStopping%20true%0AEaseSpeed-%3EEaseSpeed%3AbeginSpeedChange%0AEaseSpeed-%3EEaseSpeed%3AcontinueSpeedChange%5Cncalculate%20new%20speed%0AEaseSpeed-%3EMain%3A**setSpeed**%20using%20new%20speed%0A%0Anote%20over%20User%2CSimulator%3A%20Browser%20ready%5Cnfor%20**next%20keyframe**%0A%0AAnimateTrolley--%3E(3)AnimateTrolley%3ArequestAnimationFrame%0AAnimateTrolley%3C-%3EApp%3AgetState%0AAnimateTrolley-%3ETrolleyUI%3AupdatePosition%0ATrolleyUI-%3ESimulator%3A%20redraw%20Trolley%0A
+		</desc>
+	<g>
+		<g>
+			<rect x="-64.608" y="-4.541" fill="#FFFFFF" fill-opacity="0.5" width="2048.608" height="2399.541"/>
+		</g>
+		<g>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M23.644,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M193.303,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M330.564,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M516.954,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M647.889,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M793.365,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M957.534,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1055.361,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1136.074,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1334.789,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1461.539,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1672.115,128.655v2267.263"/>
+			<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="12.5655,5.4451" d="
+				M1805.392,128.655v2267.263"/>
+		</g>
+		<g>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.777" stroke-miterlimit="10" d="M32.955,59.557
+					c0,5.143-4.169,9.311-9.312,9.31c-5.142,0-9.311-4.169-9.31-9.312c0-5.143,4.169-9.311,9.312-9.311
+					c5.139,0,9.306,4.164,9.31,9.303 M23.644,68.868v19.929 M11.882,76.055h23.522 M23.644,88.797l-11.761,18.622 M23.644,88.797
+					l11.761,18.622"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 8.1675 123.7539)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">User</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M144.62,84.549h97.366v44.105H144.62
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 162.3433 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Simulator</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M264.229,84.549h132.67v44.105h-132.67
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 281.9526 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">AnimateTrolley</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M470.179,84.549h93.551v44.105h-93.551
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 487.9023 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">TrolleyUI</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M580.064,84.549h135.648v44.105H580.064
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 597.7881 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Microprocessor</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M732.048,84.549h122.634v44.105H732.048
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 749.771 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">AnalogWiring</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M906.808,84.549h101.454v44.105H906.808
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 924.5303 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">DataStore</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1024.595,84.549h61.531v44.105h-61.531
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1042.3188 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">App</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1102.462,84.549h67.223v44.105h-67.223
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1120.186 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Main</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1294.656,84.549h80.266v44.105h-80.266
+					V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1312.3794 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Events</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1391.255,84.549h140.566v44.105
+					h-140.566V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1408.979 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">ControlManager</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1610.796,84.549h122.635v44.105
+					h-122.635V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1628.521 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">currentStates</text>
+			</g>
+			<path d="M0,0"/>
+			<g>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="2.6136" stroke-miterlimit="10" d="M1749.767,84.549h111.252v44.105
+					h-111.252V84.549z"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 1767.4897 112.3193)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">EaseSpeed</text>
+			</g>
+		</g>
+		<g>
+			<g>
+				<text transform="matrix(1 0 0 1 914.9492 24.6514)" font-family="'HelveticaNeueLTStd-Roman'" font-size="16">Halt (Slow Stop)</text>
+			</g>
+			<path fill="#FFFFFF" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M8.942,161.325h184.361l14.702,14.702
+				v55.54H8.942V161.325 M193.303,161.325v14.702h14.702"/>
+			<g>
+				<text transform="matrix(1 0 0 1 60.4087 184.1943)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">Page Load</text>
+				<text transform="matrix(1 0 0 1 60.4087 200.5293)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">boots</text>
+				<text transform="matrix(1 0 0 1 60.4087 216.8643)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">microcontroller</text>
+			</g>
+			<g>
+				<rect x="849.175" y="256.069" fill="#FFFFFF" width="4.9" height="21.235"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M647.889,277.305h394.023"/>
+				<g transform="translate(1055.3614674016198,277.30492620231814) translate(-1055.3614674016198,-277.30492620231814)">
+					<path d="M1041.75,270.499l13.611,6.806l-13.611,6.807V270.499z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1075.335" y="301.808" fill="#FFFFFF" width="40.764" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1077.7856 316.5098)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">setup</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1055.361,323.043h67.264"/>
+				<g transform="translate(1136.0739019505104,323.04349544231815) translate(-1136.0739019505104,-323.04349544231815)">
+					<path d="M1122.46,316.237l13.613,6.806l-13.613,6.806V316.237z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1248.689" y="347.546" fill="#FFFFFF" width="100.234" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1251.1392 362.248)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">initialize states</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1136.074,368.782h312.016"/>
+				<g transform="translate(1461.538712128828,368.78206468231815) translate(-1461.538712128828,-368.78206468231815)">
+					<path d="M1447.925,361.976l13.613,6.807l-13.613,6.806V361.976z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1554.597" y="393.285" fill="#FFFFFF" width="24.457" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1557.0483 407.9863)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">set</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1461.539,414.521h197.127"/>
+				<g transform="translate(1672.1142994281768,414.52063392231815) translate(-1672.1142994281768,-414.52063392231815)">
+					<path d="M1658.501,407.714l13.613,6.807l-13.613,6.807V407.714z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="212.633" y="439.023" fill="#FFFFFF" width="98.602" height="21.235"/>
+				<text transform="matrix(1 0 0 1 215.0825 453.7256)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">startAnimation</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M193.303,460.259h123.813"/>
+				<g transform="translate(330.56418335319006,460.25920316231816) translate(-330.56418335319006,-460.25920316231816)">
+					<path d="M316.951,453.453l13.613,6.806l-13.613,6.807V453.453z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="663.208" y="484.762" fill="#FFFFFF" width="59.51" height="21.236"/>
+				<text transform="matrix(1 0 0 1 665.6572 499.4639)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">getState</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M344.014,505.998h697.898"/>
+				<g transform="translate(1055.3614674016198,505.99777240231816) translate(-1055.3614674016198,-505.99777240231816)">
+					<path d="M1041.75,499.191l13.611,6.807l-13.611,6.806V499.191z"/>
+					<g transform="translate(330.56418335319006,505.99777240231816) translate(-330.56418335319006,-505.99777240231816)">
+						<path d="M344.177,499.191l-13.612,6.807l13.612,6.806V499.191z"/>
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="372.813" y="530.501" fill="#FFFFFF" width="101.894" height="21.235"/>
+				<text transform="matrix(1 0 0 1 375.2622 545.2021)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">updatePosition</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M330.564,551.736h172.94"/>
+				<g transform="translate(516.9543778472005,551.7363416423182) translate(-516.9543778472005,-551.7363416423182)">
+					<path d="M503.342,544.93l13.612,6.807l-13.612,6.807V544.93z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="306.516" y="576.239" fill="#FFFFFF" width="97.227" height="21.235"/>
+				<text transform="matrix(1 0 0 1 308.9648 590.9409)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">redraw Trolley</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M516.954,597.475H206.752"/>
+				<g transform="translate(193.3028965909505,597.4749108823181) translate(-193.3028965909505,-597.4749108823181)">
+					<path d="M206.916,590.669l-13.613,6.806l13.613,6.807V590.669z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="349.895" y="621.978" fill="#FFFFFF" width="66.833" height="21.236"/>
+				<rect x="349.895" y="638.313" fill="#FFFFFF" width="161.343" height="21.236"/>
+				<text transform="matrix(1 0 0 1 352.3438 636.6792)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">ends with</text>
+				<text transform="matrix(1 0 0 1 352.3438 653.0146)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">requestAnimationFrame</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M330.564,659.549h65.341v21.235h-63.299"/>
+				<g transform="translate(330.56418335319006,680.7844477123181) translate(-330.56418335319006,-680.7844477123181)">
+					<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M344.56,674.541l-12.465,6.243
+						l12.465,6.243"/>
+				</g>
+			</g>
+			<path fill="#FFFFFF" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M130.498,705.287h110.908l14.702,14.702
+				v39.204h-125.61V705.287 M241.406,705.287v14.702h14.702"/>
+			<g>
+				<text transform="matrix(1 0 0 1 153.3667 728.1567)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">attach event</text>
+				<text transform="matrix(1 0 0 1 153.3667 744.4917)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">handlers</text>
+			</g>
+			<g>
+				<rect x="667.219" y="783.696" fill="#FFFFFF" width="106.747" height="21.235"/>
+				<text transform="matrix(1 0 0 1 669.6685 798.3979)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">start Loop timer</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M647.889,804.932h65.341v21.236h-63.299"/>
+				<g transform="translate(647.8886828184544,826.1677570823181) translate(-647.8886828184544,-826.1677570823181)">
+					<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M661.884,819.925l-12.465,6.243
+						l12.465,6.243"/>
+				</g>
+			</g>
+			<path fill="#FFFFFF" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M8.942,850.671h184.361l14.702,14.701
+				v22.869H8.942V850.671 M193.303,850.671v14.701h14.702"/>
+			<g>
+				<text transform="matrix(1 0 0 1 66.9155 873.54)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">Page Ready</text>
+			</g>
+			<g>
+				<rect x="42.974" y="912.744" fill="#FFFFFF" width="130.999" height="21.236"/>
+				<text transform="matrix(1 0 0 1 45.4233 927.4463)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Clicks &quot;Halt&quot; Button</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="M23.644,927.688
+					l167.698,48.439"/>
+				
+					<g transform="translate(193.3028965909505,976.6945382684111) rotate(16.11121404031676,0,0) translate(-193.3028965909505,-976.6945382684111)">
+					<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M179.308,970.451l12.465,6.243
+						l-12.465,6.243"/>
+					<g transform="rotate(-16.11121404031676,0,0)">
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="361.667" y="1001.197" fill="#FFFFFF" width="105.946" height="21.236"/>
+				<rect x="361.667" y="1017.532" fill="#FFFFFF" width="34.229" height="21.236"/>
+				<rect x="361.667" y="1017.532" fill="#FFFFFF" width="88.53" height="21.236"/>
+				<text transform="matrix(1 0 0 1 364.1171 1015.8987)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">onClick handler</text>
+				<text transform="matrix(1 0 0 1 364.1171 1032.2341)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Call </text>
+				<text transform="matrix(1 0 0 1 393.4443 1032.2341)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">analogWrite</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M193.303,1038.768h441.137"/>
+				<g transform="translate(647.8886828184544,1038.7683108084111) translate(-647.8886828184544,-1038.7683108084111)">
+					<path d="M634.276,1031.962l13.612,6.807l-13.612,6.806V1031.962z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="679.196" y="1063.271" fill="#FFFFFF" width="82.86" height="21.235"/>
+				<text transform="matrix(1 0 0 1 681.6464 1077.9724)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">analogWrite</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M647.889,1084.507h132.027"/>
+				<g transform="translate(793.3648502775013,1084.5068800484112) translate(-793.3648502775013,-1084.5068800484112)">
+					<path d="M779.752,1077.7l13.613,6.807l-13.613,6.807V1077.7z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="812.695" y="1109.01" fill="#FFFFFF" width="103.469" height="21.235"/>
+				<rect x="812.695" y="1125.344" fill="#FFFFFF" width="125.509" height="21.235"/>
+				<text transform="matrix(1 0 0 1 815.1445 1123.7112)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">set(pin, value)</text>
+				<text transform="matrix(1 0 0 1 815.1445 1140.0466)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Saves name/value</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M793.365,1146.581h150.719"/>
+				<g transform="translate(957.5337908483347,1146.580652588411) translate(-957.5337908483347,-1146.580652588411)">
+					<path d="M943.921,1139.774l13.613,6.807l-13.613,6.806V1139.774z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="511.88" y="1171.084" fill="#FFFFFF" width="127.077" height="21.235"/>
+				<text transform="matrix(1 0 0 1 514.3295 1185.7849)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">updateMultimeter</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M957.534,1192.319H206.752"/>
+				<g transform="translate(193.3028965909505,1192.3192218284112) translate(-193.3028965909505,-1192.3192218284112)">
+					<path d="M206.915,1185.512l-13.613,6.807l13.613,6.807V1185.512z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="770.227" y="1216.822" fill="#FFFFFF" width="162.796" height="21.235"/>
+				<text transform="matrix(1 0 0 1 772.6767 1231.5232)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">trigger next tick to &quot;loop&quot;</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M647.889,1223.05l394.121,47.399"/>
+				
+					<g transform="translate(1055.3614674016198,1272.0554156321182) rotate(6.857864905652072,0,0) translate(-1055.3614674016198,-1272.0554156321182)">
+					<path d="M1041.75,1265.248l13.611,6.807l-13.613,6.806L1041.75,1265.248z"/>
+					<g transform="rotate(-6.857864905652072,0,0)">
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="1079.41" y="1296.558" fill="#FFFFFF" width="32.617" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1081.8589 1311.2596)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">loop</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1055.361,1317.794h67.264"/>
+				<g transform="translate(1136.0739019505104,1317.7939848721182) translate(-1136.0739019505104,-1317.7939848721182)">
+					<path d="M1122.46,1310.987l13.613,6.807l-13.613,6.807V1310.987z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1262.128" y="1342.297" fill="#FFFFFF" width="73.355" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1264.5796 1356.9979)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Poll Inputs</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1136.074,1363.532h323.424"/>
+				<g transform="translate(1461.538712128828,1363.5325541121183) translate(-1461.538712128828,-1363.5325541121183)">
+					<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1447.542,1357.289l12.467,6.243
+						l-12.467,6.244"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1007.664" y="1388.035" fill="#FFFFFF" width="87.994" height="21.236"/>
+				<rect x="1007.664" y="1404.371" fill="#FFFFFF" width="239.576" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1010.1147 1402.7372)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">analogRead</text>
+				<text transform="matrix(1 0 0 1 1010.1147 1419.0721)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">compare current value to prior value</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1448.089,1425.606H806.814"/>
+				<g transform="translate(793.3648502775013,1425.6063266521182) translate(-793.3648502775013,-1425.6063266521182)">
+					<path d="M806.978,1418.8l-13.612,6.807l13.612,6.807V1418.8z"/>
+					<g transform="translate(1461.538712128828,1425.6063266521182) translate(-1461.538712128828,-1425.6063266521182)">
+						<path d="M1447.925,1418.8l13.613,6.807l-13.613,6.807V1418.8z"/>
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="1480.869" y="1450.109" fill="#FFFFFF" width="28.529" height="21.235"/>
+				<rect x="1480.869" y="1450.109" fill="#FFFFFF" width="92.875" height="21.235"/>
+				<rect x="1480.869" y="1450.109" fill="#FFFFFF" width="22.824" height="21.235"/>
+				<rect x="1480.869" y="1450.109" fill="#FFFFFF" width="42.389" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1483.3179 1464.8104)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">set </text>
+				<text transform="matrix(1 0 0 1 1506.9478 1464.8104)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">hasChanged</text>
+				<text transform="matrix(1 0 0 1 1594.9214 1464.8104)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11"> &amp; </text>
+				<text transform="matrix(1 0 0 1 1612.8462 1464.8104)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">value</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1461.539,1471.345h197.127"/>
+				<g transform="translate(1672.1142994281768,1471.3448958921183) translate(-1672.1142994281768,-1471.3448958921183)">
+					<path d="M1658.501,1464.539l13.613,6.806l-13.613,6.807V1464.539z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1232.423" y="1495.848" fill="#FFFFFF" width="128.693" height="21.235"/>
+				<rect x="1232.423" y="1495.848" fill="#FFFFFF" width="8.973" height="21.235"/>
+				<rect x="1232.423" y="1512.182" fill="#FFFFFF" width="88.521" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1234.8726 1510.5487)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">hasInputChanged</text>
+				<text transform="matrix(1 0 0 1 1358.6665 1510.5487)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11"> </text>
+				<text transform="matrix(1 0 0 1 1234.8726 1526.8846)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">(HALT_BTN)</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1136.074,1533.419h312.016"/>
+				<g transform="translate(1461.538712128828,1533.4186684321182) translate(-1461.538712128828,-1533.4186684321182)">
+					<path d="M1447.925,1526.612l13.613,6.807l-13.613,6.806V1526.612z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1520.388" y="1557.922" fill="#FFFFFF" width="92.875" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1522.8394 1572.6229)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">hasChanged</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M1474.988,1579.157h183.678"/>
+				<g transform="translate(1672.1142994281768,1579.1572376721183) translate(-1672.1142994281768,-1579.1572376721183)">
+					<path d="M1658.501,1572.35l13.613,6.807l-13.613,6.807V1572.35z"/>
+					<g transform="translate(1461.538712128828,1579.1572376721183) translate(-1461.538712128828,-1579.1572376721183)">
+						<path d="M1475.152,1572.35l-13.613,6.807l13.613,6.807V1572.35z"/>
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="1261.324" y="1603.66" fill="#FFFFFF" width="47.27" height="21.235"/>
+				<rect x="1261.324" y="1603.66" fill="#FFFFFF" width="32.596" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1263.7739 1618.3612)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">return </text>
+				<text transform="matrix(1 0 0 1 1306.1431 1618.3612)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">true</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1461.539,1624.895h-312.016"/>
+				<g transform="translate(1136.0739019505104,1624.8958069121184) translate(-1136.0739019505104,-1624.8958069121184)">
+					<path d="M1149.687,1618.09l-13.613,6.806l13.613,6.807V1618.09z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1155.404" y="1649.398" fill="#FFFFFF" width="66.01" height="21.236"/>
+				<rect x="1155.404" y="1649.398" fill="#FFFFFF" width="8.975" height="21.236"/>
+				<rect x="1155.404" y="1665.733" fill="#FFFFFF" width="160.055" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1157.853 1664.1005)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">setEvent</text>
+				<text transform="matrix(1 0 0 1 1218.9634 1664.1005)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11"> </text>
+				<text transform="matrix(1 0 0 1 1157.853 1680.4354)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">&quot;BEGIN_SLOW_STOP&quot;</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1136.074,1686.97h185.266"/>
+				<g transform="translate(1334.788359489117,1686.9695794521183) translate(-1334.788359489117,-1686.9695794521183)">
+					<path d="M1321.175,1680.163l13.613,6.807l-13.613,6.806V1680.163z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1202.025" y="1711.473" fill="#FFFFFF" width="66.813" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1204.4751 1726.1737)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">getEvent</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1149.523,1732.708h171.816"/>
+				<g transform="translate(1334.788359489117,1732.7081486921184) translate(-1334.788359489117,-1732.7081486921184)">
+					<path d="M1321.175,1725.902l13.613,6.806l-13.613,6.807V1725.902z"/>
+					<g transform="translate(1136.0739019505104,1732.7081486921184) translate(-1136.0739019505104,-1732.7081486921184)">
+						<path d="M1149.687,1725.902l-13.613,6.806l13.613,6.807V1725.902z"/>
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="1405.943" y="1757.211" fill="#FFFFFF" width="70.055" height="21.235"/>
+				<rect x="1405.943" y="1773.546" fill="#FFFFFF" width="129.582" height="21.236"/>
+				<rect x="1405.943" y="1789.881" fill="#FFFFFF" width="102.695" height="21.236"/>
+				<text transform="matrix(1 0 0 1 1408.3921 1771.912)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">slowStop</text>
+				<text transform="matrix(1 0 0 1 1408.3921 1788.2479)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">save current speed</text>
+				<text transform="matrix(1 0 0 1 1408.3921 1804.5829)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">isStopping true</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1136.074,1811.117h655.869"/>
+				<g transform="translate(1805.392918974626,1811.1171245321184) translate(-1805.392918974626,-1811.1171245321184)">
+					<path d="M1791.781,1804.31l13.611,6.807l-13.611,6.807V1804.31z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1824.722" y="1835.62" fill="#FFFFFF" width="134.514" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1827.1733 1850.3221)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">beginSpeedChange</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1805.392,1856.855h65.342v21.236h-51.893"
+					/>
+				<g transform="translate(1805.392918974626,1878.0914580621184) translate(-1805.392918974626,-1878.0914580621184)">
+					<path d="M1819.005,1871.285l-13.613,6.807l13.613,6.806V1871.285z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1824.722" y="1902.594" fill="#FFFFFF" width="154.07" height="21.236"/>
+				<rect x="1824.722" y="1918.93" fill="#FFFFFF" width="137.742" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1827.1733 1917.2958)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">continueSpeedChange</text>
+				<text transform="matrix(1 0 0 1 1827.1733 1933.6307)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">calculate new speed</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1805.392,1940.165h65.342v21.236h-51.893"
+					/>
+				<g transform="translate(1805.392918974626,1961.4009948921184) translate(-1805.392918974626,-1961.4009948921184)">
+					<path d="M1819.005,1954.595l-13.613,6.807l13.613,6.806V1954.595z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="1378.64" y="1985.904" fill="#FFFFFF" width="70.084" height="21.235"/>
+				<rect x="1378.64" y="1985.904" fill="#FFFFFF" width="119.004" height="21.235"/>
+				<text transform="matrix(1 0 0 1 1381.0913 2000.6053)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">setSpeed</text>
+				<text transform="matrix(1 0 0 1 1446.2729 2000.6053)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11"> using new speed</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M1805.392,2007.14h-655.869"/>
+				<g transform="translate(1136.0739019505104,2007.1395641321185) translate(-1136.0739019505104,-2007.1395641321185)">
+					<path d="M1149.687,2000.333l-13.613,6.807l13.613,6.807V2000.333z"/>
+				</g>
+			</g>
+			<path fill="#FFFFFF" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M8.942,2031.642h184.361l14.702,14.701
+				v39.205H8.942V2031.642 M193.303,2031.642v14.701h14.702"/>
+			<g>
+				<text transform="matrix(1 0 0 1 48.5806 2054.5117)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">Browser ready</text>
+				<text transform="matrix(1 0 0 1 48.5806 2070.8467)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">for </text>
+				<text transform="matrix(1 0 0 1 69.7612 2070.8467)" font-family="'HelveticaNeueLTStd-Bd'" font-size="11">next keyframe</text>
+			</g>
+			<g>
+				<rect x="349.895" y="2110.051" fill="#FFFFFF" width="161.343" height="21.236"/>
+				<text transform="matrix(1 0 0 1 352.3438 2124.7529)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">requestAnimationFrame</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" stroke-dasharray="6.5341" d="
+					M330.564,2131.287h65.341v21.236l-54.582,40.936"/>
+				
+					<g transform="translate(330.56418335319006,2201.528483402118) rotate(-36.86989764584402,0,0) translate(-330.56418335319006,-2201.528483402118)">
+					<path d="M344.177,2194.723l-13.613,6.806l13.612,6.806L344.177,2194.723z"/>
+					<g transform="rotate(36.86989764584402,0,0)">
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="663.208" y="2226.031" fill="#FFFFFF" width="59.51" height="21.236"/>
+				<text transform="matrix(1 0 0 1 665.6572 2240.7324)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">getState</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M344.014,2247.268h697.898"/>
+				<g transform="translate(1055.3614674016198,2247.267052642118) translate(-1055.3614674016198,-2247.267052642118)">
+					<path d="M1041.75,2240.461l13.611,6.807l-13.611,6.806V2240.461z"/>
+					<g transform="translate(330.56418335319006,2247.267052642118) translate(-330.56418335319006,-2247.267052642118)">
+						<path d="M344.177,2240.461l-13.612,6.807l13.612,6.806V2240.461z"/>
+					</g>
+				</g>
+			</g>
+			<g>
+				<rect x="372.813" y="2271.77" fill="#FFFFFF" width="101.894" height="21.236"/>
+				<text transform="matrix(1 0 0 1 375.2622 2286.4717)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">updatePosition</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M330.564,2293.006h172.94"/>
+				<g transform="translate(516.9543778472005,2293.005621882118) translate(-516.9543778472005,-2293.005621882118)">
+					<path d="M503.342,2286.199l13.612,6.807l-13.612,6.807V2286.199z"/>
+				</g>
+			</g>
+			<g>
+				<rect x="306.516" y="2317.509" fill="#FFFFFF" width="97.227" height="21.235"/>
+				<text transform="matrix(1 0 0 1 308.9648 2332.21)" font-family="'HelveticaNeueLTStd-Roman'" font-size="11">redraw Trolley</text>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="1.3613" stroke-miterlimit="10" d="M516.954,2338.744H206.752"/>
+				<g transform="translate(193.3028965909505,2338.7441911221176) translate(-193.3028965909505,-2338.7441911221176)">
+					<path d="M206.916,2331.938l-13.613,6.807l13.613,6.807V2331.938z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+<g id="swatches" display="none">
+	<rect x="955.72" y="1189.5" display="inline" fill="#CFD3C6" width="71.5" height="10.5"/>
+	<rect x="1039.439" y="1189.5" display="inline" fill="#A6B5B0" width="71.5" height="10.5"/>
+	<rect x="873.5" y="1243.5" display="inline" fill="#CDE0DA" width="71.5" height="10.5"/>
+	<rect x="955.72" y="1243.5" display="inline" fill="#FFDDB7" width="71.5" height="10.5"/>
+	<rect x="1039.439" y="1243.5" display="inline" fill="#7A7A7A" width="71.5" height="10.5"/>
+	<rect x="873.5" y="1189.5" display="inline" fill="#F9EEE0" width="71.5" height="10.5"/>
+</g>
+</svg>
