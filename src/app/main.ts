@@ -1,27 +1,29 @@
 // externals
-import { Serial, getTicks, pinMode } from '../microcontroller';
+import { Serial, analogRead, getTicks } from '../microcontroller';
 import {
-  INPUT,
   int, uint8_t, velocity, getStations, MAX_SPEED, DASHBOARD_REFRESH_RATE,
-  DirectionTypes, DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX, HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN, SPEED_CONTROL,
+  DirectionTypes, HALT_BTN, PAUSE_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
-  CONTROL_PANEL_CHBX,
+  OutputModes,
 } from '../common';
 // locals
 import { slowStop, slowStart, continueSpeedChange } from './libs/mgrs/EaseSpeed';
 import { EventTypes, getEvent, setEvent } from './libs/mgrs/EventManager';
-// TODO: don't talk to Simulator from the App
 import { refreshDashboard } from './libs/mgrs/LCDManager';
 import { StationTransistions } from './libs/mgrs/StationManager';
-import { analogRead, booleanRead, hasInputChanged, resetChangeFlags } from './libs/mgrs/ControlManager';
+import {
+  booleanRead, ctlPinMode, hasInputChanged, pollInputs, resetChangeFlags,
+} from './libs/mgrs/ControlManager';
 import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
+
+const { INPUT } = OutputModes;
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** (px/tick) current speed */
 let speed: velocity = MAX_SPEED;
 let waitUntil = 0;
 
-export const getSpeed = () => speed;
+// export const getSpeed = () => speed;
 export const setSpeed = (newSpeed: velocity) => { speed = newSpeed; };
 export const getState = () => ({ isLayover: waitUntil > 0, speed, direction });
 
@@ -77,13 +79,9 @@ const pollButtons = () => {
 };
 
 export const loop = () => {
+  pollInputs();
   pollButtons();
   pollPointSensors();
-  // checkAllSensors();
-  // const sensedStation = getCurrentStationSensor();
-  // if (sensedStation > -1) {
-  //   // Serial.println({ 'current triggered station': sensedStation });
-  // }
 
   const ticks = getTicks();
   if (ticks % DASHBOARD_REFRESH_RATE === 0) {
@@ -143,24 +141,15 @@ export const loop = () => {
       break;
   }
 
-  // clearPointSensors();
   resetChangeFlags();
 };
 
 export const setup = () => {
   Serial.begin(9600);
 
-  pinMode(POWER_BTN, INPUT);
-  pinMode(PAUSE_BTN, INPUT);
-  pinMode(HALT_BTN, INPUT);
-  pinMode(REVERSE_BTN, INPUT);
-
-  pinMode(SPEED_CONTROL, INPUT);
-
-  pinMode(CONTROL_PANEL_CHBX, INPUT);
-  pinMode(DASHBORD_CHBX, INPUT);
-  pinMode(SIGNAL_CHBX, INPUT);
-  pinMode(STATION_CHBX, INPUT);
+  ctlPinMode(HALT_BTN, INPUT);
+  ctlPinMode(REVERSE_BTN, INPUT);
+  ctlPinMode(SPEED_CONTROL, INPUT);
 
   onSpeedChange();
 };

@@ -1,12 +1,12 @@
-import { POWER_BTN } from '../common';
-import { booleanRead, loop, setup } from '../app';
+import { POWER_BTN, CLOCK_SPEED, HIGH_LOW_THRESHOLD } from '../common';
+import { loop, setup } from '../app';
 import { prepareSimulator, startSimulator, updateClock } from '../simulator';
 // locals
 import { getTicks, resetTicks, updateTicks } from './components/Clock';
-import { CLOCK_SPEED } from '../common';
+import { analogRead } from './components/AnalogWiring';
 
 const onClockTick = () => {
-  if (!booleanRead(POWER_BTN)) {
+  if (analogRead(POWER_BTN) < HIGH_LOW_THRESHOLD) {
     return;
   }
 

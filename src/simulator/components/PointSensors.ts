@@ -1,13 +1,13 @@
 // External
 import {
   getStations,
-  SENSOR_VOLTS_ALL_CLEAR, SENSOR_VOLTS_OBJECT_DETECTED,
+  IR_SENSOR__CLEAR, IR_SENSOR__BLOCKED,
   STATION_SAFETY_LENGTH,
   pixels,
 } from '../../common';
-import { analogWrite } from '../../app';
+import { analogWrite } from '../../microcontroller';
 // locals
-import { setActive } from './StationsHelper';
+import { updateStationUI } from './StationsHelper';
 
 let currentSensorId = -1;
 
@@ -17,12 +17,12 @@ export const getStationByPostion = (pos: pixels) => getStations()
 export const tripSensors = (position: pixels): void => {
   const station = getStationByPostion(position);
   if (station && station.id !== currentSensorId) {
-    analogWrite(station.id, SENSOR_VOLTS_OBJECT_DETECTED);
-    setActive(station.id, true);
+    analogWrite(station.id, IR_SENSOR__BLOCKED);
+    updateStationUI(station.id, true);
     currentSensorId = station.id;
   } else if (!station && currentSensorId > -1) {
-    analogWrite(currentSensorId, SENSOR_VOLTS_ALL_CLEAR);
-    setActive(currentSensorId, false);
+    analogWrite(currentSensorId, IR_SENSOR__CLEAR);
+    updateStationUI(currentSensorId, false);
     currentSensorId = -1;
   }
 };

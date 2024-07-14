@@ -30,3 +30,7 @@ export const updateStdOut = (message: JsonData) => {
 
   document.getElementById(ElementIds.STD_OUT)!.prepend(p);
 };
+
+export const clearStdOut = () => {
+  document.getElementById(ElementIds.STD_OUT)!.innerHTML = '';
+};

@@ -18,6 +18,7 @@ export const ElementIds = Object.freeze({
   LOG_DASHBORD:          'enableDashboardLogCbx',
   LOG_STATION:           'enableStationsLogCbx',
   LOG_SIGNAL:            'enableSignalsLogCbx',
+  CLEAR_LOGS_BTN:        'clearLogBtn',
 
   LAYOUT:                'layout',
   RAIL:                  'layout-rail',
@@ -25,4 +26,6 @@ export const ElementIds = Object.freeze({
 
   STATUS:                'display-status',
   STD_OUT:               'std-out',
+
+  MULTMETR:              'multimeter-list',
 });

@@ -1,0 +1,63 @@
+title Halt (Slow Stop)
+
+actor User
+
+participant Simulator
+participant AnimateTrolley
+participant TrolleyUI
+
+participant Microprocessor
+participant AnalogWiring
+participant DataStore
+
+participant App
+participant Main
+participant Events
+participant ControlManager
+participant currentStates
+
+note over User,Simulator: **Page Load**\nboots\nmicrocontroller
+
+Microprocessor-->App:
+App->Main:setup
+Main->ControlManager:initialize states
+ControlManager->currentStates:set
+
+Simulator->AnimateTrolley:startAnimation
+AnimateTrolley<->App:getState
+AnimateTrolley->TrolleyUI:updatePosition
+TrolleyUI->Simulator: redraw Trolley
+AnimateTrolley-->>AnimateTrolley: ends with\nrequestAnimationFrame
+note over Simulator: attach event\nhandlers
+
+Microprocessor-->>Microprocessor:start Loop timer
+note over User,Simulator: **Page Ready**
+
+User-->>(3)Simulator:Clicks "Halt" Button
+Simulator->Microprocessor:onClick handler\nCall **analogWrite**
+Microprocessor->AnalogWiring:analogWrite
+AnalogWiring->DataStore: **set(pin, value)**\nSaves name/value
+DataStore->Simulator:**updateMultimeter**
+
+App(3)<--Microprocessor: trigger next tick to "loop"
+
+App->Main:loop
+Main->>ControlManager:Poll Inputs
+ControlManager<->AnalogWiring:**analogRead**\ncompare current value to prior value
+ControlManager->currentStates:set **hasChanged** & **value**
+Main->ControlManager:**hasInputChanged** \n(HALT_BTN)
+ControlManager<-->currentStates:**hasChanged**
+ControlManager->Main:return **true**
+Main->Events:**setEvent** \n"BEGIN_SLOW_STOP"
+Main<->Events:**getEvent**
+Main->EaseSpeed:**slowStop**\nsave current speed\nisStopping true
+EaseSpeed->EaseSpeed:beginSpeedChange
+EaseSpeed->EaseSpeed:continueSpeedChange\ncalculate new speed
+EaseSpeed->Main:**setSpeed** using new speed
+
+note over User,Simulator: Browser ready\nfor **next keyframe**
+
+AnimateTrolley-->(3)AnimateTrolley:requestAnimationFrame
+AnimateTrolley<->App:getState
+AnimateTrolley->TrolleyUI:updatePosition
+TrolleyUI->Simulator: redraw Trolley

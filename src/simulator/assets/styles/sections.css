@@ -9,6 +9,7 @@
 .section--logging {
   background-color: var(--logging-bg-color);
   color: var(--logging-color);
+  position: relative;
 }
 
 .section--simulator {
