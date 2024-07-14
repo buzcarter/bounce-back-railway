@@ -5,8 +5,8 @@ import {
   HALT_BTN, PAUSE_BTN, POWER_BTN, REVERSE_BTN,
   SPEED_CONTROL,
   SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
-  IR_SENSOR__CLEAR,
   CONTROL_PANEL_CHBX,
+  IR_SENSOR__CLEAR,
   uint10_MAX,
   HIGH_LOW_THRESHOLD,
   int,
@@ -16,6 +16,7 @@ import {
 import { analogRead, analogWrite } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
+import { updateStdOut } from './StdOut';
 
 const { LOW, HIGH } = DigitalLevels;
 
@@ -96,10 +97,21 @@ const pinSelectorHash = {
   [STATION_CHBX]: ElementIds.LOG_STATION,
 };
 
+const logChange = (pin: uint8_t, value: int): void => {
+  if (analogRead(CONTROL_PANEL_CHBX) > HIGH_LOW_THRESHOLD) {
+    updateStdOut({
+      pin,
+      value: value as number,
+      // name: obj.name,
+    });
+  }
+};
+
 const toggle = (pin: uint8_t): int => {
   const isTrue = analogRead(pin) > HIGH_LOW_THRESHOLD;
   const newVal = !isTrue ? HIGH : LOW;
   analogWrite(pin, newVal);
+  logChange(pin, newVal);
   return newVal;
 };
 
@@ -122,6 +134,7 @@ const onInputChange = (event: Event) => {
   const { pin } = target.dataset;
   const pinInt = parseInt(pin || '', 10);
   analogWrite(pinInt, parseFloat(target.value));
+  logChange(pin as unknown as uint8_t, target.value as unknown as int);
 };
 
 const pinToElement = (pin: uint8_t): HTMLElement | null => {

@@ -3,12 +3,10 @@ import {
   int,
   uint10_t,
   uint8_t,
-  CONTROL_PANEL_CHBX,
   HIGH_LOW_THRESHOLD,
   OutputModes,
   DigitalLevels,
 } from '../../../common';
-import { Serial } from '../../../microcontroller';
 import { analogRead } from '../../../microcontroller';
 
 const { LOW, HIGH } = DigitalLevels;
@@ -27,15 +25,6 @@ const updateValue = (pin: uint8_t, value: int): int => {
   const obj = getDirtyObject(pin);
   if (!obj) {
     return value;
-  }
-
-  // eslint-disable-next-line no-use-before-define
-  if (booleanRead(CONTROL_PANEL_CHBX)) {
-    Serial.println({
-      pin,
-      value: value as number,
-      // name: obj.name,
-    });
   }
 
   if (obj.value !== value) {
