@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   uint10_t, uint8_t,
   DASHBORD_CHBX, SIGNAL_CHBX, STATION_CHBX,
@@ -16,6 +15,7 @@ import {
 import { analogRead, analogWrite } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
+import { debounce } from './Debounce';
 import { updateStdOut } from './StdOut';
 
 const { LOW, HIGH } = DigitalLevels;
@@ -129,7 +129,7 @@ const onClick = (event: Event) => {
   }
 };
 
-const onInputChange = (event: Event) => {
+const onInputChange = (event: Event): void => {
   const target = event.target as HTMLInputElement;
   const { pin } = target.dataset;
   const pinInt = parseInt(pin || '', 10);
@@ -164,8 +164,12 @@ export const attachEventHandlers = () => {
 
       switch (type) {
         case ControlTypes.ANALOG:
-          (ele as HTMLInputElement).value = ctl.initialValue.toString();
-          ele.addEventListener('input', onInputChange);
+          {
+            (ele as HTMLInputElement).value = ctl.initialValue.toString();
+            // @ts-expect-error Some problem with `onInputCHange` type
+            const deboundedOnInbputChange = debounce(onInputChange, 100);
+            ele.addEventListener('input', deboundedOnInbputChange);
+          }
           break;
         case ControlTypes.CHECKBOX:
         case ControlTypes.BOOLEAN:
