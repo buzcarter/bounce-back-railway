@@ -6,3 +6,4 @@ export * as Serial from './components/Serial';
 export { millis } from './components/Clock';
 // Well, a cheat so the App doesn't violoate the "no talking to the simulator" rule
 export { updateDashboard } from '../simulator';
+export { eventManager } from './components/EventManager';

@@ -60,7 +60,7 @@ class CountdownTimer {
     pathLength: number,
   };
 
-  static getColorCodes(timerDuration: number): {
+  static #getColorCodes(timerDuration: number): {
     info: ColorCodeTypes,
     warning: ColorCodeTypes,
     alert: ColorCodeTypes,
@@ -73,17 +73,17 @@ class CountdownTimer {
       // at 50% of the time remaining, change to warning color
       warning: {
         color: 'orange',
-        threshold: Math.floor(timerDuration / 2),
+        threshold: timerDuration / 2,
       },
       // at 25% of the time remaining, change to alert color
       alert: {
         color: 'red',
-        threshold: Math.floor(timerDuration / 4),
+        threshold: timerDuration / 4,
       },
     };
   }
 
-  static formatTime(time: number) {
+  static #formatTime(time: number) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
 
@@ -107,17 +107,16 @@ class CountdownTimer {
         <g class="base-timer__circle">
           <circle class="base-timer__path-elapsed" cx="${center}" cy="${center}" r="${radius}" style="stroke-width: ${lineWidth}px;" />
           <path id="${pathID}" stroke-dasharray="${pathLength}"
-            style="transition: ${this.clockSpeed / 1000}s linear stroke-dasharray, ${(initialTime / 8).toFixed(2)}s linear color; stroke-width: ${lineWidth}px;"
             class="base-timer__path-remaining ${pathColorClass}"
-            d="${pathDefinition}"
-          />
+            style="stroke-width: ${lineWidth}px; transition: stroke-dasharray ${this.clockSpeed / 1000}s linear 0s, color ${(initialTime / 8).toFixed(2)}s linear 0s"
+            d="${pathDefinition}" />
         </g>
       </svg>
-      <span id="${labelID}" class="base-timer__label">${CountdownTimer.formatTime(initialTime)}</span>
+      <span id="${labelID}" class="base-timer__label">${CountdownTimer.#formatTime(initialTime)}</span>
     </div>`;
   }
 
-  static setRemainingPathColor(svgPathEle: HTMLElement, remainingTime: number, { alert, warning, info }: { alert: ColorCodeTypes, warning: ColorCodeTypes, info: ColorCodeTypes } = {
+  static #setRemainingPathColor(svgPathEle: HTMLElement, remainingTime: number, { alert, warning, info }: { alert: ColorCodeTypes, warning: ColorCodeTypes, info: ColorCodeTypes } = {
     alert: { color: '', threshold: 0 },
     warning: { color: '', threshold: 0 },
     info: { color: '', threshold: 0 },
@@ -141,7 +140,7 @@ class CountdownTimer {
 
     const svgPathID = `base-timer-path-remaining-${containerId}`;
     const labelID = `base-timer-label-${containerId}`;
-    const colorCodes = CountdownTimer.getColorCodes(timerDuration);
+    const colorCodes = CountdownTimer.#getColorCodes(timerDuration);
 
     containerEle.innerHTML = this.#getMarkup(svgPathID, labelID, colorCodes.info.color, timerDuration);
 
@@ -161,7 +160,7 @@ class CountdownTimer {
     } = this;
 
     const pixelsPerTick = pathLength / ((1000 * timerDuration) / clockSpeed);
-    const colorCodes = CountdownTimer.getColorCodes(timerDuration);
+    const colorCodes = CountdownTimer.#getColorCodes(timerDuration);
 
     let remainingPathLength = pathLength;
     let elapsedTime = 0;
@@ -174,11 +173,11 @@ class CountdownTimer {
       remainingPathLength -= pixelsPerTick;
 
       svgPathEle!.setAttribute('stroke-dasharray', `${remainingPathLength.toFixed(1)} ${pathLength}`);
-      CountdownTimer.setRemainingPathColor(svgPathEle as unknown as HTMLElement, remainingTime, colorCodes);
-      timeRemainingEle!.innerText = CountdownTimer.formatTime(remainingTime);
+      CountdownTimer.#setRemainingPathColor(svgPathEle as unknown as HTMLElement, remainingTime, colorCodes);
+      timeRemainingEle!.innerText = CountdownTimer.#formatTime(remainingTime);
 
       if (remainingTime <= 0) {
-        timeRemainingEle!.innerText = CountdownTimer.formatTime(0);
+        timeRemainingEle!.innerText = CountdownTimer.#formatTime(0);
         svgPathEle!.setAttribute('stroke-dasharray', `-1 ${pathLength}`);
         clearInterval(timerInterval);
 
