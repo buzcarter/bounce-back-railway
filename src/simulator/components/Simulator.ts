@@ -15,6 +15,7 @@ import { booleanRead } from './Utils';
 import { attachEventHandlers, getPins } from './UXControls';
 import { render as addMultimeter } from './Multimeter';
 import { attach as attachLogging } from './Logging';
+import { startTimer } from './TimerUI';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -29,6 +30,7 @@ export const prepareSimulator = () => {
 
 export const startSimulator = () => {
   startAnimation();
+  startTimer();
 };
 
 export const updateDashboard = ({
