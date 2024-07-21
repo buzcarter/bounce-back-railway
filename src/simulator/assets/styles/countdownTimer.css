@@ -56,11 +56,16 @@
   /* border: solid 1px; */
   height: 50px;
   left: 15px;
-  /* opacity: 0.4; */
+  opacity: 1;
   overflow: hidden;
   position: absolute;
   top: 5px;
+  transition: ease-in-out 0.2s opacity;
   width: 50px;
+}
+
+.base-timer--fade {
+  opacity: .2;
 }
 
 .base-timer__label {

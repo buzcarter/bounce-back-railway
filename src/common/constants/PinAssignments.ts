@@ -30,5 +30,7 @@ export const DASHBORD_CHBX: uint8_t            = 105;
 export const SIGNAL_CHBX: uint8_t              = 106;
 export const STATION_CHBX: uint8_t             = 107;
 
+export const LCD_TX: uint8_t                   = 109;
+
 // LED Output Pins
 export const CLOCK_LED_OUT: uint8_t            = LED_BUILTIN;

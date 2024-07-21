@@ -1,10 +1,11 @@
 // externals
-import { Serial, analogRead, getTicks } from '../microcontroller';
+import { Serial, analogRead, millis } from '../microcontroller';
 import {
   int, uint8_t, velocity, getStations, MAX_SPEED, DASHBOARD_REFRESH_RATE,
   DirectionTypes, HALT_BTN, PAUSE_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
   OutputModes,
+  unsigned_long,
 } from '../common';
 // locals
 import { slowStop, slowStart, continueSpeedChange } from './libs/mgrs/EaseSpeed';
@@ -42,7 +43,7 @@ const onSpeedChange = () => {
 
 const setLayoverDuration = (length: int) => {
   if (length > 0) {
-    waitUntil = getTicks() + length;
+    waitUntil = millis() + length;
   }
 };
 
@@ -83,8 +84,9 @@ export const loop = () => {
   pollButtons();
   pollPointSensors();
 
-  const ticks = getTicks();
-  if (ticks % DASHBOARD_REFRESH_RATE === 0) {
+  const elapsedTime: unsigned_long = millis();
+
+  if (elapsedTime % DASHBOARD_REFRESH_RATE === 0) {
     refreshDashboard();
   }
 
@@ -92,7 +94,7 @@ export const loop = () => {
     return;
   }
 
-  if (ticks >= waitUntil && waitUntil > 0) {
+  if (elapsedTime >= waitUntil && waitUntil > 0) {
     waitUntil = 0;
   }
 

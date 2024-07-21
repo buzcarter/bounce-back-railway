@@ -1,6 +1,5 @@
 import {
-  CLOCK_SPEED,
-  clockTick, int, pixels, velocity,
+  int, pixels, velocity,
   DirectionTypes,
   DASHBORD_CHBX,
 } from '../../common';
@@ -10,8 +9,7 @@ import { updateStdOut } from './StdOut';
 import { booleanRead } from './Utils';
 
 export const refreshDashboard = (
-  { ticks, isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {
-    ticks: clockTick,
+  { isLayover, isPaused, direction, position, powerLevel, speed, maxSpeed }: {
     isLayover: boolean,
     isPaused: boolean,
     direction: DirectionTypes,
@@ -22,14 +20,13 @@ export const refreshDashboard = (
   },
 ) => {
   const currentState = {
-    ticks,
     action: isLayover || isPaused ? 'Pause' : 'Move',
     direction: direction === DirectionTypes.RIGHT ? 'Right' : 'Left',
     position: position.toFixed(1),
     power: `${(powerLevel * 100).toFixed(1)}%`,
-    speed: ((1000 / CLOCK_SPEED) * speed).toFixed(1),
+    speed: speed.toFixed(1),
     // eslint-disable-next-line no-mixed-operators
-    maxSpeed: ((1000 / CLOCK_SPEED) * maxSpeed).toFixed(1),
+    maxSpeed: maxSpeed.toFixed(1),
   };
 
   document.getElementById(ElementIds.DSPLY_DIRECTION)!.classList.toggle(CSSClasses.ICON_ROTATE, direction === DirectionTypes.LEFT);
