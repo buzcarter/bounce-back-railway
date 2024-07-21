@@ -1,10 +1,14 @@
 // externals
-import { Serial, analogRead, getTicks } from '../microcontroller';
+import {
+  Serial, analogRead, analogWrite, millis, pinMode,
+} from '../microcontroller';
 import {
   int, uint8_t, velocity, getStations, MAX_SPEED, DASHBOARD_REFRESH_RATE,
   DirectionTypes, HALT_BTN, PAUSE_BTN, REVERSE_BTN, SPEED_CONTROL,
   uint10_MAX,
   OutputModes,
+  unsigned_long,
+  LCD_TX,
 } from '../common';
 // locals
 import { slowStop, slowStart, continueSpeedChange } from './libs/mgrs/EaseSpeed';
@@ -16,7 +20,7 @@ import {
 } from './libs/mgrs/ControlManager';
 import { getTransition, pollSensors as pollPointSensors, getCurrentStationId } from './libs/mgrs/PointCensorManager';
 
-const { INPUT } = OutputModes;
+const { INPUT, OUTPUT } = OutputModes;
 
 let direction: DirectionTypes = DirectionTypes.NOT_SET;
 /** (px/tick) current speed */
@@ -42,7 +46,8 @@ const onSpeedChange = () => {
 
 const setLayoverDuration = (length: int) => {
   if (length > 0) {
-    waitUntil = getTicks() + length;
+    analogWrite(LCD_TX, length / 1000);
+    waitUntil = millis() + length;
   }
 };
 
@@ -83,8 +88,9 @@ export const loop = () => {
   pollButtons();
   pollPointSensors();
 
-  const ticks = getTicks();
-  if (ticks % DASHBOARD_REFRESH_RATE === 0) {
+  const elapsedTime: unsigned_long = millis();
+
+  if (elapsedTime % DASHBOARD_REFRESH_RATE === 0) {
     refreshDashboard();
   }
 
@@ -92,7 +98,7 @@ export const loop = () => {
     return;
   }
 
-  if (ticks >= waitUntil && waitUntil > 0) {
+  if (elapsedTime >= waitUntil && waitUntil > 0) {
     waitUntil = 0;
   }
 
@@ -150,6 +156,8 @@ export const setup = () => {
   ctlPinMode(HALT_BTN, INPUT);
   ctlPinMode(REVERSE_BTN, INPUT);
   ctlPinMode(SPEED_CONTROL, INPUT);
+
+  pinMode(LCD_TX, OUTPUT);
 
   onSpeedChange();
 };

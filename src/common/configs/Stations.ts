@@ -1,5 +1,4 @@
 import { DirectionTypes } from '../constants/DirectionTypes';
-import { CLOCK_SPEED } from '../constants/MicrocontrollerConstants';
 import {
   SENSOR_26TH_AVE_XING, SENSOR_ATWATER_XING, SENSOR_LT_LA, SENSOR_MIDDLE_BURBANK, SENSOR_RT_CLAREMONT, SENSOR_SOUTH_GATE_XING,
 } from '../constants/PinAssignments';
@@ -12,7 +11,7 @@ export const stations = [{
   name: 'LA Central Station',
   position: MIN_LEFT_EDGE, // px from left
   reverseDirection: true,
-  delay: 2000 / CLOCK_SPEED, // ms
+  delay: 2000, // ms
   icon: 'station-1',
   defaultDirection: DirectionTypes.RIGHT,
   style: {
@@ -24,7 +23,7 @@ export const stations = [{
   name: 'Claremont Station',
   position: MAX_RIGHT_EDGE, // px from left
   reverseDirection: true,
-  delay: 3000 / CLOCK_SPEED, // ms
+  delay: 3000, // ms
   icon: 'station-2',
   defaultDirection: DirectionTypes.LEFT,
   style: {
@@ -36,7 +35,7 @@ export const stations = [{
   name: 'Burbank Platform',
   position: 400, // px from left
   reverseDirection: false,
-  delay: 1500 / CLOCK_SPEED, // ms
+  delay: 1500, // ms
   icon: 'passenger-platform',
   style: {
     top: '64px', right: '50%',
@@ -47,7 +46,7 @@ export const stations = [{
   name: 'Atwater Crossing',
   position: 700, // px from left
   reverseDirection: false,
-  delay: 750 / CLOCK_SPEED, // ms
+  delay: 750, // ms
   icon: 'crossing-signal',
   style: {
     top: '73px',

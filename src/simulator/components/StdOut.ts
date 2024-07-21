@@ -1,12 +1,12 @@
 import { JsonData } from '../../common';
-import { getTicks } from '../../microcontroller';
+import { millis } from '../../microcontroller';
 // locals
 import { CSSClasses, ElementIds } from '../constants';
 
 export const updateStdOut = (message: JsonData) => {
   const p = document.createElement('p');
   Object.entries({
-    ticks: getTicks(),
+    t: millis(),
     ...message,
   })
     .forEach(([key, value]) => {

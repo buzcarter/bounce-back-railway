@@ -1,5 +1,6 @@
 import { uint10_MAX, uint10_t, uint8_t } from '../../common';
 import { update as updateMultimeter } from '../../simulator/components/Multimeter';
+import { eventManager } from './EventManager';
 
 interface DataStoreObj {
   [key: string]: uint10_t,
@@ -24,6 +25,7 @@ export const set = (pin: uint8_t, value: uint10_t) => {
     throw new Error(`analogWrite: Invalid value: ${value} on pin ${pin}`);
   }
   dataCache[getPin(pin)] = value;
+  eventManager.emit(pin, value);
   updateMultimeter(pin, value);
 };
 

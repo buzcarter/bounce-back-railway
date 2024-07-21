@@ -7,6 +7,7 @@ import './base.css';
 import './icons.css';
 /* . */
 import './buttons.css';
+import './countdownTimer.css';
 import './dashboard.css';
 import './multimeter.css';
 import './proximitySensor.css';

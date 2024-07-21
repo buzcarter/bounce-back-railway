@@ -1,0 +1,90 @@
+.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke: var(--color-status-disabled);
+}
+
+.base-timer__path-remaining {
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: var(--color-status-success);
+  /* --color-status-info); */
+}
+
+.base-timer__path-remaining.orange {
+  color: var(--color-status-warning);
+}
+
+.base-timer__path-remaining.red {
+  color: var(--color-status-alert);
+}
+
+/*
+.base-timer__label {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+*/
+
+/* my tweaks */
+.base-timer {
+  height: 50px;
+  left: 15px;
+  opacity: 1;
+  overflow: hidden;
+  position: absolute;
+  top: 5px;
+  width: 50px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.base-timer__wrap {
+  animation: fadeIn .25s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.base-timer__wrap--fade {
+  animation: fadeOut .75s ease-out forwards;
+}
+
+.base-timer__label {
+  font-size: 11px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 19px;
+}

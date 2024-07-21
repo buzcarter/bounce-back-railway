@@ -4,7 +4,7 @@ import {
   uint10_MAX,
   MAX_SPEED,
 } from '../../common';
-import { analogRead, getTicks } from '../../microcontroller';
+import { analogRead } from '../../microcontroller';
 // locals
 import { startAnimation } from './AnimateTrolley';
 import { refreshDashboard, setStatusLED } from './Dashboard';
@@ -15,6 +15,7 @@ import { booleanRead } from './Utils';
 import { attachEventHandlers, getPins } from './UXControls';
 import { render as addMultimeter } from './Multimeter';
 import { attach as attachLogging } from './Logging';
+import { attachTimer } from './TimerUI';
 
 export const prepareSimulator = () => {
   addStationsToLayout();
@@ -25,6 +26,7 @@ export const prepareSimulator = () => {
   attachEventHandlers();
   addMultimeter(getPins());
   attachLogging();
+  attachTimer();
 };
 
 export const startSimulator = () => {
@@ -44,7 +46,6 @@ export const updateDashboard = ({
 
   setStatusLED({ isPowered, isSlowHalt, isLayover, isPaused });
   refreshDashboard({
-    ticks: getTicks(),
     isLayover,
     isPaused,
     direction,
